@@ -1,0 +1,72 @@
+{
+  "demo": true,
+  "engineering_fixture": true,
+  "equal": true,
+  "equal_message": "ok",
+  "event_count": 8,
+  "ledger_path": "out/scenario_ledger.jsonl",
+  "ledger_sha256": "2e4254d2108e6436b55ece97d9108609ae40a4bb03c4598a0fe301223d947060",
+  "live_state": {
+    "avg_costs": {
+      "QQQ": 500.0
+    },
+    "cash": 94590.0,
+    "daily_loss_stop_latched": false,
+    "day_start_equity": 100000.0,
+    "demo": true,
+    "drawdown_pct": 0.0,
+    "drawdown_stop_latched": false,
+    "equity": 100200.0,
+    "filled_decision_ids": {
+      "DEC-G2A-EV-BUY": "FILL-G2A-0001-DEC-G2A-EV-BUY",
+      "DEC-G2A-EV-SELL": "FILL-G2A-0002-DEC-G2A-EV-SELL"
+    },
+    "last_event_sha256": "0b9645052ac5e13306c4e5c25b540aa34ac474c39d409b9b2e2f04ee6f048d39",
+    "last_seq": 8,
+    "marks": {
+      "QQQ": 510.0,
+      "SPY": 400.0
+    },
+    "outstanding_pending": [],
+    "peak_equity": 100200.0,
+    "positions": {
+      "QQQ": 11
+    },
+    "realized_pnl": 90.0,
+    "schema": "ledger_state_v1",
+    "trading_day": "2026-11-03",
+    "unrealized_pnl": 110.0
+  },
+  "note": "DEMO synthetic scenario only; not formal performance",
+  "replayed_state": {
+    "avg_costs": {
+      "QQQ": 500.0
+    },
+    "cash": 94590.0,
+    "daily_loss_stop_latched": false,
+    "day_start_equity": 100000.0,
+    "demo": true,
+    "drawdown_pct": 0.0,
+    "drawdown_stop_latched": false,
+    "equity": 100200.0,
+    "filled_decision_ids": {
+      "DEC-G2A-EV-BUY": "FILL-G2A-0001-DEC-G2A-EV-BUY",
+      "DEC-G2A-EV-SELL": "FILL-G2A-0002-DEC-G2A-EV-SELL"
+    },
+    "last_event_sha256": "0b9645052ac5e13306c4e5c25b540aa34ac474c39d409b9b2e2f04ee6f048d39",
+    "last_seq": 8,
+    "marks": {
+      "QQQ": 510.0,
+      "SPY": 400.0
+    },
+    "outstanding_pending": [],
+    "peak_equity": 100200.0,
+    "positions": {
+      "QQQ": 11
+    },
+    "realized_pnl": 90.0,
+    "schema": "ledger_state_v1",
+    "trading_day": "2026-11-03",
+    "unrealized_pnl": 110.0
+  }
+}

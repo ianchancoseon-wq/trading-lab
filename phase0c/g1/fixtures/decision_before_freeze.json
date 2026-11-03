@@ -1,0 +1,13 @@
+{
+  "schema": "decision_v1",
+  "id": "DEC-G1-FIXTURE-EARLY",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "intent": "NO_TRADE",
+  "size_pct": 0,
+  "rationale_digest": "too early",
+  "memory_influence": [],
+  "risk_ack": true,
+  "decided_at_utc": "2026-11-03T00:30:00Z",
+  "demo": true,
+  "content_sha256": "95adab0b5ce6728d764182e3d2ddaf6a7197da28a05aad1d924ad49da4b4b1a0"
+}

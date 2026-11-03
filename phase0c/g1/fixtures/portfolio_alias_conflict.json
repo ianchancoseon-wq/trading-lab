@@ -1,0 +1,16 @@
+{
+  "cash": 100000.0,
+  "equity": 100000.0,
+  "peak_equity": 100000.0,
+  "day_start_equity": 100000.0,
+  "unrealized_pnl": 0.0,
+  "holdings": {
+    "BRK.B": 1,
+    "BRK-B": 2
+  },
+  "marks": {
+    "BRK.B": 100.0,
+    "BRK-B": 100.0
+  },
+  "pending_intents": []
+}

@@ -1,0 +1,25 @@
+{
+  "$id": "lab://schemas/gate_result_v1",
+  "title": "gate_result_v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "id", "decision_id", "prediction_id", "verdict",
+    "reason_codes", "risk_policy_version", "lab_mode",
+    "snapshots", "evaluated_at_utc", "content_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "gate_result_v1"},
+    "id": {"type": "string", "pattern": "^GATE-[A-Za-z0-9._-]+$"},
+    "decision_id": {"type": "string"},
+    "prediction_id": {"type": "string"},
+    "verdict": {"enum": ["ACCEPT", "REJECT", "NEEDS_HUMAN"]},
+    "reason_codes": {"type": "array", "items": {"type": "string"}},
+    "risk_policy_version": {"type": "string"},
+    "lab_mode": {"type": "string"},
+    "snapshots": {"type": "object"},
+    "evaluated_at_utc": {"type": "string"},
+    "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "notes": {"type": "string"}
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "g2a_price_book_v1",
+  "demo": true,
+  "notes": "Synthetic engineering fixture prices only; not market data; not formal performance.",
+  "prices": {
+    "2026-11-03": {
+      "QQQ": 500.0,
+      "SPY": 400.0
+    },
+    "2026-11-04": {
+      "QQQ": 480.0,
+      "SPY": 400.0
+    },
+    "2026-11-05": {
+      "QQQ": 450.0,
+      "SPY": 360.0
+    },
+    "2026-11-06": {
+      "QQQ": 440.0,
+      "SPY": 350.0
+    },
+    "2026-11-07": {
+      "QQQ": 500.0,
+      "SPY": 400.0
+    }
+  }
+}

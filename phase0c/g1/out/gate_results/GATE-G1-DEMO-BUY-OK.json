@@ -1,0 +1,39 @@
+{
+  "content_sha256": "884f0af43ba8a6f06ddcf7656603fd3fa45c0b661a96062fc2e2c2381fdbb69d",
+  "decision_id": "DEC-G1-FIXTURE-BUY-001",
+  "evaluated_at_utc": "2026-11-03T04:19:21Z",
+  "id": "GATE-G1-DEMO-BUY-OK",
+  "lab_mode": "FIXTURE_EVAL",
+  "notes": "ACCEPT under FIXTURE_EVAL only \u2014 no ledger write, no broker",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "reason_codes": [
+    "OK_TRADE_FIXTURE"
+  ],
+  "risk_policy_version": "RP-0C-G1-FIXTURE-001",
+  "schema": "gate_result_v1",
+  "snapshots": {
+    "baseline_price": 500.0,
+    "cash": 80000.0,
+    "daily_loss_pct": 0.0,
+    "day_start_equity": 100000.0,
+    "drawdown_pct": 0.0,
+    "equity": 100000.0,
+    "existing_position": 0.0,
+    "holdings": {
+      "QQQ": 0
+    },
+    "intended_notional": 10000.0,
+    "intended_shares": 20,
+    "mark_price": 500.0,
+    "peak_equity": 100000.0,
+    "pending_intents_count": 0,
+    "pending_same_ticker": 0,
+    "post_trade_long_exposure_pct": 10.0,
+    "post_trade_name_pct": 10.0,
+    "raw_shares": 20.0,
+    "unrealized_pnl": 0.0,
+    "unrealized_pnl_pct_equity": 0.0,
+    "whole_shares": 20
+  },
+  "verdict": "ACCEPT"
+}

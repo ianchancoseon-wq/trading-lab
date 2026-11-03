@@ -1,0 +1,15 @@
+{
+  "content_sha256": "41d5468c4cdaf27797a2339bee778aff8b3218c988be589e6f7add952735605f",
+  "decision_id": "DEC-G1-FIXTURE-001",
+  "evaluated_at_utc": "2026-11-03T05:55:08Z",
+  "id": "GATE-R2-NO-TRADE",
+  "lab_mode": "PAPER_OFF",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "reason_codes": [
+    "OK_NO_TRADE"
+  ],
+  "risk_policy_version": "RP-0C-G1-001",
+  "schema": "gate_result_v1",
+  "snapshots": {},
+  "verdict": "ACCEPT"
+}

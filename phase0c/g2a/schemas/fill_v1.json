@@ -1,0 +1,29 @@
+{
+  "$id": "lab://schemas/fill_v1",
+  "title": "fill_v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "id", "decision_id", "prediction_id", "gate_result_id",
+    "ticker", "side", "shares", "price", "notional", "filled_at_utc",
+    "engineering_fixture", "demo", "content_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "fill_v1"},
+    "id": {"type": "string", "pattern": "^FILL-[A-Za-z0-9._-]+$"},
+    "decision_id": {"type": "string", "pattern": "^DEC-[A-Za-z0-9._-]+$"},
+    "prediction_id": {"type": "string", "pattern": "^PRED-[A-Za-z0-9._-]+$"},
+    "gate_result_id": {"type": "string", "pattern": "^GATE-[A-Za-z0-9._-]+$"},
+    "ticker": {"type": "string", "minLength": 1},
+    "side": {"enum": ["BUY", "SELL"]},
+    "shares": {"type": "integer", "minimum": 1},
+    "price": {"type": "number", "exclusiveMinimum": 0},
+    "notional": {"type": "number", "exclusiveMinimum": 0},
+    "filled_at_utc": {"type": "string", "minLength": 10},
+    "engineering_fixture": {"const": true},
+    "demo": {"const": true},
+    "realized_pnl": {"type": "number"},
+    "notes": {"type": "string"},
+    "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

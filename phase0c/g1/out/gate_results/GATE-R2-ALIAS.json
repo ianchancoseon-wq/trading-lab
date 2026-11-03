@@ -1,0 +1,16 @@
+{
+  "content_sha256": "30db6c05e01b8a6cf9908b4c55dd70ad323af73fd4ad125845730064aad11606",
+  "decision_id": "DEC-G1-FIXTURE-BUY-001",
+  "evaluated_at_utc": "2026-11-03T05:55:08Z",
+  "id": "GATE-R2-ALIAS",
+  "lab_mode": "FIXTURE_EVAL",
+  "notes": "fail-closed: holdings/marks alias or type failure before merge",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "reason_codes": [
+    "TICKER_ALIAS_CONFLICT:BRK-B|BRK.B->BRK.B"
+  ],
+  "risk_policy_version": "RP-0C-G1-FIXTURE-001",
+  "schema": "gate_result_v1",
+  "snapshots": {},
+  "verdict": "REJECT"
+}

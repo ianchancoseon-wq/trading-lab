@@ -1,0 +1,13 @@
+{
+  "schema": "decision_v1",
+  "id": "DEC-G1-FIXTURE-ZERO",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "intent": "PAPER_BUY",
+  "size_pct": 0.1,
+  "rationale_digest": "zero share after floor",
+  "memory_influence": [],
+  "risk_ack": true,
+  "decided_at_utc": "2026-11-03T01:05:00Z",
+  "demo": true,
+  "content_sha256": "7d2edea1cd92f4d1cef7ff9ca0d3a6dd663bbf37f472a785d3c049ee713ff19b"
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "decision_v1",
+  "id": "DEC-G1-FIXTURE-001",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "intent": "NO_TRADE",
+  "size_pct": 0,
+  "rationale_digest": "fixture NO_TRADE",
+  "memory_influence": [],
+  "risk_ack": true,
+  "decided_at_utc": "2026-11-03T01:05:00Z",
+  "demo": true,
+  "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+}

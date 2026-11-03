@@ -1,0 +1,57 @@
+{
+  "content_sha256": "1114adc400244c740ff7df10e2bdc39eb8f3441c5d6c84f5a570a83012b74507",
+  "decision_id": "DEC-G1-FIXTURE-SPY-BUY",
+  "evaluated_at_utc": "2026-11-03T05:55:08Z",
+  "id": "GATE-R2-SELL-NOT-FILLED",
+  "lab_mode": "FIXTURE_EVAL",
+  "prediction_id": "PRED-G1-FIXTURE-SPY",
+  "reason_codes": [
+    "SIZE_PCT_EXCEEDS_PER_NAME_CAP",
+    "INSUFFICIENT_CASH",
+    "POST_TRADE_EXPOSURE_CAP",
+    "POST_TRADE_NAME_EXPOSURE_CAP"
+  ],
+  "risk_policy_version": "RP-0C-G1-FIXTURE-001",
+  "schema": "gate_result_v1",
+  "snapshots": {
+    "available_cash": 50000.0,
+    "baseline_price": 500.0,
+    "cash": 50000.0,
+    "daily_loss_pct": 0.0,
+    "day_start_equity": 150000.0,
+    "drawdown_pct": 0.0,
+    "equity": 150000.0,
+    "existing_position_after_pending_buys": 0.0,
+    "holdings": {
+      "QQQ": 200.0,
+      "SPY": 0.0
+    },
+    "intended_notional": 60000.0,
+    "intended_shares": 120,
+    "mark_price": 500.0,
+    "marked_equity": 150000.0,
+    "market_value": 100000.0,
+    "peak_equity": 150000.0,
+    "pending_buy_adds": {},
+    "pending_intents_count": 1,
+    "pending_same_ticker": 0,
+    "post_trade_holdings": {
+      "QQQ": 200.0,
+      "SPY": 120.0
+    },
+    "post_trade_long_exposure_pct": 106.66666666666667,
+    "post_trade_name_pct": 40.0,
+    "projected_holdings_after_pending_buys": {
+      "QQQ": 200.0,
+      "SPY": 0.0
+    },
+    "projected_long_exposure_pct_after_pending": 66.66666666666666,
+    "raw_shares": 120.0,
+    "reported_equity": 150000.0,
+    "reported_unrealized_pnl": 0.0,
+    "reserved_cash": 0.0,
+    "unrealized_pnl": 0.0,
+    "whole_shares": 120
+  },
+  "verdict": "REJECT"
+}

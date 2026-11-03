@@ -1,0 +1,62 @@
+test_existing_19_2_plus_pending_4_8_blocks_qqq_buy (__main__.TestAllSymbolNameCap.test_existing_19_2_plus_pending_4_8_blocks_qqq_buy) ... ok
+test_existing_spy_30_blocks_qqq_buy (__main__.TestAllSymbolNameCap.test_existing_spy_30_blocks_qqq_buy) ... ok
+test_pending_spy_30_blocks_qqq_buy (__main__.TestAllSymbolNameCap.test_pending_spy_30_blocks_qqq_buy) ... ok
+test_two_pending_spy_24_blocks_qqq_buy (__main__.TestAllSymbolNameCap.test_two_pending_spy_24_blocks_qqq_buy) ... ok
+test_failed_archives_present (__main__.TestHistoricalPortable.test_failed_archives_present) ... ok
+test_pred_m1_hash (__main__.TestHistoricalPortable.test_pred_m1_hash) ... ok
+test_equity_mark_mismatch (__main__.TestNumericAndDiagnostics.test_equity_mark_mismatch) ... ok
+test_garbage_portfolio_no_uncaught (__main__.TestNumericAndDiagnostics.test_garbage_portfolio_no_uncaught) ... ok
+test_inf_holding_fail_closed (__main__.TestNumericAndDiagnostics.test_inf_holding_fail_closed) ... ok
+test_empty_caller_pending_cannot_hide_portfolio (__main__.TestPendingAdversarial.test_empty_caller_pending_cannot_hide_portfolio) ... ok
+test_malformed_pending_fail_closed (__main__.TestPendingAdversarial.test_malformed_pending_fail_closed) ... ok
+test_matching_caller_pending_ok_path_still_conflicts_same_ticker (__main__.TestPendingAdversarial.test_matching_caller_pending_ok_path_still_conflicts_same_ticker) ... ok
+test_pending_fields_inconsistent_notional (__main__.TestPendingAdversarial.test_pending_fields_inconsistent_notional) ... ok
+test_pending_other_symbol_reserves_cash (__main__.TestPendingAdversarial.test_pending_other_symbol_reserves_cash) ... ok
+test_pending_sell_not_credited_as_filled (__main__.TestPendingAdversarial.test_pending_sell_not_credited_as_filled) ... ok
+test_pending_shares_size_notional_mismatch (__main__.TestPendingAdversarial.test_pending_shares_size_notional_mismatch)
+shares+notional agree with each other but contradict size_pct → reject (no silent override). ... ok
+test_pending_status_pending_reserves_cash (__main__.TestPendingAdversarial.test_pending_status_pending_reserves_cash) ... ok
+test_buy_accept_fixture_entry_only (__main__.TestRiskGateFixtures.test_buy_accept_fixture_entry_only) ... ok
+test_daily_loss_stop (__main__.TestRiskGateFixtures.test_daily_loss_stop) ... ok
+test_fixture_requires_demo (__main__.TestRiskGateFixtures.test_fixture_requires_demo) ... ok
+test_insufficient_cash (__main__.TestRiskGateFixtures.test_insufficient_cash) ... ok
+test_oversize_rejected (__main__.TestRiskGateFixtures.test_oversize_rejected) ... ok
+test_peak_drawdown_stop (__main__.TestRiskGateFixtures.test_peak_drawdown_stop) ... ok
+test_relaxed_cap_rejected_even_in_fixture_entry (__main__.TestRiskGateFixtures.test_relaxed_cap_rejected_even_in_fixture_entry) ... ok
+test_zero_share_trade_rejected (__main__.TestRiskGateFixtures.test_zero_share_trade_rejected) ... ok
+test_alternate_registry_path_ignored (__main__.TestRiskGateProduction.test_alternate_registry_path_ignored)
+Production evaluate has no registry kwarg; bindings go only to DEFAULT_REGISTRY_PATH. ... ok
+test_approved_policy_hash_matches_frozen (__main__.TestRiskGateProduction.test_approved_policy_hash_matches_frozen) ... ok
+test_buy_blocked_paper_off (__main__.TestRiskGateProduction.test_buy_blocked_paper_off) ... ok
+test_cli_has_no_registry_flag (__main__.TestRiskGateProduction.test_cli_has_no_registry_flag) ... usage: test_g1.py [-h] --prediction PREDICTION --decision DECISION
+                  [--portfolio PORTFOLIO] [--pending PENDING]
+                  [--policy POLICY] [--gate-id GATE_ID] [--out OUT]
+test_g1.py: error: unrecognized arguments: --registry /tmp/evil_registry.jsonl
+ok
+test_idempotent_replay (__main__.TestRiskGateProduction.test_idempotent_replay) ... ok
+test_no_trade_accept (__main__.TestRiskGateProduction.test_no_trade_accept) ... ok
+test_production_evaluate_has_no_allow_fixture_or_registry_param (__main__.TestRiskGateProduction.test_production_evaluate_has_no_allow_fixture_or_registry_param) ... ok
+test_rehashed_prediction_conflict_after_accept (__main__.TestRiskGateProduction.test_rehashed_prediction_conflict_after_accept) ... ok
+test_tampered_policy_file_rejected (__main__.TestRiskGateProduction.test_tampered_policy_file_rejected) ... ok
+test_no_numbers_py_in_g1 (__main__.TestRuntimeCompatibility.test_no_numbers_py_in_g1) ... ok
+test_numbers_module_is_stdlib (__main__.TestRuntimeCompatibility.test_numbers_module_is_stdlib) ... ok
+test_separate_process_id_reuse_conflict (__main__.TestSeparateProcessRegistry.test_separate_process_id_reuse_conflict)
+Two CLI processes: second with modified PRED same id must REJECT. ... ok
+test_alias_conflict_rejects_before_merge (__main__.TestTickerAdversarial.test_alias_conflict_rejects_before_merge) ... ok
+test_post_trade_preserves_other_symbols (__main__.TestTickerAdversarial.test_post_trade_preserves_other_symbols) ... ok
+test_qqq_case_alias_conflict (__main__.TestTickerAdversarial.test_qqq_case_alias_conflict) ... ok
+test_decision_before_freeze (__main__.TestValidator.test_decision_before_freeze) ... ok
+test_hash_mismatch (__main__.TestValidator.test_hash_mismatch) ... ok
+test_id_hash_conflict (__main__.TestValidator.test_id_hash_conflict) ... ok
+test_inf_price_rejected (__main__.TestValidator.test_inf_price_rejected) ... ok
+test_naive_timestamp_rejected (__main__.TestValidator.test_naive_timestamp_rejected) ... ok
+test_notes_must_be_string (__main__.TestValidator.test_notes_must_be_string) ... ok
+test_positive_bundle (__main__.TestValidator.test_positive_bundle) ... ok
+test_probs_must_sum_to_one (__main__.TestValidator.test_probs_must_sum_to_one) ... ok
+test_strict_json_rejects_exponent_overflow (__main__.TestValidator.test_strict_json_rejects_exponent_overflow) ... ok
+test_strict_json_rejects_nan_token (__main__.TestValidator.test_strict_json_rejects_nan_token) ... ok
+
+----------------------------------------------------------------------
+Ran 50 tests in 0.106s
+
+OK

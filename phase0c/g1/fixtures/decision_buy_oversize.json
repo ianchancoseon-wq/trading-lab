@@ -1,0 +1,13 @@
+{
+  "schema": "decision_v1",
+  "id": "DEC-G1-FIXTURE-BUY-BIG",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "intent": "PAPER_BUY",
+  "size_pct": 25.0,
+  "rationale_digest": "fixture oversized buy",
+  "memory_influence": [],
+  "risk_ack": true,
+  "decided_at_utc": "2026-11-03T01:05:00Z",
+  "demo": true,
+  "content_sha256": "ec50a10ec60489aeee2c016178e828dffe7781f9afcb7ab3c664bf4ebd9f99d0"
+}

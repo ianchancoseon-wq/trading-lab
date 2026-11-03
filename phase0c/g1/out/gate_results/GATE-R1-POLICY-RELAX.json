@@ -1,0 +1,16 @@
+{
+  "content_sha256": "3918c0991b20c4d1c430297e0536dc0cced80db3d3fa6326a5fc898f350686d8",
+  "decision_id": "DEC-G1-FIXTURE-BUY-001",
+  "evaluated_at_utc": "2026-11-03T05:44:04Z",
+  "id": "GATE-R1-POLICY-RELAX",
+  "lab_mode": "FIXTURE_EVAL",
+  "notes": "fail-closed: policy binding failed",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "reason_codes": [
+    "UNAUTHORIZED_POLICY_MODIFICATION:max_size_pct_per_name"
+  ],
+  "risk_policy_version": "RP-0C-G1-FIXTURE-001",
+  "schema": "gate_result_v1",
+  "snapshots": {},
+  "verdict": "REJECT"
+}

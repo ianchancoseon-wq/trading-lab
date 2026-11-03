@@ -1,0 +1,21 @@
+{
+  "schema": "prediction_v1",
+  "id": "PRED-G1-FIXTURE-001",
+  "strategy_version": "v0.1",
+  "ticker": "QQQ",
+  "baseline_price": 500.0,
+  "baseline_source_tier": "synthetic",
+  "band": 0.5,
+  "horizon_end": "2026-11-10",
+  "probs": {
+    "UP": 0.5,
+    "FLAT": 0.5,
+    "DOWN": 0.5
+  },
+  "EVENT_EXPOSED": true,
+  "knowledge_cutoff_utc": "2026-11-03T00:00:00Z",
+  "frozen_at_utc": "2026-11-03T01:00:00Z",
+  "demo": true,
+  "notes": "synthetic fixture only; not a formal forward score",
+  "content_sha256": "b29237aa708a92f04de52faa65397874be6faaf194e0a52b90603ecf5245ec8d"
+}

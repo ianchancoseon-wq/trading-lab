@@ -1,0 +1,17 @@
+{
+  "content_sha256": "348f5a01d6eaf82dbaaa5b68868c690a6dbdde9f76cd5c493ef5de47b7908726",
+  "decision_id": "DEC-G1-FIXTURE-001",
+  "evaluated_at_utc": "2026-11-03T05:44:04Z",
+  "id": "GATE-R1-NO-TRADE",
+  "lab_mode": "PAPER_OFF",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "reason_codes": [
+    "OK_NO_TRADE"
+  ],
+  "risk_policy_version": "RP-0C-G1-001",
+  "schema": "gate_result_v1",
+  "snapshots": {
+    "note": "NO_TRADE accepted without portfolio under PAPER_OFF/READ_ONLY"
+  },
+  "verdict": "ACCEPT"
+}

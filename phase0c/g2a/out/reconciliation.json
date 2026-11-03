@@ -1,0 +1,67 @@
+{
+  "all_ok": true,
+  "demo": true,
+  "per_event_checks": [
+    {
+      "cash": 100000.0,
+      "equity": 100000.0,
+      "equity_ok": true,
+      "label": "genesis",
+      "marked_equity": 100000.0,
+      "market_value": 0.0,
+      "seq": 1,
+      "unrealized_ok": true,
+      "unrealized_pnl": 0.0,
+      "unrealized_recomputed": 0.0
+    },
+    {
+      "cash": 90000.0,
+      "equity": 100000.0,
+      "equity_ok": true,
+      "label": "after_buy",
+      "marked_equity": 100000.0,
+      "market_value": 10000.0,
+      "seq": 3,
+      "unrealized_ok": true,
+      "unrealized_pnl": 0.0,
+      "unrealized_recomputed": 0.0
+    },
+    {
+      "cash": 90000.0,
+      "equity": 100000.0,
+      "equity_ok": true,
+      "label": "after_no_trade",
+      "marked_equity": 100000.0,
+      "market_value": 10000.0,
+      "seq": 5,
+      "unrealized_ok": true,
+      "unrealized_pnl": 0.0,
+      "unrealized_recomputed": 0.0
+    },
+    {
+      "cash": 90000.0,
+      "equity": 100200.0,
+      "equity_ok": true,
+      "label": "after_mtm",
+      "marked_equity": 100200.0,
+      "market_value": 10200.0,
+      "seq": 6,
+      "unrealized_ok": true,
+      "unrealized_pnl": 200.0,
+      "unrealized_recomputed": 200.0
+    },
+    {
+      "cash": 94590.0,
+      "equity": 100200.0,
+      "equity_ok": true,
+      "label": "after_sell",
+      "marked_equity": 100200.0,
+      "market_value": 5610.0,
+      "seq": 8,
+      "unrealized_ok": true,
+      "unrealized_pnl": 110.0,
+      "unrealized_recomputed": 110.0
+    }
+  ],
+  "rule": "equity == cash + \u03a3 qty*mark; unrealized == \u03a3 qty*(mark-avg_cost) [average-cost]"
+}

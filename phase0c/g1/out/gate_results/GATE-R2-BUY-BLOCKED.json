@@ -1,0 +1,51 @@
+{
+  "content_sha256": "48e8fd298d61eb18cce4d0b7c7bc111dfb3b4eea48ee2da2c2810dd77228206e",
+  "decision_id": "DEC-G1-FIXTURE-BUY-001",
+  "evaluated_at_utc": "2026-11-03T05:55:08Z",
+  "id": "GATE-R2-BUY-BLOCKED",
+  "lab_mode": "PAPER_OFF",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "reason_codes": [
+    "LAB_MODE_BLOCKS_TRADE"
+  ],
+  "risk_policy_version": "RP-0C-G1-001",
+  "schema": "gate_result_v1",
+  "snapshots": {
+    "available_cash": 100000.0,
+    "baseline_price": 500.0,
+    "cash": 100000.0,
+    "daily_loss_pct": 0.0,
+    "day_start_equity": 100000.0,
+    "drawdown_pct": 0.0,
+    "equity": 100000.0,
+    "existing_position_after_pending_buys": 0.0,
+    "holdings": {
+      "QQQ": 0.0
+    },
+    "intended_notional": 10000.0,
+    "intended_shares": 20,
+    "mark_price": 500.0,
+    "marked_equity": 100000.0,
+    "market_value": 0.0,
+    "peak_equity": 100000.0,
+    "pending_buy_adds": {},
+    "pending_intents_count": 0,
+    "pending_same_ticker": 0,
+    "post_trade_holdings": {
+      "QQQ": 20.0
+    },
+    "post_trade_long_exposure_pct": 10.0,
+    "post_trade_name_pct": 10.0,
+    "projected_holdings_after_pending_buys": {
+      "QQQ": 0.0
+    },
+    "projected_long_exposure_pct_after_pending": 0.0,
+    "raw_shares": 20.0,
+    "reported_equity": 100000.0,
+    "reported_unrealized_pnl": 0.0,
+    "reserved_cash": 0.0,
+    "unrealized_pnl": 0.0,
+    "whole_shares": 20
+  },
+  "verdict": "REJECT"
+}

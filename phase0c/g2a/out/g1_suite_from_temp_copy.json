@@ -1,0 +1,13 @@
+{
+  "ran_from_temp_lab_layout": true,
+  "returncode": 0,
+  "test_results": {
+    "build": "G1-R4",
+    "tests_run": 50,
+    "failures": 0,
+    "errors": 0,
+    "ok": true,
+    "failure_details": []
+  },
+  "note": "Executed from temporary lab layout with failed-archive trees; frozen phase0c/g1 untouched"
+}
