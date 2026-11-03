@@ -1,0 +1,26 @@
+{
+  "$id": "lab://schemas/ledger_event_v1",
+  "title": "ledger_event_v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "event_id", "seq", "event_type", "ts_utc",
+    "prev_event_sha256", "payload", "content_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "ledger_event_v1"},
+    "event_id": {"type": "string", "pattern": "^LEV-[A-Za-z0-9._-]+$"},
+    "seq": {"type": "integer", "minimum": 1},
+    "event_type": {
+      "enum": [
+        "GENESIS", "GATE_RESULT", "NO_TRADE_RECORD", "FILL",
+        "MARK_TO_MARKET", "NEW_DAY", "PENDING_INJECT"
+      ]
+    },
+    "ts_utc": {"type": "string", "minLength": 10},
+    "prev_event_sha256": {"type": "string"},
+    "payload": {"type": "object"},
+    "state_after": {"type": "object"},
+    "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

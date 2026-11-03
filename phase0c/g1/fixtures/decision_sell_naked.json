@@ -1,0 +1,13 @@
+{
+  "schema": "decision_v1",
+  "id": "DEC-G1-FIXTURE-SELL-001",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "intent": "PAPER_SELL",
+  "size_pct": 5.0,
+  "rationale_digest": "fixture sell beyond long",
+  "memory_influence": [],
+  "risk_ack": true,
+  "decided_at_utc": "2026-11-03T01:05:00Z",
+  "demo": true,
+  "content_sha256": "e60ea6824a286bbea8aa87323c1cab34214f78699ddea51678104f511fe4156b"
+}

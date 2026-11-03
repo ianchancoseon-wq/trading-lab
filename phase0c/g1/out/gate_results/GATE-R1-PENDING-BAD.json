@@ -1,0 +1,19 @@
+{
+  "content_sha256": "01381f33c3397882a2ffc5b79b8e3716557ce4b738958569e50320efcddee069",
+  "decision_id": "DEC-G1-FIXTURE-BUY-001",
+  "evaluated_at_utc": "2026-11-03T05:44:04Z",
+  "id": "GATE-R1-PENDING-BAD",
+  "lab_mode": "FIXTURE_EVAL",
+  "notes": "fail-closed: pending intents invalid",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "reason_codes": [
+    "PENDING_MISSING_FIELD:0:intent",
+    "PENDING_MISSING_FIELD:0:size_pct",
+    "PENDING_BAD_INTENT:0",
+    "PENDING_BAD_SIZE:0"
+  ],
+  "risk_policy_version": "RP-0C-G1-FIXTURE-001",
+  "schema": "gate_result_v1",
+  "snapshots": {},
+  "verdict": "REJECT"
+}

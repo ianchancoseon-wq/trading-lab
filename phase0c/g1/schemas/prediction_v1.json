@@ -1,0 +1,37 @@
+{
+  "$id": "lab://schemas/prediction_v1",
+  "title": "prediction_v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "id", "strategy_version", "ticker", "baseline_price",
+    "baseline_source_tier", "band", "horizon_end", "probs",
+    "EVENT_EXPOSED", "knowledge_cutoff_utc", "frozen_at_utc", "content_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "prediction_v1"},
+    "id": {"type": "string", "pattern": "^PRED-[A-Za-z0-9._-]+$"},
+    "strategy_version": {"type": "string", "minLength": 1},
+    "ticker": {"type": "string", "minLength": 1},
+    "baseline_price": {"type": "number", "exclusiveMinimum": 0},
+    "baseline_source_tier": {"type": "string"},
+    "band": {"type": "number", "minimum": 0},
+    "horizon_end": {"type": "string", "minLength": 8},
+    "probs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["UP", "FLAT", "DOWN"],
+      "properties": {
+        "UP": {"type": "number", "minimum": 0, "maximum": 1},
+        "FLAT": {"type": "number", "minimum": 0, "maximum": 1},
+        "DOWN": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "EVENT_EXPOSED": {"type": "boolean"},
+    "knowledge_cutoff_utc": {"type": "string", "minLength": 10},
+    "frozen_at_utc": {"type": "string", "minLength": 10},
+    "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "demo": {"type": "boolean"},
+    "notes": {"type": "string"}
+  }
+}

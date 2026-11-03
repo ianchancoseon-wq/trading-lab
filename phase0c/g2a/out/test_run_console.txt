@@ -1,0 +1,21 @@
+test_01_valid_synthetic_buy_and_sell (__main__.G2aTestCase.test_01_valid_synthetic_buy_and_sell) ... ok
+test_02_no_trade_audit_no_fill_no_position_change (__main__.G2aTestCase.test_02_no_trade_audit_no_fill_no_position_change) ... ok
+test_03_insufficient_cash (__main__.G2aTestCase.test_03_insufficient_cash) ... ok
+test_04_existing_exposure_other_symbol_blocks_buy (__main__.G2aTestCase.test_04_existing_exposure_other_symbol_blocks_buy) ... ok
+test_05_pending_exposure_other_symbol_blocks_buy (__main__.G2aTestCase.test_05_pending_exposure_other_symbol_blocks_buy) ... ok
+test_06_fractional_share_and_short_sale_rejection (__main__.G2aTestCase.test_06_fractional_share_and_short_sale_rejection) ... ok
+test_07_daily_2pct_loss_stop_unrealized (__main__.G2aTestCase.test_07_daily_2pct_loss_stop_unrealized) ... ok
+test_08_peak_10pct_drawdown_stop (__main__.G2aTestCase.test_08_peak_10pct_drawdown_stop) ... ok
+test_09_unrealized_pnl_reconciliation (__main__.G2aTestCase.test_09_unrealized_pnl_reconciliation) ... ok
+test_10_duplicate_fill_prevention (__main__.G2aTestCase.test_10_duplicate_fill_prevention) ... ok
+test_11_deterministic_replay (__main__.G2aTestCase.test_11_deterministic_replay) ... ok
+test_12_missing_or_corrupted_data_fail_closed (__main__.G2aTestCase.test_12_missing_or_corrupted_data_fail_closed) ... ok
+test_13_ledger_and_risk_gate_consistency (__main__.G2aTestCase.test_13_ledger_and_risk_gate_consistency) ... ok
+test_14_stop_cannot_be_cleared (__main__.G2aTestCase.test_14_stop_cannot_be_cleared) ... ok
+test_15_g1_tree_unchanged (__main__.G2aTestCase.test_15_g1_tree_unchanged) ... ok
+test_16_two_pending_spy_and_combined_existing_pending (__main__.G2aTestCase.test_16_two_pending_spy_and_combined_existing_pending) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.044s
+
+OK

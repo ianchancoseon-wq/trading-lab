@@ -1,0 +1,14 @@
+{
+  "cash": 89000.0,
+  "equity": 89000.0,
+  "peak_equity": 100000.0,
+  "day_start_equity": 100000.0,
+  "unrealized_pnl": 0.0,
+  "holdings": {
+    "QQQ": 0
+  },
+  "marks": {
+    "QQQ": 500.0
+  },
+  "pending_intents": []
+}

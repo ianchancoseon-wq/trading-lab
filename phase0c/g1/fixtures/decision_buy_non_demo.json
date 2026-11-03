@@ -1,0 +1,13 @@
+{
+  "schema": "decision_v1",
+  "id": "DEC-G1-LIVE-BUY-001",
+  "prediction_id": "PRED-G1-LIVE-001",
+  "intent": "PAPER_BUY",
+  "size_pct": 10.0,
+  "rationale_digest": "fixture PAPER_BUY within caps",
+  "memory_influence": [],
+  "risk_ack": true,
+  "decided_at_utc": "2026-11-03T01:05:00Z",
+  "demo": false,
+  "content_sha256": "469caeb3add89a40cab119e6ca367ea21193c9e114450f19fa27660e962562bc"
+}

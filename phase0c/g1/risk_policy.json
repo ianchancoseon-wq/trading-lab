@@ -1,0 +1,14 @@
+{
+  "schema": "risk_policy_v1",
+  "version": "RP-0C-G1-001",
+  "lab_mode": "PAPER_OFF",
+  "max_size_pct_per_name": 20.0,
+  "max_aggregate_long_exposure_pct": 100.0,
+  "max_daily_loss_pct": 2.0,
+  "max_peak_drawdown_pct": 10.0,
+  "allow_short": false,
+  "allow_leverage": false,
+  "require_whole_shares": true,
+  "reference_price_field": "mark_price",
+  "notes": "Hard limits bound to frozen_limits.py and APPROVED_POLICY_SHA256. No runtime override. PAPER_ON forbidden until G2."
+}

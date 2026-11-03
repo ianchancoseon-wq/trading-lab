@@ -1,0 +1,13 @@
+{
+  "schema": "decision_v1",
+  "id": "DEC-G1-FIXTURE-SPY-BUY",
+  "prediction_id": "PRED-G1-FIXTURE-SPY",
+  "intent": "PAPER_BUY",
+  "size_pct": 40.0,
+  "rationale_digest": "large spy buy",
+  "memory_influence": [],
+  "risk_ack": true,
+  "decided_at_utc": "2026-11-03T01:05:00Z",
+  "demo": true,
+  "content_sha256": "fea59f28f84e0958807751594941adf90bc41ce2d9e6056e17f05f5dc9616bd4"
+}

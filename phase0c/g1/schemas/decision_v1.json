@@ -1,0 +1,25 @@
+{
+  "$id": "lab://schemas/decision_v1",
+  "title": "decision_v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "id", "prediction_id", "intent", "size_pct",
+    "rationale_digest", "memory_influence", "risk_ack",
+    "decided_at_utc", "content_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "decision_v1"},
+    "id": {"type": "string", "pattern": "^DEC-[A-Za-z0-9._-]+$"},
+    "prediction_id": {"type": "string", "pattern": "^PRED-[A-Za-z0-9._-]+$"},
+    "intent": {"enum": ["NO_TRADE", "PAPER_BUY", "PAPER_SELL"]},
+    "size_pct": {"type": "number", "minimum": 0, "maximum": 100},
+    "rationale_digest": {"type": "string", "minLength": 1},
+    "memory_influence": {"type": "array", "items": {"type": "string"}},
+    "risk_ack": {"type": "boolean"},
+    "decided_at_utc": {"type": "string", "minLength": 10},
+    "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "demo": {"type": "boolean"},
+    "notes": {"type": "string"}
+  }
+}

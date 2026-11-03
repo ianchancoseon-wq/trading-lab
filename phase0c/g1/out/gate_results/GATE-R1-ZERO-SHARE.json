@@ -1,0 +1,42 @@
+{
+  "content_sha256": "cfddd3a18969b78bccff6f37543a6dce407e2279579b120ef0c166310b2d2619",
+  "decision_id": "DEC-G1-FIXTURE-ZERO",
+  "evaluated_at_utc": "2026-11-03T05:44:04Z",
+  "id": "GATE-R1-ZERO-SHARE",
+  "lab_mode": "FIXTURE_EVAL",
+  "notes": "zero-share PAPER_BUY/SELL rejected; not normalized to ACCEPT trade",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "reason_codes": [
+    "ZERO_SHARE_TRADE"
+  ],
+  "risk_policy_version": "RP-0C-G1-FIXTURE-001",
+  "schema": "gate_result_v1",
+  "snapshots": {
+    "available_cash": 100000.0,
+    "baseline_price": 500.0,
+    "cash": 100000.0,
+    "daily_loss_pct": 0.0,
+    "day_start_equity": 100000.0,
+    "drawdown_pct": 0.0,
+    "equity": 100000.0,
+    "holdings": {
+      "QQQ": 0.0
+    },
+    "mark_price": 500.0,
+    "marked_equity": 100000.0,
+    "market_value": 0.0,
+    "peak_equity": 100000.0,
+    "pending_intents_count": 0,
+    "projected_holdings_after_pending": {
+      "QQQ": 0.0
+    },
+    "projected_long_exposure_pct_after_pending": 0.0,
+    "raw_shares": 0.2,
+    "reported_equity": 100000.0,
+    "reported_unrealized_pnl": 0.0,
+    "reserved_cash": 0.0,
+    "unrealized_pnl": 0.0,
+    "whole_shares": 0
+  },
+  "verdict": "REJECT"
+}

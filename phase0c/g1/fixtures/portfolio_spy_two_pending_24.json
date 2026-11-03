@@ -1,0 +1,31 @@
+{
+  "equity": 100000.0,
+  "peak_equity": 100000.0,
+  "day_start_equity": 100000.0,
+  "unrealized_pnl": 0.0,
+  "cash": 100000.0,
+  "holdings": {
+    "SPY": 0,
+    "QQQ": 0
+  },
+  "marks": {
+    "SPY": 100.0,
+    "QQQ": 500.0
+  },
+  "pending_intents": [
+    {
+      "ticker": "SPY",
+      "status": "ACCEPT",
+      "intent": "PAPER_BUY",
+      "size_pct": 12.0,
+      "decision_id": "DEC-SPY-PEND-A"
+    },
+    {
+      "ticker": "SPY",
+      "status": "PENDING",
+      "intent": "PAPER_BUY",
+      "size_pct": 12.0,
+      "decision_id": "DEC-SPY-PEND-B"
+    }
+  ]
+}

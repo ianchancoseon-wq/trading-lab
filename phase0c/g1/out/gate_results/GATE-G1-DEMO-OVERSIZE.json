@@ -1,0 +1,39 @@
+{
+  "content_sha256": "2c8ab5bbc5142c51cc9843066b387444a3a3b7b5084ffb9e6dfd662dfea6e50c",
+  "decision_id": "DEC-G1-FIXTURE-BUY-BIG",
+  "evaluated_at_utc": "2026-11-03T04:19:22Z",
+  "id": "GATE-G1-DEMO-OVERSIZE",
+  "lab_mode": "FIXTURE_EVAL",
+  "prediction_id": "PRED-G1-FIXTURE-001",
+  "reason_codes": [
+    "SIZE_PCT_EXCEEDS_PER_NAME_CAP",
+    "POST_TRADE_NAME_EXPOSURE_CAP"
+  ],
+  "risk_policy_version": "RP-0C-G1-FIXTURE-001",
+  "schema": "gate_result_v1",
+  "snapshots": {
+    "baseline_price": 500.0,
+    "cash": 80000.0,
+    "daily_loss_pct": 0.0,
+    "day_start_equity": 100000.0,
+    "drawdown_pct": 0.0,
+    "equity": 100000.0,
+    "existing_position": 0.0,
+    "holdings": {
+      "QQQ": 0
+    },
+    "intended_notional": 25000.0,
+    "intended_shares": 50,
+    "mark_price": 500.0,
+    "peak_equity": 100000.0,
+    "pending_intents_count": 0,
+    "pending_same_ticker": 0,
+    "post_trade_long_exposure_pct": 25.0,
+    "post_trade_name_pct": 25.0,
+    "raw_shares": 50.0,
+    "unrealized_pnl": 0.0,
+    "unrealized_pnl_pct_equity": 0.0,
+    "whole_shares": 50
+  },
+  "verdict": "REJECT"
+}

@@ -1,0 +1,24 @@
+{
+  "cash": 50000.0,
+  "equity": 150000.0,
+  "peak_equity": 150000.0,
+  "day_start_equity": 150000.0,
+  "unrealized_pnl": 0.0,
+  "holdings": {
+    "QQQ": 200,
+    "SPY": 0
+  },
+  "marks": {
+    "QQQ": 500.0,
+    "SPY": 500.0
+  },
+  "pending_intents": [
+    {
+      "ticker": "QQQ",
+      "status": "ACCEPT",
+      "intent": "PAPER_SELL",
+      "size_pct": 50.0,
+      "decision_id": "DEC-SELL-PEND"
+    }
+  ]
+}

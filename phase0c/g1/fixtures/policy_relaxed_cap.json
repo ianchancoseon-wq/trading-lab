@@ -1,0 +1,12 @@
+{
+  "schema": "risk_policy_v1",
+  "version": "RP-0C-G1-FIXTURE-001",
+  "lab_mode": "FIXTURE_EVAL",
+  "max_size_pct_per_name": 50.0,
+  "max_aggregate_long_exposure_pct": 100.0,
+  "max_daily_loss_pct": 2.0,
+  "max_peak_drawdown_pct": 10.0,
+  "allow_short": false,
+  "allow_leverage": false,
+  "require_whole_shares": true
+}

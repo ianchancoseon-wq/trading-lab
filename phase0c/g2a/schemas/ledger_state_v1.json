@@ -1,0 +1,34 @@
+{
+  "$id": "lab://schemas/ledger_state_v1",
+  "title": "ledger_state_v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "cash", "positions", "avg_costs", "realized_pnl",
+    "unrealized_pnl", "equity", "peak_equity", "drawdown_pct",
+    "day_start_equity", "trading_day", "daily_loss_stop_latched",
+    "drawdown_stop_latched", "filled_decision_ids", "outstanding_pending",
+    "demo"
+  ],
+  "properties": {
+    "schema": {"const": "ledger_state_v1"},
+    "cash": {"type": "number"},
+    "positions": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "avg_costs": {"type": "object", "additionalProperties": {"type": "number"}},
+    "realized_pnl": {"type": "number"},
+    "unrealized_pnl": {"type": "number"},
+    "equity": {"type": "number"},
+    "peak_equity": {"type": "number"},
+    "drawdown_pct": {"type": "number"},
+    "day_start_equity": {"type": "number"},
+    "trading_day": {"type": "string"},
+    "daily_loss_stop_latched": {"type": "boolean"},
+    "drawdown_stop_latched": {"type": "boolean"},
+    "filled_decision_ids": {"type": "object"},
+    "outstanding_pending": {"type": "array"},
+    "marks": {"type": "object"},
+    "demo": {"const": true},
+    "last_event_sha256": {"type": "string"},
+    "last_seq": {"type": "integer"}
+  }
+}
