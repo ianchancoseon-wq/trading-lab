@@ -24,8 +24,16 @@ test_missing_or_altered_parent_hash_and_same_prediction_preserved (test_r1.R1Tes
 test_required_version_identity_fields (test_r1.R1Tests.test_required_version_identity_fields) ... ok
 test_review_foreign_evidence_and_indirect_memory_evidence (test_r1.R1Tests.test_review_foreign_evidence_and_indirect_memory_evidence) ... ok
 test_storage_boundary_rejects_incomplete_derived_record (test_r1.R1Tests.test_storage_boundary_rejects_incomplete_derived_record) ... ok
+test_invalid_remains_latched (test_r2.R2Tests.test_invalid_remains_latched) ... ok
+test_quarantine_latched_at_all_post_score_stages (test_r2.R2Tests.test_quarantine_latched_at_all_post_score_stages) ... ok
+test_revision_after_review_is_allowed (test_r2.R2Tests.test_revision_after_review_is_allowed) ... ok
+test_revision_batch_rolls_back_when_current_binding_is_wrong (test_r2.R2Tests.test_revision_batch_rolls_back_when_current_binding_is_wrong) ... ok
+test_revision_chain_after_memory_never_regresses (test_r2.R2Tests.test_revision_chain_after_memory_never_regresses) ... ok
+test_revision_status_failure_rolls_back_score (test_r2.R2Tests.test_revision_status_failure_rolls_back_score) ... ok
+test_unscored_latest_outcome_blocks_review_and_memory (test_r2.R2Tests.test_unscored_latest_outcome_blocks_review_and_memory) ... ok
+test_versions_explicit_refs_and_predecessors_must_match (test_r2.R2Tests.test_versions_explicit_refs_and_predecessors_must_match) ... ok
 
 ----------------------------------------------------------------------
-Ran 26 tests in 1.337s
+Ran 34 tests in 1.196s
 
 OK

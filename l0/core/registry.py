@@ -2,7 +2,7 @@
 import uuid
 from .storage import Storage
 from .records import (record, seal, digest, reference, verify, require, validate_envelope,
-                      validate_prediction, timestamp, primary, measurement, FIXTURE, FORWARD)
+                      validate_prediction, timestamp, primary, measurement, FIXTURE, FORWARD, validate_lineage)
 from .scoring import score
 from .review_memory import validate as validate_review_memory
 
@@ -84,6 +84,7 @@ class Registry:
         require(pred is not None and reference(pred) == r['prediction_ref'], 'PREDICTION_REFERENCE')
         for ref in r['parents']:
             require(ref['id'] in rows and reference(rows[ref['id']]) == ref, 'BAD_PARENT_REFERENCE')
+        validate_lineage(r, rows)
         parents = [rows[ref['id']] for ref in r['parents']]
         require(all(timestamp(v['created_at_utc']) <= timestamp(r['created_at_utc'])
                     for v in parents if 'created_at_utc' in v), 'PARENT_FROM_FUTURE')
@@ -104,9 +105,27 @@ class Registry:
         if kind in ('review', 'memory', 'strategy'):
             validate_review_memory(r, parents)
             if kind == 'review':
-                require(state['lifecycle_status'] in ('SCORED', 'REVIEWED'), 'REVIEW_STAGE')
+                require(state['lifecycle_status'] in ('SCORED', 'REVIEWED', 'MEMORY_PROPOSED'), 'REVIEW_STAGE')
+                self._current_review_binding(r, self.current_score(pred['id']), rows)
+                self._revision_parent(r, own, 'review')
             if kind == 'memory':
                 require(state['lifecycle_status'] in ('REVIEWED', 'MEMORY_PROPOSED'), 'MEMORY_STAGE')
+                current_score = self.current_score(pred['id'])
+                require(current_score is not None, 'CURRENT_SCORE_REQUIRED')
+                reviews = [v for v in own if v['kind'] == 'review']
+                require(reviews, 'CURRENT_REVIEW_REQUIRED')
+                current_review = reviews[-1]
+                try:
+                    self._current_review_binding(current_review, current_score, rows)
+                except ValueError as exc:
+                    raise ValueError('CURRENT_REVIEW_REQUIRED') from exc
+                require(r['record_version'] == current_review['record_version'] and
+                        r['protocol_version'] == current_review['protocol_version'], 'REVIEW_MEMORY_VERSION')
+                refs = [reference(v) for v in parents if v.get('kind') == 'review']
+                require(refs == [reference(current_review)], 'CURRENT_REVIEW_REQUIRED')
+                if 'review_ref' in p:
+                    require(p['review_ref'] == reference(current_review), 'CURRENT_REVIEW_REFERENCE')
+                self._revision_parent(r, own, 'memory')
         elif kind == 'founder_decision':
             require(r['actor'] == 'Founder' and p['decision'] in ('APPROVE', 'REJECT', 'DEFER'), 'FOUNDER_DECISION')
             require(p['target_ref'] in r['parents'] and p['external_evidence_ref'] in r['parents'], 'FOUNDER_EVIDENCE')
@@ -161,6 +180,8 @@ class Registry:
         elif kind == 'status':
             require(p['eligibility_status'] in ('UNASSESSED', 'QUARANTINED_PROVENANCE',
                     'INVALID_INTEGRITY', 'INVALID_LEAKAGE', 'INVALID_SAMPLE'), 'NO_ELIGIBILITY_PROMOTION')
+            if state['eligibility_status'] == 'QUARANTINED_PROVENANCE':
+                require(p['eligibility_status'] != 'UNASSESSED', 'QUARANTINE_LATCHED')
             if state['eligibility_status'].startswith('INVALID'):
                 require(p['eligibility_status'] == state['eligibility_status'] and p['lifecycle_status'] == state['lifecycle_status'], 'INVALID_STATUS_LATCHED')
             current, target = state['lifecycle_status'], p['lifecycle_status']
@@ -188,7 +209,7 @@ class Registry:
                         and bool(p.get('revision_reason')), 'OUTCOME_REVISION_REQUIRED')
         elif kind == 'score':
             require(r['actor'] == 'Codex', 'SCORE_OWNER')
-            require(state['lifecycle_status'] in ('AWAIT_OUTCOME', 'SCORED'), 'SCORE_STAGE')
+            require(state['lifecycle_status'] in ('AWAIT_OUTCOME', 'SCORED', 'REVIEWED', 'MEMORY_PROPOSED'), 'SCORE_STAGE')
             inputs = {k: rows[p[k]['id']] for k in ('freeze_ref', 'measurement_ref', 'outcome_ref')}
             require(all(p[k] in r['parents'] for k in inputs), 'SCORE_PARENTS')
             outcomes = [v for v in own if v['kind'] == 'outcome']
@@ -207,11 +228,32 @@ class Registry:
         if kind in targets:
             prior = [v for v in own if v['kind'] == 'status'][-1]
             status = record('STATE-' + r['id'], 'status', pred, r['created_at_utc'], r['actor'],
-                            {'lifecycle_status': targets[kind],
+                            {'lifecycle_status': max((state['lifecycle_status'], targets[kind]), key=STATES.index),
                              'eligibility_status': 'QUARANTINED_PROVENANCE',
                              'reason': 'atomic ' + kind + ' record; custody not independently verified'},
                             [reference(prior), reference(r)], r['evidence_class'], actor_identity=r['actor_identity'])
             self.storage.append(status)
+
+
+    @staticmethod
+    def _current_review_binding(review, current_score, rows):
+        require(current_score is not None, 'CURRENT_SCORE_REQUIRED')
+        scores = [ref for ref in review['parents'] if rows[ref['id']].get('kind') == 'score']
+        require(scores == [reference(current_score)], 'CURRENT_SCORE_REFERENCE')
+        require(review['record_version'] == current_score['record_version'] and
+                review['protocol_version'] == current_score['protocol_version'], 'SCORE_REVIEW_VERSION')
+        if 'score_ref' in review['payload']:
+            require(review['payload']['score_ref'] == reference(current_score), 'CURRENT_SCORE_REFERENCE')
+
+    @staticmethod
+    def _revision_parent(r, own, kind):
+        previous = [v for v in own if v['kind'] == kind]
+        if previous:
+            ref = reference(previous[-1])
+            require(r['payload'].get('supersedes') == ref and ref in r['parents'],
+                    kind.upper() + '_REVISION_REQUIRED')
+        else:
+            require('supersedes' not in r['payload'], kind.upper() + '_UNEXPECTED_PREDECESSOR')
 
 
 def canonical_challenge(r):

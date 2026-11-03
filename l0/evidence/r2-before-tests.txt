@@ -1,0 +1,116 @@
+test_invalid_remains_latched (test_r2.R2Tests.test_invalid_remains_latched) ... ok
+test_quarantine_latched_at_all_post_score_stages (test_r2.R2Tests.test_quarantine_latched_at_all_post_score_stages) ... 
+  test_quarantine_latched_at_all_post_score_stages (test_r2.R2Tests.test_quarantine_latched_at_all_post_score_stages) (stage='SCORED') ... FAIL
+test_quarantine_latched_at_all_post_score_stages (test_r2.R2Tests.test_quarantine_latched_at_all_post_score_stages) ... FAIL
+test_revision_after_review_is_allowed (test_r2.R2Tests.test_revision_after_review_is_allowed) ... ERROR
+test_revision_batch_rolls_back_when_current_binding_is_wrong (test_r2.R2Tests.test_revision_batch_rolls_back_when_current_binding_is_wrong) ... ok
+test_revision_chain_after_memory_never_regresses (test_r2.R2Tests.test_revision_chain_after_memory_never_regresses) ... ERROR
+test_revision_status_failure_rolls_back_score (test_r2.R2Tests.test_revision_status_failure_rolls_back_score) ... ERROR
+test_unscored_latest_outcome_blocks_review_and_memory (test_r2.R2Tests.test_unscored_latest_outcome_blocks_review_and_memory) ... FAIL
+test_versions_explicit_refs_and_predecessors_must_match (test_r2.R2Tests.test_versions_explicit_refs_and_predecessors_must_match) ... ERROR
+
+======================================================================
+ERROR: test_revision_after_review_is_allowed (test_r2.R2Tests.test_revision_after_review_is_allowed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/trading-lab/l0/tests/test_r2.py", line 98, in test_revision_after_review_is_allowed
+    p,oldreview,_=self.review_and_memory();_,s=self.revise();self.reg.put(s)
+                                                             ^^^^^^^^^^^^^^^
+  File "/workspace/trading-lab/l0/core/registry.py", line 69, in put
+    return self.put_batch([r])
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/trading-lab/l0/core/registry.py", line 75, in put_batch
+    self._put(r)
+  File "/workspace/trading-lab/l0/core/registry.py", line 191, in _put
+    require(state['lifecycle_status'] in ('AWAIT_OUTCOME', 'SCORED'), 'SCORE_STAGE')
+  File "/workspace/trading-lab/l0/core/records.py", line 31, in require
+    raise Invalid(reason)
+l0.core.records.Invalid: SCORE_STAGE
+
+======================================================================
+ERROR: test_revision_chain_after_memory_never_regresses (test_r2.R2Tests.test_revision_chain_after_memory_never_regresses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/trading-lab/l0/tests/test_r2.py", line 79, in test_revision_chain_after_memory_never_regresses
+    new,s=self.revise();self.reg.put(s)
+                        ^^^^^^^^^^^^^^^
+  File "/workspace/trading-lab/l0/core/registry.py", line 69, in put
+    return self.put_batch([r])
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/trading-lab/l0/core/registry.py", line 75, in put_batch
+    self._put(r)
+  File "/workspace/trading-lab/l0/core/registry.py", line 191, in _put
+    require(state['lifecycle_status'] in ('AWAIT_OUTCOME', 'SCORED'), 'SCORE_STAGE')
+  File "/workspace/trading-lab/l0/core/records.py", line 31, in require
+    raise Invalid(reason)
+l0.core.records.Invalid: SCORE_STAGE
+
+======================================================================
+ERROR: test_revision_status_failure_rolls_back_score (test_r2.R2Tests.test_revision_status_failure_rolls_back_score)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/trading-lab/l0/tests/test_r2.py", line 134, in test_revision_status_failure_rolls_back_score
+    with patch.object(self.reg.storage,'append',side_effect=fail),self.assertRaises(OSError):self.reg.put(s)
+                                                                                             ^^^^^^^^^^^^^^^
+  File "/workspace/trading-lab/l0/core/registry.py", line 69, in put
+    return self.put_batch([r])
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/trading-lab/l0/core/registry.py", line 75, in put_batch
+    self._put(r)
+  File "/workspace/trading-lab/l0/core/registry.py", line 191, in _put
+    require(state['lifecycle_status'] in ('AWAIT_OUTCOME', 'SCORED'), 'SCORE_STAGE')
+  File "/workspace/trading-lab/l0/core/records.py", line 31, in require
+    raise Invalid(reason)
+l0.core.records.Invalid: SCORE_STAGE
+
+======================================================================
+ERROR: test_versions_explicit_refs_and_predecessors_must_match (test_r2.R2Tests.test_versions_explicit_refs_and_predecessors_must_match)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/trading-lab/l0/tests/test_r2.py", line 111, in test_versions_explicit_refs_and_predecessors_must_match
+    p,oldreview,memory=self.review_and_memory();_,s=self.revise();self.reg.put(s)
+                                                                  ^^^^^^^^^^^^^^^
+  File "/workspace/trading-lab/l0/core/registry.py", line 69, in put
+    return self.put_batch([r])
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/trading-lab/l0/core/registry.py", line 75, in put_batch
+    self._put(r)
+  File "/workspace/trading-lab/l0/core/registry.py", line 191, in _put
+    require(state['lifecycle_status'] in ('AWAIT_OUTCOME', 'SCORED'), 'SCORE_STAGE')
+  File "/workspace/trading-lab/l0/core/records.py", line 31, in require
+    raise Invalid(reason)
+l0.core.records.Invalid: SCORE_STAGE
+
+======================================================================
+FAIL: test_quarantine_latched_at_all_post_score_stages (test_r2.R2Tests.test_quarantine_latched_at_all_post_score_stages) (stage='SCORED')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/trading-lab/l0/tests/test_r2.py", line 52, in test_quarantine_latched_at_all_post_score_stages
+    with self.subTest(stage=stage),self.assertRaisesRegex(ValueError,'QUARANTINE'):
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_quarantine_latched_at_all_post_score_stages (test_r2.R2Tests.test_quarantine_latched_at_all_post_score_stages)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/trading-lab/l0/tests/test_r2.py", line 54, in test_quarantine_latched_at_all_post_score_stages
+    self.assertEqual(self.reg.state(p['id'])['eligibility_status'],'QUARANTINED_PROVENANCE')
+AssertionError: 'UNASSESSED' != 'QUARANTINED_PROVENANCE'
+- UNASSESSED
++ QUARANTINED_PROVENANCE
+
+
+======================================================================
+FAIL: test_unscored_latest_outcome_blocks_review_and_memory (test_r2.R2Tests.test_unscored_latest_outcome_blocks_review_and_memory)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/trading-lab/l0/tests/test_r2.py", line 71, in test_unscored_latest_outcome_blocks_review_and_memory
+    with self.assertRaisesRegex(ValueError,'CURRENT_SCORE'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.214s
+
+FAILED (failures=3, errors=4)

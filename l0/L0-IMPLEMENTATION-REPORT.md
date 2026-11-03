@@ -1,6 +1,6 @@
 # L0 implementation report
 
-Status: L0-IMPLEMENTATION — R1 CORRECTIONS SUBMITTED FOR REVIEW / NOT ACCEPTED. This is an offline
+Status: L0-IMPLEMENTATION — R2 CORRECTIONS SUBMITTED FOR INDEPENDENT QA / NOT ACCEPTED. This is an offline
 engineering core, not an authorized Forward Pilot.
 
 Base commit: `70aa77b1deee94b34f482e987ce7f98a0013539c` (fetched main).
@@ -9,6 +9,92 @@ submission receipt and PR body. A commit cannot embed its own hash in its own
 tracked report; resolve this report's delivery commit with `git rev-parse HEAD`.
 The explicit 2026-11-03 Founder implementation contract supersedes main's older
 implementation-not-authorized status. LAB-STATE and adopted documents are preserved.
+
+## R2 minimal correction — 2026-11-04 (Asia/Shanghai)
+
+R2 base: `fb1d408538daa35b9c3db3bcdb972e2b9ccf8d82`.
+Branch/PR: existing `feat/l0-core`, Draft PR #4. Final pushed SHA is supplied in
+the submission response; this report does not claim Founder acceptance or an
+independent QA PASS. R1 sections below describe the prior correction history.
+
+### QA-1: quarantine latch
+
+Any explicit status write attempting QUARANTINED_PROVENANCE → UNASSESSED now
+fails with QUARANTINE_LATCHED, including at SCORED, REVIEWED and MEMORY_PROPOSED.
+Invalid status remains latched; no automatic clearance/authorization path is
+introduced. Effect/state writes remain a single SQLite transaction.
+
+### QA-2: latest-outcome score/review/memory binding
+
+A new Review must have exactly one direct Score parent: the current score for
+the latest Outcome. Missing current score or an old/mixed score parent is rejected.
+A new Memory must use exactly the latest Review; that Review must itself bind
+to the current score. A newly appended Outcome immediately makes an older
+score/review insufficient for new records, even before its revised score exists.
+
+Review and Memory revisions require `payload.supersedes` to reference the exact
+latest predecessor and include it among ordered parents. The predecessor retains
+its historical ancestry and counterevidence; it is not treated as the current
+score/review input. All operative record references include exact ID/hash kind/
+hash. Optional payload `score_ref` / `review_ref`, when supplied, must match the
+operative parent. Supported record/protocol versions must match across the
+Score→Review→Memory chain; R1 identity/version/hash checks remain enforced.
+
+Revised scores are permitted from AWAIT_OUTCOME, SCORED, REVIEWED and
+MEMORY_PROPOSED; revised reviews are permitted from SCORED, REVIEWED and
+MEMORY_PROPOSED. Automatic status writes keep the greater of current and target
+lifecycle stages, so a correction never demotes a sample from MEMORY_PROPOSED
+to SCORED/REVIEWED or from REVIEWED to SCORED. Lifecycle is progress history,
+not an assertion that the latest revision has finished downstream review.
+Use current_score and explicit record lineage to determine revision readiness.
+
+Identical retries of old immutable records remain idempotent historical retrieval;
+they do not create a new review/memory or make stale evidence current. There is
+no retroactive overwrite, new activation, eligibility promotion or trading path.
+
+### Actual R2 evidence
+
+Command: `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s l0/tests -v`.
+Final result: **34 tests run, 34 passed**, zero failures/errors/skips. The original
+26 tests are unchanged and pass; eight new adversarial R2 tests are in
+`l0/tests/test_r2.py`. Log: `l0/evidence/unit-tests.txt`.
+
+Before the fix, these eight R2 tests produced 3 failures and 4 errors (one pass),
+including missing quarantine rejection and unsupported late-stage score revisions.
+Original reproduction output is retained in `l0/evidence/r2-before-tests.txt`.
+
+R2 checks quarantine rollback at all three requested stages; INVALID retention;
+unscored latest outcome blocking Review/Memory; stale-score and stale-review
+rejection; full revised Score/Review/Memory chain with immutable predecessors;
+non-regressing lifecycle at REVIEWED/MEMORY_PROPOSED; protocol/record version,
+explicit reference and predecessor mismatch rejection; exact restart reconstruction
+and idempotent retries. A bad Review rolls back its preceding Score in the same
+batch. Injected status-write failure rolls back the revised Score. The existing
+subprocess crash, concurrent registration, storage corruption and ID/hash conflict
+tests remain included and passed. These are developer tests, not independent QA.
+
+### Integrity and scope
+
+`r2-integrity.json` records unchanged hashes for every original main-baseline
+file and every pre-R2 file outside the four authorized modified paths. The
+original main baseline has 121 files, including frozen G1/G2a, M1, historical
+manifests and all four adopted L0 documents; every byte is preserved. Prior R1
+integrity evidence and all 26 prior tests are unchanged. The active L0 changed-file
+manifest is regenerated as requested; historical G1/G2a/import manifests are not.
+
+R2 modifies only `l0/core/registry.py`, this implementation report,
+`l0/evidence/unit-tests.txt`, and the active `l0/evidence/changed-files.sha256`.
+It adds `l0/tests/test_r2.py`, `l0/evidence/r2-before-tests.txt` and
+`l0/evidence/r2-integrity.json`.
+
+No known remaining QA-1/QA-2 failure was observed in the full offline suite.
+Independent QA is still pending. Existing limitations remain: local identity
+binding is not authentication, custody remains PENDING/UNVERIFIED, performance
+eligibility stays false, cross-prediction memory is unsupported, and privileged
+coherent database rewriting cannot be disproved without an external anchor.
+No G1 risk-gate execution, G2a simulator, M1 scoring, real outcome collection,
+API trading, orders, paid service, Pilot, deployment or G2b occurred. Proposed
+30-block / 0.02 / 95% thresholds remain unadopted. Keep PR #4 Draft and unmerged.
 
 ## Implementation
 
@@ -182,7 +268,7 @@ Command from repository root:
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s l0/tests -v
 ```
 
-Result: **26 tests passed** (17 existing + 9 targeted R1 tests), including parameterized subcases; zero failed,
+Result: **34 tests passed** (17 original + 9 R1 + 8 R2 tests), including parameterized subcases; zero failed,
 skipped or expected-failure tests. Full output is `l0/evidence/unit-tests.txt`.
 
 Coverage includes schema/required fields; stale/recomputed hash reuse; identical
