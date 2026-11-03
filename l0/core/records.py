@@ -14,6 +14,12 @@ from submit_validator import validate_prediction as _g1_validate, ValidationErro
 FIXTURE = 'SYNTHETIC_ENGINEERING_FIXTURE'
 FORWARD = 'GENUINE_FORWARD_PREDICTION'
 TIE = ['FLAT', 'DOWN', 'UP']
+RECORD_VERSION = '1.0'
+PROTOCOL_VERSION = 'L0-v1.0'
+# Local fixture identities only; not authenticated Bot identities.
+DEFAULT_IDENTITIES = {role: 'fixture:' + role for role in
+                      ('Macro', 'News', 'Company', 'Market', 'Skeptic', 'Chief', 'Review', 'Memory', 'Codex', 'Founder')}
+
 
 
 class Invalid(ValueError):
@@ -70,8 +76,11 @@ def primary(prediction, tie):
     return max(tie, key=lambda label: prediction['probs'][label])
 
 
-def record(rid, kind, prediction, at, actor, payload, parents=(), evidence_class=FIXTURE):
-    return seal({'id': rid, 'kind': kind, 'prediction_ref': reference(prediction),
+def record(rid, kind, prediction, at, actor, payload, parents=(), evidence_class=FIXTURE, *, actor_identity=None):
+    return seal({'id': rid, 'kind': kind, 'record_version': RECORD_VERSION,
+                 'protocol_version': PROTOCOL_VERSION,
+                 'actor_identity': DEFAULT_IDENTITIES.get(actor) if actor_identity is None else actor_identity,
+                 'prediction_ref': reference(prediction),
                  'created_at_utc': at, 'actor': actor, 'payload': payload,
                  'parents': list(parents), 'evidence_class': evidence_class})
 
@@ -79,7 +88,13 @@ def record(rid, kind, prediction, at, actor, payload, parents=(), evidence_class
 def validate_envelope(r):
     verify(r)
     require(set(r) == {'id', 'kind', 'prediction_ref', 'created_at_utc', 'actor',
-                       'payload', 'parents', 'evidence_class', 'content_sha256'}, 'ENVELOPE_FIELDS')
+                       'payload', 'parents', 'evidence_class', 'content_sha256',
+                       'record_version', 'protocol_version', 'actor_identity'}, 'ENVELOPE_FIELDS')
+    require(r['record_version'] == RECORD_VERSION, 'RECORD_VERSION_MISMATCH')
+    require(r['protocol_version'] == PROTOCOL_VERSION, 'PROTOCOL_VERSION_MISMATCH')
+    require(r['actor'] in DEFAULT_IDENTITIES, 'UNKNOWN_ACTOR_ROLE')
+    require(isinstance(r['actor_identity'], str) and r['actor_identity'].strip() == r['actor_identity']
+            and bool(r['actor_identity']), 'ACTOR_IDENTITY_REQUIRED')
     require(isinstance(r['id'], str) and r['id'] and isinstance(r['payload'], dict), 'BAD_RECORD')
     timestamp(r['created_at_utc'])
     require(r['evidence_class'] in (FIXTURE, FORWARD), 'UNSUPPORTED_EVIDENCE_CLASS')
@@ -104,3 +119,22 @@ def validate_prediction(prediction):
         return _g1_validate(prediction)
     except ValidationError as exc:
         raise Invalid(str(exc)) from exc
+
+
+def validate_lineage(r, records):
+    """R1: no cross-prediction lessons are authorized, including indirect inputs."""
+    if r.get('kind') not in ('review', 'memory', 'strategy'):
+        return
+    expected = r['prediction_ref']
+    pending = list(r['parents'])
+    seen = set()
+    while pending:
+        ref = pending.pop()
+        require(ref['id'] in records and reference(records[ref['id']]) == ref, 'BAD_PARENT_REFERENCE')
+        if ref['id'] in seen:
+            continue
+        seen.add(ref['id'])
+        parent = records[ref['id']]
+        actual = reference(parent) if parent.get('schema') == 'prediction_v1' else parent.get('prediction_ref')
+        require(actual == expected, 'CROSS_PREDICTION_LINEAGE')
+        pending.extend(parent.get('parents', []))

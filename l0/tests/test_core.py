@@ -180,7 +180,7 @@ class CoreTests(unittest.TestCase):
             try:r.register(prediction(),at=EARLY)
             finally:r.close()
         with ThreadPoolExecutor(max_workers=4) as pool:list(pool.map(register,range(8)))
-        self.assertEqual(len(self.reg.snapshot()),2)
+        self.assertEqual(len(self.reg.snapshot()),3)
 
     def test_process_death_before_and_after_commit(self):
         for boundary in ('before','after'):
@@ -190,7 +190,7 @@ from l0.core.registry import Registry
 from l0.core.records import seal
 r=Registry({path!r})
 with r.storage.transaction():
- r.storage.append(seal({{'id':'UNIT-CRASH','kind':'attempt','reason':'invented'}}))
+ r.storage.append(seal({{'id':'UNIT-CRASH','kind':'attempt','schema':'l0_attempt_v1','attempted_id':'unit','at':None,'reason':'invented'}}))
  if {boundary!r}=='before':os._exit(73)
 os._exit(73)
 '''
@@ -255,7 +255,7 @@ setup(r)
         self.reg.register(prediction(),at=EARLY)
         with sqlite3.connect(self.path) as db:
             db.execute('DROP TRIGGER immutable_update')
-            db.execute("UPDATE records SET body=replace(body,'100.0','900.0') WHERE seq=1")
+            db.execute("UPDATE records SET body=replace(body,'100.0','900.0') WHERE id='PRED-UNIT-001'")
         with self.assertRaises(ValueError):self.reg.snapshot()
         with self.assertRaises(ValueError):Registry(self.path)
 

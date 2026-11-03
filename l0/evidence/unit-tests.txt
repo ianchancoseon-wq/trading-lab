@@ -15,8 +15,17 @@ test_schema_and_probabilities (test_core.CoreTests.test_schema_and_probabilities
 test_scoring_guards (test_core.CoreTests.test_scoring_guards) ... ok
 test_strategy_is_proposal_only (test_core.CoreTests.test_strategy_is_proposal_only) ... ok
 test_tie_and_zero_probability (test_core.CoreTests.test_tie_and_zero_probability) ... ok
+test_all_derived_envelopes_and_pinned_identity_reopen (test_r1.R1Tests.test_all_derived_envelopes_and_pinned_identity_reopen) ... ok
+test_cross_prediction_review_used_as_memory_parent (test_r1.R1Tests.test_cross_prediction_review_used_as_memory_parent) ... ok
+test_declared_custom_identity_bound_to_role (test_r1.R1Tests.test_declared_custom_identity_bound_to_role) ... ok
+test_foreign_memory_and_strategy_predecessor_rejected (test_r1.R1Tests.test_foreign_memory_and_strategy_predecessor_rejected) ... ok
+test_hash_and_reused_id_bind_versions_and_identity (test_r1.R1Tests.test_hash_and_reused_id_bind_versions_and_identity) ... ok
+test_missing_or_altered_parent_hash_and_same_prediction_preserved (test_r1.R1Tests.test_missing_or_altered_parent_hash_and_same_prediction_preserved) ... ok
+test_required_version_identity_fields (test_r1.R1Tests.test_required_version_identity_fields) ... ok
+test_review_foreign_evidence_and_indirect_memory_evidence (test_r1.R1Tests.test_review_foreign_evidence_and_indirect_memory_evidence) ... ok
+test_storage_boundary_rejects_incomplete_derived_record (test_r1.R1Tests.test_storage_boundary_rejects_incomplete_derived_record) ... ok
 
 ----------------------------------------------------------------------
-Ran 17 tests in 0.516s
+Ran 26 tests in 1.337s
 
 OK

@@ -11,8 +11,8 @@ STATES = ['RESEARCH', 'CHALLENGED', 'CHIEF_FINAL', 'FROZEN', 'AWAIT_OUTCOME',
 
 
 class Registry:
-    def __init__(self, path):
-        self.storage = Storage(path)
+    def __init__(self, path, *, actor_bindings=None):
+        self.storage = Storage(path, actor_bindings)
 
     def close(self):
         self.storage.close()
@@ -41,7 +41,7 @@ class Registry:
     def _attempt(self, rid, at, error):
         # Rejection evidence persists separately after the invalid operation rolled back.
         with self.storage.transaction():
-            self.storage.append(seal({'id': 'ATTEMPT-' + uuid.uuid4().hex, 'kind': 'attempt',
+            self.storage.append(seal({'id': 'ATTEMPT-' + uuid.uuid4().hex, 'kind': 'attempt', 'schema': 'l0_attempt_v1',
                                       'attempted_id': rid, 'at': at, 'reason': str(error)}))
 
     def register(self, prediction, *, at, evidence_class=FIXTURE):
@@ -55,7 +55,7 @@ class Registry:
                 if self.storage.append(prediction):
                     initial = record('REGISTER-' + prediction['id'], 'status', prediction, at, 'Chief',
                                      {'lifecycle_status': 'RESEARCH', 'eligibility_status': 'UNASSESSED',
-                                      'reason': 'registered; no independent custody proof'}, evidence_class=evidence_class)
+                                      'reason': 'registered; no independent custody proof'}, evidence_class=evidence_class, actor_identity=self.storage.actor_bindings['Chief'])
                     self.storage.append(initial)
                 else:
                     old = self.snapshot()['REGISTER-' + prediction['id']]
@@ -78,7 +78,7 @@ class Registry:
             raise
 
     def _put(self, r):
-        validate_envelope(r)
+        self.storage.validate_record(r)
         rows = self.snapshot()
         pred = rows.get(r['prediction_ref']['id'])
         require(pred is not None and reference(pred) == r['prediction_ref'], 'PREDICTION_REFERENCE')
@@ -210,7 +210,7 @@ class Registry:
                             {'lifecycle_status': targets[kind],
                              'eligibility_status': 'QUARANTINED_PROVENANCE',
                              'reason': 'atomic ' + kind + ' record; custody not independently verified'},
-                            [reference(prior), reference(r)], r['evidence_class'])
+                            [reference(prior), reference(r)], r['evidence_class'], actor_identity=r['actor_identity'])
             self.storage.append(status)
 
 

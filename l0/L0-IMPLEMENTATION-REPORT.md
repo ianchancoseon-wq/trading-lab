@@ -1,6 +1,6 @@
 # L0 implementation report
 
-Status: L0-CORE READY FOR REVIEW. Founder acceptance is pending. This is an offline
+Status: L0-IMPLEMENTATION — R1 CORRECTIONS SUBMITTED FOR REVIEW / NOT ACCEPTED. This is an offline
 engineering core, not an authorized Forward Pilot.
 
 Base commit: `70aa77b1deee94b34f482e987ce7f98a0013539c` (fetched main).
@@ -38,9 +38,96 @@ implementation-not-authorized status. LAB-STATE and adopted documents are preser
 - `l0/evidence/`: actual test log, baseline preservation evidence and changed-file
   hashes. These are engineering evidence, never learning/performance statistics.
 
-All code changes are additions under `l0/`; no existing tracked file is modified.
+All implementation changes are confined to L0 source, tests and engineering evidence. R1 modifies the prior L0 implementation; all 121 original main-baseline files, including the adopted documents, remain byte-identical.
 The changed-file manifest lists each added source, test and report path. The
 manifest excludes its own digest, which is reported in the submission receipt.
+
+
+## R1 response to Founder review 6607510100
+
+R1 base/head-before-correction: `0b9d4e5bd3db7247d8b26c97c8abe2bfd34a6064`.
+Exact final R1 SHA is supplied in the submission receipt/response, avoiding a
+self-referential commit hash in this tracked report.
+
+### R1-1: adopted envelope mapping and strict identity/version binding
+
+The stored field mapping is deterministic and explicit:
+
+| Adopted contract | Stored field / encoding |
+| --- | --- |
+| record_id | id |
+| record_type | kind; review_record → review, memory_revision → memory, strategy_version_record → strategy; other existing kinds retain their documented names |
+| actor_role | actor |
+| record_version | record_version, exactly the supported string `1.0` |
+| protocol_version | protocol_version, exactly `L0-v1.0` |
+| actor_identity | actor_identity, nonempty trimmed string matching the database's pinned role binding |
+| created_at_utc, evidence_class, content_sha256, prediction_ref | same names and meanings |
+| ordered parent ID/hash refs | parents, ordered array; ordering participates in canonical hashing |
+
+All derived records, including automatically generated registration and lifecycle
+records, carry these fields. Unsupported/missing/malformed versions and identities
+fail closed before replay. All fields participate in the unchanged canonical-body
+hash algorithm. Changing a version or actor under a reused ID is rejected either
+by version/identity validation or immutable ID conflict; no caller can rehash a
+change into an accepted retry. G1 prediction schema/hash behavior is untouched.
+
+`Registry(path, actor_bindings=...)` accepts an explicit complete role/identity
+mapping. It is pinned atomically as a hash-bound internal configuration record;
+reopening with a changed mapping fails closed. Default identities are explicitly
+`fixture:<role>`, not claimed deployed Grok/Founder identities. Automatic status
+records inherit the validated actor identity; initial registration uses the pinned
+Chief identity. These are attribution bindings, not cryptographic authentication.
+
+Two internal schema exceptions are explicit: `l0_actor_bindings_v1` (id, kind,
+schema, bindings, content_sha256) and `l0_attempt_v1` (id, kind, schema,
+attempted_id, at, reason, content_sha256). Invalid attempted timestamps may remain
+in attempt evidence exactly as supplied; they are not accepted lifecycle times.
+Internal schemas cannot substitute for a derived research envelope. Both write
+and restart/read verification enforce derived envelopes and pinned identities.
+
+Pre-R1 prototype SQLite databases with incomplete envelopes are rejected; no
+silent migration, guessed identity/version, or rewritten historical hashes are
+performed. Fresh isolated databases are used by the tests. Frozen G1/M1 files
+are neither migrated nor extended.
+
+### R1-2: recursive single-prediction lineage
+
+Review, Memory and Strategy require every parent and recursive ancestor to bind
+to their exact original prediction ID, hash kind and SHA-256. Raw prediction
+parents are checked against their own original reference. Every traversed parent
+must exist with the exact referenced hash. Validation runs on append and replay,
+so a same-prediction evidence wrapper cannot launder a foreign ancestor.
+Cross-prediction memory is **not supported** in R1. No declaration field or
+annotation bypass is provided; it requires separate authorization and a complete
+provenance contract in a future change. Valid same-prediction predecessors,
+contrary evidence and rejected/superseded revisions remain immutable and usable.
+
+### R1-3: actual tests, preservation and scope
+
+Full command: `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s l0/tests -v`.
+Actual result: **26 tests passed**, zero failures/errors/skips. Nine new tests
+cover missing/forged envelope fields, stale and recomputed identity/version hashes,
+idempotent replay, database identity mismatch on reopen, custom role identity,
+foreign Review→Memory, foreign Memory/strategy predecessors, indirect foreign
+evidence, altered/missing parents, and low-level storage envelope bypass rejection.
+Original 17 tests remain included: process death before/after commit,
+freeze/status atomicity, rollback, concurrent retries, restart reconstruction,
+corruption, scoring boundaries/revisions, custody and cutoff restrictions.
+
+These are developer tests, **not independent QA PASS**. Synthetic arithmetic
+only; `performance_eligible: false`, PENDING/UNVERIFIED custody, M1 prohibition,
+and all prospective-only/verification guards remain unchanged. Comparison
+thresholds 30 blocks / 0.02 Brier / 95% CI remain PROPOSED / NOT ADOPTED.
+No Pilot, model/market/broker API, payment, order, simulator, Bot, timer,
+deployment or G2b ran. Only authorized Git transport is used for delivery.
+
+Changed R1 paths: core/records.py, core/registry.py, core/storage.py,
+tests/test_core.py, new tests/test_r1.py, evidence/unit-tests.txt,
+evidence/changed-files.sha256, new evidence/r1-integrity.json, and this report.
+Remaining limitations: real identity authentication and external custody are not
+implemented; cross-prediction memory and legacy-database migration are deliberately
+unavailable. No new known blocking implementation issue was found in these tests;
+Founder review remains required. Keep PR #4 Draft and unmerged.
 
 ## API and trust boundaries
 
@@ -95,7 +182,7 @@ Command from repository root:
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s l0/tests -v
 ```
 
-Result: **17 tests passed**, including parameterized subcases; zero failed,
+Result: **26 tests passed** (17 existing + 9 targeted R1 tests), including parameterized subcases; zero failed,
 skipped or expected-failure tests. Full output is `l0/evidence/unit-tests.txt`.
 
 Coverage includes schema/required fields; stale/recomputed hash reuse; identical
@@ -143,10 +230,8 @@ record system, not high-volume storage. No automatic source validation, semantic
 challenge judgment, trusted clock, dataset selection, active memory, comparison
 cohort, formal pilot, deployment or learning claim is provided.
 
-No known unresolved P0/P1 issue within this bounded, unauthenticated offline
-engineering contract after the recorded tests. These checks are developer tests,
-not independent QA. Draft PR delivery is subject to GitHub API access: current
-requests to api.github.com return Forbidden although Git transport works.
+R1 addresses both blocking review findings with developer regressions. No independent QA or Founder acceptance is claimed; reviewer confirmation remains required. These checks are developer tests,
+not independent QA. Delivery uses existing Draft PR #4 and branch feat/l0-core. The Founder review comment 6607510100 was supplied verbatim by the user after GitHub API reads were denied. Git push updates the existing PR; no new PR or merge is requested.
 Neither this report nor passing tests declares Founder acceptance.
 
 Recommendation: **L0-CORE READY FOR REVIEW**. Do not merge or run a pilot.
