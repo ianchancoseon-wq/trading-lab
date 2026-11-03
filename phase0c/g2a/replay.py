@@ -63,6 +63,8 @@ def replay_ledger_file(path: Path) -> dict[str, Any]:
             if state is None:
                 raise LedgerError("REPLAY_NO_STATE", str(i))
             fill = payload["fill"]
+            if fill["decision_id"] in state["filled_decision_ids"]:
+                raise LedgerError("DUPLICATE_FILL", fill["decision_id"])
             apply_fill_to_state(state, fill)
             state["filled_decision_ids"][fill["decision_id"]] = fill["id"]
         elif et == "MARK_TO_MARKET":
@@ -76,16 +78,18 @@ def replay_ledger_file(path: Path) -> dict[str, Any]:
             refresh_marks_and_equity(state, marks)
             state["trading_day"] = payload["trading_day"]
             state["day_start_equity"] = float(payload["day_start_equity"])
-            state["daily_loss_stop_latched"] = False
-            # drawdown latch never auto-clears; refresh may keep/set True
-            if sa:
-                state["drawdown_stop_latched"] = bool(sa.get("drawdown_stop_latched", state["drawdown_stop_latched"]))
         elif et == "PENDING_INJECT":
             if state is None:
                 raise LedgerError("REPLAY_NO_STATE", str(i))
             state["outstanding_pending"] = copy.deepcopy(payload.get("outstanding_pending") or [])
         else:
             raise LedgerError("UNKNOWN_EVENT_TYPE", et)
+
+        expected = copy.deepcopy(state)
+        expected.pop("last_event_sha256", None)
+        expected.pop("last_seq", None)
+        if sa != expected:
+            raise LedgerError("STATE_REPLAY_MISMATCH", f"line={i}")
 
     if state is None:
         raise LedgerError("EMPTY_REPLAY")

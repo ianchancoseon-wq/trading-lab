@@ -4,6 +4,12 @@ from __future__ import annotations
 import copy
 import hashlib
 import math
+import os
+import tempfile
+import threading
+import fcntl
+from contextlib import contextmanager
+from functools import wraps
 from pathlib import Path
 from typing import Any
 
@@ -90,7 +96,7 @@ def unrealized_from_avg(
 
 
 def apply_stop_latches(state: dict[str, Any]) -> None:
-    """Latch stops from marked equity. Never clears drawdown; daily only via NEW_DAY."""
+    """Latch stops from marked equity. Never clears either stop latch."""
     equity = float(state["equity"])
     day_start = float(state["day_start_equity"])
     peak = float(state["peak_equity"])
@@ -173,16 +179,85 @@ def apply_fill_to_state(state: dict[str, Any], fill: dict[str, Any]) -> float:
     return realized
 
 
+def transactional(method):
+    @wraps(method)
+    def wrapped(self, *args, **kwargs):
+        with self.transaction():
+            return method(self, *args, **kwargs)
+    return wrapped
+
+
 class Ledger:
     def __init__(self, path: Path, *, initial_cash: float = 100_000.0, trading_day: str = "2026-11-03"):
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.state = _empty_state(cash=initial_cash, trading_day=trading_day)
         self._events: list[dict[str, Any]] = []
-        if self.path.exists() and self.path.stat().st_size > 0:
-            self._load_and_verify()
-        else:
-            self._append_genesis()
+        self._in_transaction = False
+        self._thread_lock = threading.RLock()
+        with self.transaction():
+            if not self._events:
+                self._append_genesis()
+
+    @contextmanager
+    def transaction(self):
+        with self._thread_lock:
+            with self._locked_transaction():
+                yield
+
+    @contextmanager
+    def _locked_transaction(self):
+        """Serialize writers; stage a complete logical append and publish atomically.
+
+        The JSONL ledger is the only durable authority. Atomic replacement prevents
+        torn tails; file + directory fsync establish durability before success.
+        """
+        if self._in_transaction:
+            yield
+            return
+        with self.path.with_suffix(self.path.suffix + ".lock").open("a+") as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX)
+            self._in_transaction = True
+            before_state = copy.deepcopy(self.state)
+            before_events = copy.deepcopy(self._events)
+            try:
+                if self._events and (not self.path.exists() or not self.path.stat().st_size):
+                    raise LedgerError("LEDGER_MISSING_OR_EMPTY")
+                if self.path.exists() and self.path.stat().st_size:
+                    self._load_and_verify()
+                before_state = copy.deepcopy(self.state)
+                before_events = copy.deepcopy(self._events)
+                yield
+                if self._events != before_events:
+                    self._commit_events()
+            except BaseException:
+                self.state, self._events = before_state, before_events
+                # A replace may have completed before an I/O error/interrupt.
+                # Reconcile the live handle with whichever complete version exists.
+                if self.path.exists() and self.path.stat().st_size:
+                    self._load_and_verify()
+                raise
+            finally:
+                self._in_transaction = False
+                fcntl.flock(lock, fcntl.LOCK_UN)
+
+    def _commit_events(self):
+        fd, name = tempfile.mkstemp(prefix=self.path.name + ".", suffix=".tmp", dir=self.path.parent)
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as stream:
+                for event in self._events:
+                    stream.write(dumps_strict(event, sort_keys=True, separators=(",", ":")) + "\n")
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(name, self.path)
+            directory = os.open(self.path.parent, os.O_RDONLY | os.O_DIRECTORY)
+            try:
+                os.fsync(directory)
+            finally:
+                os.close(directory)
+        finally:
+            if os.path.exists(name):
+                os.unlink(name)
 
     def _load_and_verify(self) -> None:
         text = self.path.read_text(encoding="utf-8")
@@ -218,8 +293,13 @@ class Ledger:
             raise LedgerError("NO_STATE_AFTER", "ledger has no state_after")
         state["last_event_sha256"] = prev
         state["last_seq"] = len(events)
+        # Verify reconstructed effects against every recorded snapshot too.
+        from replay import replay_ledger_file
+        rebuilt = replay_ledger_file(self.path)["state"]
+        if state != rebuilt:
+            raise LedgerError("STATE_REPLAY_MISMATCH")
         self._events = events
-        self.state = state
+        self.state = rebuilt
 
     def _append_genesis(self) -> None:
         payload = {
@@ -260,10 +340,6 @@ class Ledger:
             "state_after": state_after,
         }
         ev = attach_hash(body)
-        line = dumps_strict(ev, sort_keys=True, separators=(",", ":"))
-        with self.path.open("a", encoding="utf-8") as f:
-            f.write(line + "\n")
-            f.flush()
         self._events.append(ev)
         self.state = copy.deepcopy(state_after)
         self.state["last_event_sha256"] = ev["content_sha256"]
@@ -271,19 +347,23 @@ class Ledger:
         self.state["demo"] = True
         return ev
 
+    @transactional
     def snapshot_state(self) -> dict[str, Any]:
         return copy.deepcopy(self.state)
 
+    @transactional
     def events(self) -> list[dict[str, Any]]:
         return copy.deepcopy(self._events)
 
-    def record_gate(self, gate_result: dict[str, Any], ts_utc: str) -> dict[str, Any]:
+    @transactional
+    def record_gate(self, gate_result: dict[str, Any], ts_utc: str, bindings: dict | None = None) -> dict[str, Any]:
         return self._append_event(
             event_type="GATE_RESULT",
             ts_utc=ts_utc,
-            payload={"gate_result": gate_result},
+            payload={"gate_result": gate_result, "bindings": bindings or {}},
         )
 
+    @transactional
     def record_no_trade(
         self,
         *,
@@ -303,8 +383,11 @@ class Ledger:
             },
         )
 
+    @transactional
     def record_fill(self, fill: dict[str, Any], ts_utc: str) -> dict[str, Any]:
-        # Apply fill then append (fill must already carry content_sha256)
+        if fill["decision_id"] in self.state["filled_decision_ids"]:
+            raise LedgerError("DUPLICATE_FILL", fill["decision_id"])
+        # Apply only to staged state; transaction rolls back on any failure.
         realized = apply_fill_to_state(self.state, fill)
         fill_out = dict(fill)
         if "realized_pnl" not in fill_out:
@@ -318,6 +401,7 @@ class Ledger:
             payload={"fill": fill_out, "realized_pnl": float(realized)},
         )
 
+    @transactional
     def mark_to_market(self, marks: dict[str, float], ts_utc: str) -> dict[str, Any]:
         refresh_marks_and_equity(self.state, marks)
         return self._append_event(
@@ -326,12 +410,12 @@ class Ledger:
             payload={"marks": dict(marks)},
         )
 
+    @transactional
     def start_new_day(self, trading_day: str, marks: dict[str, float], ts_utc: str) -> dict[str, Any]:
-        """New trading day: reset daily stop latch; drawdown latch NEVER clears."""
+        """New trading day: rebase daily equity without clearing either halt."""
         refresh_marks_and_equity(self.state, marks)
         self.state["trading_day"] = trading_day
         self.state["day_start_equity"] = float(self.state["equity"])
-        self.state["daily_loss_stop_latched"] = False
         # drawdown_stop_latched intentionally unchanged
         return self._append_event(
             event_type="NEW_DAY",
@@ -343,6 +427,7 @@ class Ledger:
             },
         )
 
+    @transactional
     def inject_outstanding_pending(self, pending: list[dict[str, Any]], ts_utc: str) -> dict[str, Any]:
         """Engineering fixture: set outstanding pending snapshot (DEMO only)."""
         if not isinstance(pending, list):

@@ -1,0 +1,95 @@
+test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) ... 
+  test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='pred', rehash=False) ... FAIL
+  test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='pred', rehash=True) ... FAIL
+  test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='dec', rehash=False) ... FAIL
+  test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='dec', rehash=True) ... FAIL
+  test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='pred', rehash=False) ... FAIL
+  test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='pred', rehash=True) ... FAIL
+  test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='dec', rehash=False) ... FAIL
+  test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='dec', rehash=True) ... FAIL
+test_daily_halt_survives_new_day_recovery_and_blocks_buy (test_g2a_r1.CorrectionTests.test_daily_halt_survives_new_day_recovery_and_blocks_buy) ... FAIL
+
+======================================================================
+FAIL: test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='pred', rehash=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/trading-baseline-156q1zbg/phase0c/g2a/tests/test_g2a_r1.py", line 64, in test_changed_content_rejected_before_replay_live_and_restarted
+    with self.assertRaises(SimError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: SimError not raised
+
+======================================================================
+FAIL: test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='pred', rehash=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/trading-baseline-156q1zbg/phase0c/g2a/tests/test_g2a_r1.py", line 64, in test_changed_content_rejected_before_replay_live_and_restarted
+    with self.assertRaises(SimError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: SimError not raised
+
+======================================================================
+FAIL: test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='dec', rehash=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/trading-baseline-156q1zbg/phase0c/g2a/tests/test_g2a_r1.py", line 64, in test_changed_content_rejected_before_replay_live_and_restarted
+    with self.assertRaises(SimError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: SimError not raised
+
+======================================================================
+FAIL: test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='dec', rehash=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/trading-baseline-156q1zbg/phase0c/g2a/tests/test_g2a_r1.py", line 64, in test_changed_content_rejected_before_replay_live_and_restarted
+    with self.assertRaises(SimError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: SimError not raised
+
+======================================================================
+FAIL: test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='pred', rehash=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/trading-baseline-156q1zbg/phase0c/g2a/tests/test_g2a_r1.py", line 64, in test_changed_content_rejected_before_replay_live_and_restarted
+    with self.assertRaises(SimError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: SimError not raised
+
+======================================================================
+FAIL: test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='pred', rehash=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/trading-baseline-156q1zbg/phase0c/g2a/tests/test_g2a_r1.py", line 64, in test_changed_content_rejected_before_replay_live_and_restarted
+    with self.assertRaises(SimError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: SimError not raised
+
+======================================================================
+FAIL: test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='dec', rehash=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/trading-baseline-156q1zbg/phase0c/g2a/tests/test_g2a_r1.py", line 64, in test_changed_content_rejected_before_replay_live_and_restarted
+    with self.assertRaises(SimError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: SimError not raised
+
+======================================================================
+FAIL: test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) (which='dec', rehash=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/trading-baseline-156q1zbg/phase0c/g2a/tests/test_g2a_r1.py", line 64, in test_changed_content_rejected_before_replay_live_and_restarted
+    with self.assertRaises(SimError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: SimError not raised
+
+======================================================================
+FAIL: test_daily_halt_survives_new_day_recovery_and_blocks_buy (test_g2a_r1.CorrectionTests.test_daily_halt_survives_new_day_recovery_and_blocks_buy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/trading-baseline-156q1zbg/phase0c/g2a/tests/test_g2a_r1.py", line 77, in test_daily_halt_survives_new_day_recovery_and_blocks_buy
+    self.assertTrue(self.sim.state['daily_loss_stop_latched'])
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.006s
+
+FAILED (failures=9)

@@ -2,22 +2,19 @@
 from __future__ import annotations
 
 import copy
-import math
 from pathlib import Path
 from typing import Any
 
-from g2a_paths import FIXTURE_POLICY_PATH, G2A_ROOT, ensure_g1_on_path
+from g2a_paths import FIXTURE_POLICY_PATH, ensure_g1_on_path
 from fill_engine import FillError, build_fill
-from ledger import Ledger, LedgerError, marked_equity, unrealized_from_avg
+from ledger import Ledger, marked_equity, unrealized_from_avg
 from prices import PriceBook
 
 ensure_g1_on_path()
-from _hashutil import attach_hash  # type: ignore  # noqa: E402
-from finite_numbers import as_finite  # type: ignore  # noqa: E402
 from id_registry import IdRegistry  # type: ignore  # noqa: E402
 from json_strict import load_path  # type: ignore  # noqa: E402
+from submit_validator import validate_bundle
 from risk_gate import evaluate_for_tests  # type: ignore  # noqa: E402
-import frozen_limits as FL  # type: ignore  # noqa: E402
 
 
 class SimError(Exception):
@@ -72,22 +69,41 @@ class Simulator:
     ):
         self.prices = price_book
         self.ledger = Ledger(ledger_path, initial_cash=initial_cash, trading_day=trading_day)
-        self.registry = IdRegistry(registry_path)
+        self.registry_path = Path(registry_path)
+        self.registry = self._registry_from_ledger()
         self.policy = load_path(policy_path or FIXTURE_POLICY_PATH)
-        self._gate_seq = 0
-        self._fill_seq = 0
 
     @property
     def state(self) -> dict[str, Any]:
         return self.ledger.snapshot_state()
 
+    def _registry_from_ledger(self):
+        registry = IdRegistry(None)
+        for event in self.ledger.events():
+            if event["event_type"] != "GATE_RESULT":
+                continue
+            payload = event["payload"]
+            if payload["gate_result"]["verdict"] != "ACCEPT":
+                continue
+            bindings = payload.get("bindings")
+            if not bindings:
+                raise SimError("LEGACY_LEDGER_REQUIRES_REVIEW", "accepted gate has no durable content bindings")
+            status, _ = registry.check_and_register(bindings.items())
+            if status == "ID_HASH_CONFLICT":
+                raise SimError("ID_HASH_CONFLICT", "inconsistent durable bindings")
+        # Never import orphan sidecar bindings: old G2a could save IDs before fills.
+        legacy = IdRegistry(self.registry_path)
+        if any(registry.check(k, v) != "ID_REPLAY_SAME" for k, v in legacy._map.items()):
+            raise SimError("ORPHAN_REGISTRY_REQUIRES_REVIEW")
+        return registry
+
     def _next_gate_id(self, decision_id: str) -> str:
-        self._gate_seq += 1
-        return f"GATE-G2A-{self._gate_seq:04d}-{decision_id}"
+        seq = 1 + sum(e["event_type"] == "GATE_RESULT" for e in self.ledger.events())
+        return f"GATE-G2A-{seq:04d}-{decision_id}"
 
     def _next_fill_id(self, decision_id: str) -> str:
-        self._fill_seq += 1
-        return f"FILL-G2A-{self._fill_seq:04d}-{decision_id}"
+        seq = 1 + sum(e["event_type"] == "FILL" for e in self.ledger.events())
+        return f"FILL-G2A-{seq:04d}-{decision_id}"
 
     def clear_stops(self, *a, **k):
         """No Bot may clear stops — always fails closed."""
@@ -115,7 +131,19 @@ class Simulator:
         ts = ts_utc or f"{trading_day}T09:30:00Z"
         return self.ledger.start_new_day(trading_day, marks, ts)
 
-    def submit(
+    def submit(self, prediction: dict, decision: dict, *, evaluated_at_utc: str,
+               fill_immediately: bool = True) -> dict[str, Any]:
+        try:
+            with self.ledger.transaction():
+                self.registry = self._registry_from_ledger()
+                result = self._submit(prediction, decision, evaluated_at_utc=evaluated_at_utc,
+                                      fill_immediately=fill_immediately)
+            return result
+        except BaseException:
+            self.registry = self._registry_from_ledger()
+            raise
+
+    def _submit(
         self,
         prediction: dict,
         decision: dict,
@@ -129,6 +157,11 @@ class Simulator:
 
         # Idempotent: if this DEC already produced a fill, return replay without new fill
         if isinstance(dec_id, str) and dec_id in st["filled_decision_ids"]:
+            bundle = validate_bundle(prediction, decision, self.registry, allow_id_replay=True)
+            if not bundle["ok"]:
+                raise SimError("INVALID_REPLAY_BUNDLE", detail=bundle)
+            if bundle["prediction_replay"] != "identical" or bundle["decision_replay"] != "identical":
+                raise SimError("ID_REPLAY_INCONSISTENT")
             return {
                 "status": "OK_IDEMPOTENT_REPLAY",
                 "fill_id": st["filled_decision_ids"][dec_id],
@@ -174,7 +207,9 @@ class Simulator:
             registry=self.registry,
             allow_fixture_eval=True,
         )
-        gate_ev = self.ledger.record_gate(gate, evaluated_at_utc)
+        bindings = ({a["id"]: a["content_sha256"] for a in (prediction, decision)}
+                    if gate["verdict"] == "ACCEPT" else {})
+        gate_ev = self.ledger.record_gate(gate, evaluated_at_utc, bindings)
 
         out: dict[str, Any] = {
             "status": gate["verdict"],
