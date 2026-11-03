@@ -1,6 +1,6 @@
 # LAB-STATE — AI Autonomous Trading Learning Lab (authoritative handoff)
 
-**Updated:** 2026-11-03 (UTC+8), Founder-authorized PR merges and status reconciliation
+**Updated:** 2026-11-03 (UTC+8), Founder-approved L0 v1.0 design merge and Gate reconciliation
 **Rule:** If chat history conflicts with this file, THIS FILE wins. Update it at every gate change.
 
 ## Current gate
@@ -8,7 +8,8 @@
 - **G2a (original): FAILED** (independent audit, 2026-11-03). Three independently reproduced defects: altered-content ID replay bypass, NEW_DAY clearing a latched daily halt, and non-atomic registry/fill/ledger persistence. This historical verdict is not rewritten by the R1 merge.
 - **G2a-R1: FOUNDER ACCEPTED WITH INDEPENDENT QA WAIVED / MERGED** (2026-11-03). The Founder explicitly accepted developer-reported 28/28 G2a tests, the historical G1 49/50 import result, disclosed residual risks, and waived additional independent QA. This is a Founder acceptance, **not** independent QA PASS. Correction merged in PR #2; no broker/API activation implied.
 - **Migration PR #1: MERGED** (2026-11-03). Founder explicitly accepted omitted historical failed-build archives; archive-presence regression remains a recorded failure.
-- **G2b: NOT AUTHORIZED.** Also not authorized: PAPER_ON, broker connections, real/paper orders, recurring automation/schedules, paid APIs, new Bots.
+- **L0 Protocol v1.0: FOUNDER ADOPTED / MERGED** (2026-11-03). PR #3's four Markdown design documents were approved and merged to `main`; this is **design adoption only**. L0 implementation, scoring code, pilot execution, Bot runtime changes, outcome collection, and strategy activation remain **NOT AUTHORIZED**.
+- **G2b: NOT AUTHORIZED.** Also not authorized: PAPER_ON, broker connections, real/paper/synthetic simulation orders, recurring automation/schedules, paid APIs, new Bots.
 
 ## Gate history
 | Gate | Result |
@@ -23,6 +24,7 @@
 | G1-R4 | ACCEPTED 2026-11-03 (50/50 tests) |
 | G2a | FAIL; R1 CORRECTION AUTHORIZED 2026-11-03 |
 | G2a-R1 | 2026-11-03 Founder acceptance with independent QA WAIVED; PR #2 merged; developer-reported 28/28, not independently rerun |
+| L0-DESIGN | 2026-11-03 Founder adopted Protocol v1.0; PR #3 merged; implementation and pilot not authorized |
 
 ## Immutable evidence (never modify)
 - `predictions/PRED-M1-001.md` sha256 `2317319d9ec2b33d9ccd2b8316c6c39b2f78d2d25e7fa7ad45aeb0e9274f224e`
@@ -61,8 +63,16 @@ Forbidden: Alpaca/broker API, real or paper API orders, live execution, schedule
 - Residual limitations accepted for this offline gate: POSIX local filesystem assumption; whole-file atomic replacement O(ledger size); power-loss/controller failure not simulated; legacy ledger/registry incompatibility fails closed; no pending execution API or halt recovery workflow; checksum chains are not signatures; heuristic credential scan only.
 - No G2b authorization, no PAPER_ON, no broker/Alpaca connections, real or paper orders, paid APIs, schedules or additional Bots. No real funds.
 
+## L0 design adoption record (2026-11-03, UTC+8)
+- Founder explicitly approved L0 Protocol v1.0 design, authorized PR #3 to be marked Ready and merged to `main`.
+- PR #3 design head: `d4c7eaac2a40ea58c83397e0aaa4081accb092a4`; **MERGED** as `6e6b67393f8d215af4a0b9923316342576684438`.
+- Adopted documentation files only: `l0/L0-PROTOCOL.md`, `l0/L0-ROLE-CONTRACT.md`, `l0/L0-EVALUATION-SPEC.md`, `l0/L0-READINESS-REPORT.md`.
+- Design conventions: separate lifecycle/eligibility statuses; derived argmax primary call; immutable hash-referenced prediction and freeze custody evidence; original M1 remains frozen and unscored.
+- Comparative thresholds of 30 blocks, 0.02 summed-Brier improvement and 95% paired CI are **PROPOSED / NOT ADOPTED**; they neither activate a cohort nor replace previously frozen formal strategy advancement requirements.
+- L0 implementation, scoring programs, new forward pilot, Bot runtime/identity bindings, automated collection, paid services, market/broker APIs, any orders or trading fixtures, G2b, and strategy activation are **NOT AUTHORIZED**. Adoption of this design does not waive future evidence requirements.
+
 ## Next step
-PR #1 and #2 are merged. Verify `main` contents, frozen evidence and PR status; then submit a **separate Founder decision** for any next offline research/learning gate. Do not start G2b or connect brokers without a separate explicit approval.
+Verify PR #3 merged status, the four adopted documents on `main` and preservation of G1/G2a/M1 frozen evidence. Any bounded offline L0 implementation or forward pilot requires a new explicit Founder decision. No automatic experiment start, G2b, broker connection or paid API activation.
 
 ## G2a deliverables
 - Report: `phase0c/G2a-IMPLEMENTATION-REPORT.md`
