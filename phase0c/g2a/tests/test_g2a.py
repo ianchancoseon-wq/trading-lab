@@ -344,11 +344,11 @@ class G2aTestCase(unittest.TestCase):
         self.assertIn(cm.exception.code, ("DRAWDOWN_STOP_LATCHED", "DAILY_LOSS_STOP_LATCHED"))
         # Prefer drawdown code when both latched: reorder simulator check — also assert DD flag
         self.assertTrue(sim.state["drawdown_stop_latched"])
-        # NEW_DAY does NOT clear drawdown latch even if prices recover
+        # NEW_DAY does NOT clear either latch even if prices recover
         sim.prices._table["2026-11-07"]["QQQ"] = 600.0
         sim.start_new_day("2026-11-07", ts_utc="2026-11-07T09:30:00Z")
         self.assertTrue(sim.state["drawdown_stop_latched"])
-        self.assertFalse(sim.state["daily_loss_stop_latched"])
+        self.assertTrue(sim.state["daily_loss_stop_latched"])
 
     def test_09_unrealized_pnl_reconciliation(self):
         sim = self._new_sim("upnl")

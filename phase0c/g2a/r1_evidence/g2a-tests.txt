@@ -1,0 +1,33 @@
+test_01_valid_synthetic_buy_and_sell (test_g2a.G2aTestCase.test_01_valid_synthetic_buy_and_sell) ... ok
+test_02_no_trade_audit_no_fill_no_position_change (test_g2a.G2aTestCase.test_02_no_trade_audit_no_fill_no_position_change) ... ok
+test_03_insufficient_cash (test_g2a.G2aTestCase.test_03_insufficient_cash) ... ok
+test_04_existing_exposure_other_symbol_blocks_buy (test_g2a.G2aTestCase.test_04_existing_exposure_other_symbol_blocks_buy) ... ok
+test_05_pending_exposure_other_symbol_blocks_buy (test_g2a.G2aTestCase.test_05_pending_exposure_other_symbol_blocks_buy) ... ok
+test_06_fractional_share_and_short_sale_rejection (test_g2a.G2aTestCase.test_06_fractional_share_and_short_sale_rejection) ... ok
+test_07_daily_2pct_loss_stop_unrealized (test_g2a.G2aTestCase.test_07_daily_2pct_loss_stop_unrealized) ... ok
+test_08_peak_10pct_drawdown_stop (test_g2a.G2aTestCase.test_08_peak_10pct_drawdown_stop) ... ok
+test_09_unrealized_pnl_reconciliation (test_g2a.G2aTestCase.test_09_unrealized_pnl_reconciliation) ... ok
+test_10_duplicate_fill_prevention (test_g2a.G2aTestCase.test_10_duplicate_fill_prevention) ... ok
+test_11_deterministic_replay (test_g2a.G2aTestCase.test_11_deterministic_replay) ... ok
+test_12_missing_or_corrupted_data_fail_closed (test_g2a.G2aTestCase.test_12_missing_or_corrupted_data_fail_closed) ... ok
+test_13_ledger_and_risk_gate_consistency (test_g2a.G2aTestCase.test_13_ledger_and_risk_gate_consistency) ... ok
+test_14_stop_cannot_be_cleared (test_g2a.G2aTestCase.test_14_stop_cannot_be_cleared) ... ok
+test_15_g1_tree_unchanged (test_g2a.G2aTestCase.test_15_g1_tree_unchanged) ... ok
+test_16_two_pending_spy_and_combined_existing_pending (test_g2a.G2aTestCase.test_16_two_pending_spy_and_combined_existing_pending) ... ok
+test_changed_content_rejected_before_replay_live_and_restarted (test_g2a_r1.CorrectionTests.test_changed_content_rejected_before_replay_live_and_restarted) ... ok
+test_concurrent_process_retries_fill_once (test_g2a_r1.CorrectionTests.test_concurrent_process_retries_fill_once) ... ok
+test_daily_halt_survives_new_day_recovery_and_blocks_buy (test_g2a_r1.CorrectionTests.test_daily_halt_survives_new_day_recovery_and_blocks_buy) ... ok
+test_direct_fill_duplicate_and_failed_mark_do_not_mutate_state (test_g2a_r1.CorrectionTests.test_direct_fill_duplicate_and_failed_mark_do_not_mutate_state) ... ok
+test_directory_fsync_failure_reconciles_committed_memory (test_g2a_r1.CorrectionTests.test_directory_fsync_failure_reconciles_committed_memory) ... ok
+test_legacy_orphan_registry_fails_closed (test_g2a_r1.CorrectionTests.test_legacy_orphan_registry_fails_closed) ... ok
+test_no_trade_and_pending_failure_roll_back_bindings (test_g2a_r1.CorrectionTests.test_no_trade_and_pending_failure_roll_back_bindings) ... ok
+test_pending_retry_does_not_duplicate_reservation (test_g2a_r1.CorrectionTests.test_pending_retry_does_not_duplicate_reservation) ... ok
+test_real_process_death_does_not_lose_or_duplicate_fill (test_g2a_r1.CorrectionTests.test_real_process_death_does_not_lose_or_duplicate_fill) ... ok
+test_recovery_rejects_rehashed_forged_snapshot (test_g2a_r1.CorrectionTests.test_recovery_rejects_rehashed_forged_snapshot) ... ok
+test_restart_preserves_ids_and_deterministic_bytes (test_g2a_r1.CorrectionTests.test_restart_preserves_ids_and_deterministic_bytes) ... ok
+test_staging_failures_leave_no_binding_gate_or_fill (test_g2a_r1.CorrectionTests.test_staging_failures_leave_no_binding_gate_or_fill) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 0.691s
+
+OK

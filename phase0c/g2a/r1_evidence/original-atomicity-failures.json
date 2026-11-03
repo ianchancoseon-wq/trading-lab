@@ -1,0 +1,11 @@
+{
+  "failure_after_binding": {
+    "retry_status": "OK_IDEMPOTENT_REPLAY",
+    "positions": {},
+    "fills": 0
+  },
+  "write_failure_memory_divergence": {
+    "memory_day": "2026-11-04",
+    "durable_day": "2026-11-03"
+  }
+}
