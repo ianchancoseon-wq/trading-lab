@@ -1,0 +1,22 @@
+test_atomic_rollback_and_restart (test_core.CoreTests.test_atomic_rollback_and_restart) ... ok
+test_classes_bounds_and_arithmetic (test_core.CoreTests.test_classes_bounds_and_arithmetic) ... ok
+test_concurrent_registration (test_core.CoreTests.test_concurrent_registration) ... ok
+test_corrupted_storage_fails_closed (test_core.CoreTests.test_corrupted_storage_fails_closed) ... ok
+test_freeze_and_status_crash_is_atomic (test_core.CoreTests.test_freeze_and_status_crash_is_atomic) ... ok
+test_future_evidence_cannot_enter_memory_snapshot (test_core.CoreTests.test_future_evidence_cannot_enter_memory_snapshot) ... ok
+test_lifecycle_and_eligibility (test_core.CoreTests.test_lifecycle_and_eligibility) ... ok
+test_missing_chief_dispositions_and_custody (test_core.CoreTests.test_missing_chief_dispositions_and_custody) ... ok
+test_outcome_revisions_and_score_retry (test_core.CoreTests.test_outcome_revisions_and_score_retry) ... ok
+test_parent_and_memory_guards (test_core.CoreTests.test_parent_and_memory_guards) ... ok
+test_process_death_before_and_after_commit (test_core.CoreTests.test_process_death_before_and_after_commit) ... ok
+test_registration_idempotency_and_conflict (test_core.CoreTests.test_registration_idempotency_and_conflict) ... ok
+test_review_memory_and_rejected_revision (test_core.CoreTests.test_review_memory_and_rejected_revision) ... ok
+test_schema_and_probabilities (test_core.CoreTests.test_schema_and_probabilities) ... ok
+test_scoring_guards (test_core.CoreTests.test_scoring_guards) ... ok
+test_strategy_is_proposal_only (test_core.CoreTests.test_strategy_is_proposal_only) ... ok
+test_tie_and_zero_probability (test_core.CoreTests.test_tie_and_zero_probability) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.516s
+
+OK
