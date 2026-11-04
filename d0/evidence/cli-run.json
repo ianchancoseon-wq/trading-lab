@@ -1,0 +1,25 @@
+{
+  "first_import": {
+    "inserted": 8,
+    "replayed": 0
+  },
+  "identical_retry": {
+    "inserted": 0,
+    "replayed": 8
+  },
+  "status": {
+    "by_kind": {
+      "market": 1,
+      "memory": 1,
+      "news": 1,
+      "outcome": 1,
+      "prediction": 1,
+      "research": 2,
+      "review": 1
+    },
+    "evidence_class": "RESEARCH_ONLY",
+    "missing": 0,
+    "performance_eligible": false,
+    "records": 8
+  }
+}
