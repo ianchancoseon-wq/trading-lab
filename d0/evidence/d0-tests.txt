@@ -1,23 +1,23 @@
-test_bad_price_and_null_hash_rejected (test_d0.D0Tests) ... ok
-test_cli_import_status_export_and_error (test_d0.D0Tests) ... ok
-test_complete_loop_and_restart (test_d0.D0Tests) ... ok
-test_concurrent_duplicate_imports (test_d0.D0Tests) ... ok
-test_corruption_fails_closed (test_d0.D0Tests) ... ok
-test_existing_l0_database_is_rejected (test_d0.D0Tests) ... ok
-test_historical_import_is_retrospective_and_stays_research (test_d0.D0Tests) ... ok
-test_incorrect_or_missing_parent_rolls_back_batch (test_d0.D0Tests) ... ok
-test_injected_write_error_is_atomic (test_d0.D0Tests) ... ok
-test_missing_data_retained_without_invented_value (test_d0.D0Tests) ... ok
-test_no_formal_class_or_symbol_or_eligibility_bypass (test_d0.D0Tests) ... ok
-test_nonfinite_probabilities_and_duplicate_json_keys (test_d0.D0Tests) ... ok
-test_prediction_is_immutable_stale_or_rehashed (test_d0.D0Tests) ... ok
-test_prediction_revision_has_new_id_and_preserves_old (test_d0.D0Tests) ... ok
-test_process_interruption_commit_and_recovery (test_d0.D0Tests) ... ok
-test_repeated_import_is_idempotent (test_d0.D0Tests) ... ok
-test_source_and_envelope_metadata_errors (test_d0.D0Tests) ... ok
-test_stale_review_cannot_drive_new_memory (test_d0.D0Tests) ... ok
+test_bad_price_and_null_hash_rejected (test_d0.D0Tests.test_bad_price_and_null_hash_rejected) ... ok
+test_cli_import_status_export_and_error (test_d0.D0Tests.test_cli_import_status_export_and_error) ... ok
+test_complete_loop_and_restart (test_d0.D0Tests.test_complete_loop_and_restart) ... ok
+test_concurrent_duplicate_imports (test_d0.D0Tests.test_concurrent_duplicate_imports) ... ok
+test_corruption_fails_closed (test_d0.D0Tests.test_corruption_fails_closed) ... ok
+test_existing_l0_database_is_rejected (test_d0.D0Tests.test_existing_l0_database_is_rejected) ... ok
+test_historical_import_is_retrospective_and_stays_research (test_d0.D0Tests.test_historical_import_is_retrospective_and_stays_research) ... ok
+test_incorrect_or_missing_parent_rolls_back_batch (test_d0.D0Tests.test_incorrect_or_missing_parent_rolls_back_batch) ... ok
+test_injected_write_error_is_atomic (test_d0.D0Tests.test_injected_write_error_is_atomic) ... ok
+test_missing_data_retained_without_invented_value (test_d0.D0Tests.test_missing_data_retained_without_invented_value) ... ok
+test_no_formal_class_or_symbol_or_eligibility_bypass (test_d0.D0Tests.test_no_formal_class_or_symbol_or_eligibility_bypass) ... ok
+test_nonfinite_probabilities_and_duplicate_json_keys (test_d0.D0Tests.test_nonfinite_probabilities_and_duplicate_json_keys) ... ok
+test_prediction_is_immutable_stale_or_rehashed (test_d0.D0Tests.test_prediction_is_immutable_stale_or_rehashed) ... ok
+test_prediction_revision_has_new_id_and_preserves_old (test_d0.D0Tests.test_prediction_revision_has_new_id_and_preserves_old) ... ok
+test_process_interruption_commit_and_recovery (test_d0.D0Tests.test_process_interruption_commit_and_recovery) ... ok
+test_repeated_import_is_idempotent (test_d0.D0Tests.test_repeated_import_is_idempotent) ... ok
+test_source_and_envelope_metadata_errors (test_d0.D0Tests.test_source_and_envelope_metadata_errors) ... ok
+test_stale_review_cannot_drive_new_memory (test_d0.D0Tests.test_stale_review_cannot_drive_new_memory) ... ok
 
 ----------------------------------------------------------------------
-Ran 18 tests in 0.778s
+Ran 18 tests in 0.656s
 
 OK

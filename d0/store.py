@@ -1,6 +1,6 @@
 """Separate SQLite authority for research; never opens or writes an L0 database."""
 import sqlite3
-from .records import canonical, digest, reference, require, prepare, load, time
+from .records import canonical, digest, reference, require, prepare, load, time, validate_stored
 
 NEEDS = {'research': {'market', 'news', 'memory'}, 'prediction': {'research'},
          'outcome': {'prediction'}, 'review': {'outcome'}, 'memory': {'review'}}
@@ -10,21 +10,25 @@ class Store:
     def __init__(self, path):
         self.db = sqlite3.connect(path, timeout=15, isolation_level=None)
         try:
-            # Reject an existing non-D0 database instead of silently adding tables.
-            tables = {v[0] for v in self.db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-            require(not tables or tables == {'d0_records'}, 'NOT_A_D0_DATABASE')
             self.db.execute('PRAGMA synchronous=FULL')
-            self.db.executescript('''
-            CREATE TABLE IF NOT EXISTS d0_records(seq INTEGER PRIMARY KEY, id TEXT UNIQUE NOT NULL,
-                body TEXT NOT NULL, previous TEXT NOT NULL, chain TEXT NOT NULL);
-            CREATE TRIGGER IF NOT EXISTS d0_no_update BEFORE UPDATE ON d0_records
-                BEGIN SELECT RAISE(ABORT,'immutable'); END;
-            CREATE TRIGGER IF NOT EXISTS d0_no_delete BEFORE DELETE ON d0_records
-                BEGIN SELECT RAISE(ABORT,'immutable'); END;
-            ''')
+            self.db.execute('BEGIN IMMEDIATE')
+            tables = {row[0].lower() for row in self.db.execute(
+                "SELECT name FROM sqlite_master WHERE type='table'")}
+            require(not tables or tables == {'d0_records'}, 'NOT_A_D0_DATABASE')
+            self.db.execute("""CREATE TABLE IF NOT EXISTS d0_records (
+                seq INTEGER PRIMARY KEY, id TEXT UNIQUE NOT NULL, body TEXT NOT NULL,
+                previous TEXT NOT NULL, chain TEXT NOT NULL)""")
+            self.db.execute("""CREATE TRIGGER IF NOT EXISTS d0_no_update BEFORE UPDATE ON d0_records
+                BEGIN SELECT RAISE(ABORT,'immutable'); END""")
+            self.db.execute("""CREATE TRIGGER IF NOT EXISTS d0_no_delete BEFORE DELETE ON d0_records
+                BEGIN SELECT RAISE(ABORT,'immutable'); END""")
             self.snapshot()
+            self.db.execute('COMMIT')
         except BaseException:
-            self.db.close(); raise
+            if self.db.in_transaction:
+                self.db.execute('ROLLBACK')
+            self.db.close()
+            raise
 
     def close(self):
         self.db.close()
@@ -76,7 +80,8 @@ class Store:
         rows, prev = {}, '0'*64
         for expected, (seq, rid, body, previous, chain) in enumerate(
                 self.db.execute('SELECT * FROM d0_records ORDER BY seq'), 1):
-            r = prepare(load(body))
+            r = load(body)
+            validate_stored(r)
             require(seq == expected and rid == r['id'] and previous == prev and
                     chain == digest({'seq': seq, 'record': r, 'previous': prev}), 'CHAIN_CORRUPTION')
             self.validate(r, rows)

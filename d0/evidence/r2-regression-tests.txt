@@ -1,0 +1,15 @@
+test_d0_same_type_concurrent_initialization (test_r2.D0R2Tests.test_d0_same_type_concurrent_initialization) ... ok
+test_d0_wins_cross_type_initialization (test_r2.D0R2Tests.test_d0_wins_cross_type_initialization) ... ok
+test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) ... ok
+test_each_persisted_required_field_modification_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_modification_fails_closed) ... ok
+test_failed_ddl_rolls_back_all_schema_changes (test_r2.D0R2Tests.test_failed_ddl_rolls_back_all_schema_changes) ... ok
+test_l0_same_type_concurrent_initialization (test_r2.D0R2Tests.test_l0_same_type_concurrent_initialization) ... ok
+test_l0_wins_cross_type_initialization (test_r2.D0R2Tests.test_l0_wins_cross_type_initialization) ... ok
+test_new_import_still_computes_optional_hash_and_derived_fields (test_r2.D0R2Tests.test_new_import_still_computes_optional_hash_and_derived_fields) ... ok
+test_qa_four_missing_fields_cannot_be_repaired (test_r2.D0R2Tests.test_qa_four_missing_fields_cannot_be_repaired) ... ok
+test_schema_check_and_ddl_share_one_transaction (test_r2.D0R2Tests.test_schema_check_and_ddl_share_one_transaction) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.272s
+
+OK

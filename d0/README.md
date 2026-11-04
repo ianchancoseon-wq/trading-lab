@@ -95,8 +95,10 @@ PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s d0/tests -v
 ```
 
 D0 使用獨立 SQLite、完整交易、hash chain 與 immutable triggers。既有非 D0 DB
-會在建表前被拒絕，L0 也會在初始化前拒絕既有 D0 資料庫。舊資料庫若含
+會在寫入鎖保護下、建表前被拒絕；L0 也使用同一初始化交易檢查 schema／類型、建表及觸發器，避免首次並發初始化混庫。舊資料庫若含
 衝突 cutoff 或跨預測修訂，重開會報錯並保留原始記錄與 hash。
+新匯入可計算缺少的 hash／衍生欄位；已存資料讀取則要求完整欄位、核對實際 JSON
+與原 hash chain，不會自動補回刪掉的 source.sha256、content_sha256 或狀態欄位。
 沒有外部時間／簽章、模型推理、資料真偽驗證、CSV/PDF
 解析、GUI、自動採集、排程或正式統計。獨立 connection 供每個 worker 使用；
 不要在 threads 間共用 Store handle。失敗匯入以 exit/stderr 回報，未建立額外持久

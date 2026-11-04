@@ -102,3 +102,16 @@ def prepare(raw):
     result = seal(r)
     require(not claimed or claim == result['content_sha256'], 'HASH_MISMATCH')
     return result
+
+
+def validate_stored(raw):
+    """Verify the actual saved body; import-time defaults are not corruption repair."""
+    require(isinstance(raw, dict), 'STORED_RECORD_OBJECT_REQUIRED')
+    require({'content_sha256', 'missing_fields', 'data_status', 'timing_status',
+             'performance_eligible'} <= raw.keys(), 'STORED_FIELDS_REQUIRED')
+    require(isinstance(raw.get('source'), dict) and 'sha256' in raw['source'],
+            'STORED_SOURCE_HASH_REQUIRED')
+    # Verify the claimed hash against exactly the parsed stored JSON before normalization.
+    require(raw['content_sha256'] == digest(raw), 'HASH_MISMATCH')
+    checked = prepare(raw)
+    require(canonical(raw) == canonical(checked), 'STORED_BODY_MISMATCH')

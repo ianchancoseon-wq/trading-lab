@@ -5,7 +5,7 @@
   "original_pr_tree": "a4e3e4b296b2aa9435e3e80dd8a36ca7f2cdd362",
   "baseline_file_count": 138,
   "unchanged_file_count": 137,
-  "verification": "Verified all baseline bytes against the original SHA-256 map and reconstructed both Git trees. Compared each candidate baseline file to that verified copy.",
+  "verification": "Verified original baseline SHA-256, Git blob and filesystem mode; only authorized L0 Storage initialization differs.",
   "sha256": {
     ".gitignore": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793",
     "IMPORT-MANIFEST.sha256": "15c9caa9f039ceb2a0a69ba6d46d4bec1c07ca1d7fb5593e379748eaab651f40",
@@ -702,7 +702,7 @@
   },
   "exceptions": {
     "l0/core/storage.py": {
-      "reason": "Authorized L0 pre-initialization guard for existing D0 databases.",
+      "reason": "Explicitly authorized L0 initialization: type/schema check, DDL, validation and identity pinning share one BEGIN IMMEDIATE transaction.",
       "base": {
         "sha256": "9305ad79f62ace1a611d48837f1635cfb3e6853ce78d0ccffa9f21fef4d61188",
         "git_blob": "9c29733fc9e2872f63136c10877950fbe477e412",
@@ -712,7 +712,14 @@
         "sha256": "52db7719bbddedde68c4b34761b2dc3d7b5c5a92b5da7433903225811e00ff0f",
         "git_blob": "deb5ea2f49cbbcd090afc54c8d49ff5ea661283b",
         "mode": "100644"
+      },
+      "r2": {
+        "sha256": "9e7ac27df89af3f977bf0c022c27525f78346430b674e092a0c37ba2405c6a49",
+        "git_blob": "347bdd8c1fbfe29b71ff9d7fb8f913fa408d1ea6",
+        "mode": "100644"
       }
     }
-  }
+  },
+  "correction_base": "a9e022773d1c3c3a82541f7ab8d3ec0c644e879c",
+  "correction_base_tree": "515c9af2e0a8e7bb3bfd3ba562451dcf65799ef2"
 }

@@ -1,0 +1,9 @@
+test_cross_open_preserves_bytes_schema_and_records_both_ways (test_r1.D0R1Tests.test_cross_open_preserves_bytes_schema_and_records_both_ways) ... ok
+test_cutoff_chronology_uses_instants_and_allows_equality (test_r1.D0R1Tests.test_cutoff_chronology_uses_instants_and_allows_equality) ... ok
+test_revision_subject_is_pinned_on_append_and_reopen (test_r1.D0R1Tests.test_revision_subject_is_pinned_on_append_and_reopen) ... ok
+test_special_missing_sentinels_roundtrip_and_nonempty_errors_reject (test_r1.D0R1Tests.test_special_missing_sentinels_roundtrip_and_nonempty_errors_reject) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.116s
+
+OK

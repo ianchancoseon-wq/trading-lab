@@ -12,30 +12,28 @@ class Storage:
                 all(isinstance(v, str) and v and v.strip() == v for v in self.actor_bindings.values()), 'ACTOR_BINDINGS')
         self.db = sqlite3.connect(path, timeout=15, isolation_level=None)
         try:
-            d0_table = self.db.execute(
-                "SELECT 1 FROM sqlite_master WHERE type='table' AND name='d0_records' COLLATE NOCASE"
-            ).fetchone()
-            require(d0_table is None, 'NOT_AN_L0_DATABASE')
+            # Set connection durability before BEGIN (SQLite forbids changing it in a transaction).
+            self.db.execute('PRAGMA synchronous=FULL')
+            self.db.execute('BEGIN IMMEDIATE')
+            tables = {row[0].lower() for row in self.db.execute(
+                "SELECT name FROM sqlite_master WHERE type='table'")}
+            require(not tables or tables == {'records'}, 'NOT_AN_L0_DATABASE')
+            # Individual execute calls keep schema checking, DDL and identity pinning atomic.
+            self.db.execute("""CREATE TABLE IF NOT EXISTS records (
+                seq INTEGER PRIMARY KEY, id TEXT UNIQUE NOT NULL, body TEXT NOT NULL,
+                previous TEXT NOT NULL, chain TEXT NOT NULL)""")
+            self.db.execute("""CREATE TRIGGER IF NOT EXISTS immutable_update BEFORE UPDATE ON records
+                BEGIN SELECT RAISE(ABORT, 'immutable records'); END""")
+            self.db.execute("""CREATE TRIGGER IF NOT EXISTS immutable_delete BEFORE DELETE ON records
+                BEGIN SELECT RAISE(ABORT, 'immutable records'); END""")
+            self.snapshot()
+            from .records import seal
+            self.append(seal({'id': 'INTERNAL-ACTOR-BINDINGS', 'kind': 'internal_config',
+                              'schema': 'l0_actor_bindings_v1', 'bindings': self.actor_bindings}))
+            self.db.execute('COMMIT')
         except BaseException:
-            self.db.close()
-            raise
-        self.db.execute('PRAGMA synchronous=FULL')
-        self.db.executescript('''
-        CREATE TABLE IF NOT EXISTS records (
-          seq INTEGER PRIMARY KEY, id TEXT UNIQUE NOT NULL, body TEXT NOT NULL,
-          previous TEXT NOT NULL, chain TEXT NOT NULL);
-        CREATE TRIGGER IF NOT EXISTS immutable_update BEFORE UPDATE ON records
-          BEGIN SELECT RAISE(ABORT, 'immutable records'); END;
-        CREATE TRIGGER IF NOT EXISTS immutable_delete BEFORE DELETE ON records
-          BEGIN SELECT RAISE(ABORT, 'immutable records'); END;
-        ''')
-        # Pin the deployment's role/identity bindings in this database, never guess on reopen.
-        try:
-            with self.transaction():
-                from .records import seal
-                self.append(seal({'id': 'INTERNAL-ACTOR-BINDINGS', 'kind': 'internal_config',
-                                  'schema': 'l0_actor_bindings_v1', 'bindings': self.actor_bindings}))
-        except BaseException:
+            if self.db.in_transaction:
+                self.db.execute('ROLLBACK')
             self.db.close()
             raise
 

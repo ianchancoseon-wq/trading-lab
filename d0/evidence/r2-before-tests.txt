@@ -1,0 +1,216 @@
+test_d0_same_type_concurrent_initialization (test_r2.D0R2Tests.test_d0_same_type_concurrent_initialization) ... FAIL
+test_d0_wins_cross_type_initialization (test_r2.D0R2Tests.test_d0_wins_cross_type_initialization) ... FAIL
+test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) ... 
+  test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) (key='missing_fields') ... FAIL
+  test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) (key='data_status') ... FAIL
+  test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) (key='timing_status') ... FAIL
+  test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) (key='performance_eligible') ... FAIL
+  test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) (key='content_sha256') ... FAIL
+  test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) (key='source.sha256') ... FAIL
+test_each_persisted_required_field_modification_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_modification_fails_closed) ... 
+  test_each_persisted_required_field_modification_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_modification_fails_closed) (key='performance_eligible') ... FAIL
+test_failed_ddl_rolls_back_all_schema_changes (test_r2.D0R2Tests.test_failed_ddl_rolls_back_all_schema_changes) ... 
+  test_failed_ddl_rolls_back_all_schema_changes (test_r2.D0R2Tests.test_failed_ddl_rolls_back_all_schema_changes) (cls='Storage') ... FAIL
+  test_failed_ddl_rolls_back_all_schema_changes (test_r2.D0R2Tests.test_failed_ddl_rolls_back_all_schema_changes) (cls='Store') ... FAIL
+test_l0_same_type_concurrent_initialization (test_r2.D0R2Tests.test_l0_same_type_concurrent_initialization) ... FAIL
+test_l0_wins_cross_type_initialization (test_r2.D0R2Tests.test_l0_wins_cross_type_initialization) ... FAIL
+test_new_import_still_computes_optional_hash_and_derived_fields (test_r2.D0R2Tests.test_new_import_still_computes_optional_hash_and_derived_fields) ... ok
+test_qa_four_missing_fields_cannot_be_repaired (test_r2.D0R2Tests.test_qa_four_missing_fields_cannot_be_repaired) ... FAIL
+test_schema_check_and_ddl_share_one_transaction (test_r2.D0R2Tests.test_schema_check_and_ddl_share_one_transaction) ... 
+  test_schema_check_and_ddl_share_one_transaction (test_r2.D0R2Tests.test_schema_check_and_ddl_share_one_transaction) (cls='Storage') ... FAIL
+  test_schema_check_and_ddl_share_one_transaction (test_r2.D0R2Tests.test_schema_check_and_ddl_share_one_transaction) (cls='Store') ... FAIL
+
+======================================================================
+FAIL: test_d0_same_type_concurrent_initialization (test_r2.D0R2Tests.test_d0_same_type_concurrent_initialization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 100, in test_d0_same_type_concurrent_initialization
+    self.race(Store, Store)
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 64, in race
+    self.assertEqual(visible, [])
+AssertionError: Lists differ: [('d0_records',)] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+('d0_records',)
+
+- [('d0_records',)]
++ []
+
+======================================================================
+FAIL: test_d0_wins_cross_type_initialization (test_r2.D0R2Tests.test_d0_wins_cross_type_initialization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 94, in test_d0_wins_cross_type_initialization
+    self.race(Store, Storage)
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 64, in race
+    self.assertEqual(visible, [])
+AssertionError: Lists differ: [('records',)] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+('records',)
+
+- [('records',)]
++ []
+
+======================================================================
+FAIL: test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) (key='missing_fields')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 190, in test_each_persisted_required_field_deletion_fails_closed
+    self.damage([(key, 'delete')])
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 174, in damage
+    with self.assertRaises((ValueError, KeyError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'KeyError'>, <class 'TypeError'>) not raised
+
+======================================================================
+FAIL: test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) (key='data_status')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 190, in test_each_persisted_required_field_deletion_fails_closed
+    self.damage([(key, 'delete')])
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 174, in damage
+    with self.assertRaises((ValueError, KeyError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'KeyError'>, <class 'TypeError'>) not raised
+
+======================================================================
+FAIL: test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) (key='timing_status')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 190, in test_each_persisted_required_field_deletion_fails_closed
+    self.damage([(key, 'delete')])
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 174, in damage
+    with self.assertRaises((ValueError, KeyError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'KeyError'>, <class 'TypeError'>) not raised
+
+======================================================================
+FAIL: test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) (key='performance_eligible')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 190, in test_each_persisted_required_field_deletion_fails_closed
+    self.damage([(key, 'delete')])
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 174, in damage
+    with self.assertRaises((ValueError, KeyError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'KeyError'>, <class 'TypeError'>) not raised
+
+======================================================================
+FAIL: test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) (key='content_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 190, in test_each_persisted_required_field_deletion_fails_closed
+    self.damage([(key, 'delete')])
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 174, in damage
+    with self.assertRaises((ValueError, KeyError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'KeyError'>, <class 'TypeError'>) not raised
+
+======================================================================
+FAIL: test_each_persisted_required_field_deletion_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_deletion_fails_closed) (key='source.sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 190, in test_each_persisted_required_field_deletion_fails_closed
+    self.damage([(key, 'delete')])
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 174, in damage
+    with self.assertRaises((ValueError, KeyError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'KeyError'>, <class 'TypeError'>) not raised
+
+======================================================================
+FAIL: test_each_persisted_required_field_modification_fails_closed (test_r2.D0R2Tests.test_each_persisted_required_field_modification_fails_closed) (key='performance_eligible')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 196, in test_each_persisted_required_field_modification_fails_closed
+    self.damage([(key, 'modify')])
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 174, in damage
+    with self.assertRaises((ValueError, KeyError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'KeyError'>, <class 'TypeError'>) not raised
+
+======================================================================
+FAIL: test_failed_ddl_rolls_back_all_schema_changes (test_r2.D0R2Tests.test_failed_ddl_rolls_back_all_schema_changes) (cls='Storage')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 136, in test_failed_ddl_rolls_back_all_schema_changes
+    with patch('sqlite3.connect', side_effect=fail), self.assertRaisesRegex(
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: OperationalError not raised
+
+======================================================================
+FAIL: test_failed_ddl_rolls_back_all_schema_changes (test_r2.D0R2Tests.test_failed_ddl_rolls_back_all_schema_changes) (cls='Store')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 136, in test_failed_ddl_rolls_back_all_schema_changes
+    with patch('sqlite3.connect', side_effect=fail), self.assertRaisesRegex(
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: OperationalError not raised
+
+======================================================================
+FAIL: test_l0_same_type_concurrent_initialization (test_r2.D0R2Tests.test_l0_same_type_concurrent_initialization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 97, in test_l0_same_type_concurrent_initialization
+    self.race(Storage, Storage)
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 64, in race
+    self.assertEqual(visible, [])
+AssertionError: Lists differ: [('records',)] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+('records',)
+
+- [('records',)]
++ []
+
+======================================================================
+FAIL: test_l0_wins_cross_type_initialization (test_r2.D0R2Tests.test_l0_wins_cross_type_initialization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 91, in test_l0_wins_cross_type_initialization
+    self.race(Storage, Store)
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 64, in race
+    self.assertEqual(visible, [])
+AssertionError: Lists differ: [('d0_records',)] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+('d0_records',)
+
+- [('d0_records',)]
++ []
+
+======================================================================
+FAIL: test_qa_four_missing_fields_cannot_be_repaired (test_r2.D0R2Tests.test_qa_four_missing_fields_cannot_be_repaired)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 183, in test_qa_four_missing_fields_cannot_be_repaired
+    self.damage([(k, 'delete') for k in ('content_sha256', 'source.sha256',
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 174, in damage
+    with self.assertRaises((ValueError, KeyError, TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'KeyError'>, <class 'TypeError'>) not raised
+
+======================================================================
+FAIL: test_schema_check_and_ddl_share_one_transaction (test_r2.D0R2Tests.test_schema_check_and_ddl_share_one_transaction) (cls='Storage')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 118, in test_schema_check_and_ddl_share_one_transaction
+    self.assertTrue(all(active for _, active in checks), checks)
+AssertionError: False is not true : [("SELECT 1 FROM SQLITE_MASTER WHERE TYPE='TABLE' AND NAME='D0_RECORDS' COLLATE NOCASE", False), ('CREATE TABLE IF NOT EXISTS RECORDS (\n          SEQ INTEGER PRIMARY KEY, ID TEXT UNIQUE NOT NULL, BODY TEXT NOT NULL,\n          PREVIOUS TEXT NOT NULL, CHAIN TEXT NOT NULL);', False), ("CREATE TRIGGER IF NOT EXISTS IMMUTABLE_UPDATE BEFORE UPDATE ON RECORDS\n          BEGIN SELECT RAISE(ABORT, 'IMMUTABLE RECORDS'); END;", False), ("CREATE TRIGGER IF NOT EXISTS IMMUTABLE_DELETE BEFORE DELETE ON RECORDS\n          BEGIN SELECT RAISE(ABORT, 'IMMUTABLE RECORDS'); END;", False)]
+
+======================================================================
+FAIL: test_schema_check_and_ddl_share_one_transaction (test_r2.D0R2Tests.test_schema_check_and_ddl_share_one_transaction) (cls='Store')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/d0-r2-before-fns60zcx/d0/tests/test_r2.py", line 118, in test_schema_check_and_ddl_share_one_transaction
+    self.assertTrue(all(active for _, active in checks), checks)
+AssertionError: False is not true : [("SELECT NAME FROM SQLITE_MASTER WHERE TYPE='TABLE'", False), ('CREATE TABLE IF NOT EXISTS D0_RECORDS(SEQ INTEGER PRIMARY KEY, ID TEXT UNIQUE NOT NULL,\n                BODY TEXT NOT NULL, PREVIOUS TEXT NOT NULL, CHAIN TEXT NOT NULL);', False), ("CREATE TRIGGER IF NOT EXISTS D0_NO_UPDATE BEFORE UPDATE ON D0_RECORDS\n                BEGIN SELECT RAISE(ABORT,'IMMUTABLE'); END;", False), ("CREATE TRIGGER IF NOT EXISTS D0_NO_DELETE BEFORE DELETE ON D0_RECORDS\n                BEGIN SELECT RAISE(ABORT,'IMMUTABLE'); END;", False)]
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.201s
+
+FAILED (failures=16)
