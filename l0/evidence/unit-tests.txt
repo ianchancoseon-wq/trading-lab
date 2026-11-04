@@ -1,0 +1,39 @@
+test_atomic_rollback_and_restart (test_core.CoreTests.test_atomic_rollback_and_restart) ... ok
+test_classes_bounds_and_arithmetic (test_core.CoreTests.test_classes_bounds_and_arithmetic) ... ok
+test_concurrent_registration (test_core.CoreTests.test_concurrent_registration) ... ok
+test_corrupted_storage_fails_closed (test_core.CoreTests.test_corrupted_storage_fails_closed) ... ok
+test_freeze_and_status_crash_is_atomic (test_core.CoreTests.test_freeze_and_status_crash_is_atomic) ... ok
+test_future_evidence_cannot_enter_memory_snapshot (test_core.CoreTests.test_future_evidence_cannot_enter_memory_snapshot) ... ok
+test_lifecycle_and_eligibility (test_core.CoreTests.test_lifecycle_and_eligibility) ... ok
+test_missing_chief_dispositions_and_custody (test_core.CoreTests.test_missing_chief_dispositions_and_custody) ... ok
+test_outcome_revisions_and_score_retry (test_core.CoreTests.test_outcome_revisions_and_score_retry) ... ok
+test_parent_and_memory_guards (test_core.CoreTests.test_parent_and_memory_guards) ... ok
+test_process_death_before_and_after_commit (test_core.CoreTests.test_process_death_before_and_after_commit) ... ok
+test_registration_idempotency_and_conflict (test_core.CoreTests.test_registration_idempotency_and_conflict) ... ok
+test_review_memory_and_rejected_revision (test_core.CoreTests.test_review_memory_and_rejected_revision) ... ok
+test_schema_and_probabilities (test_core.CoreTests.test_schema_and_probabilities) ... ok
+test_scoring_guards (test_core.CoreTests.test_scoring_guards) ... ok
+test_strategy_is_proposal_only (test_core.CoreTests.test_strategy_is_proposal_only) ... ok
+test_tie_and_zero_probability (test_core.CoreTests.test_tie_and_zero_probability) ... ok
+test_all_derived_envelopes_and_pinned_identity_reopen (test_r1.R1Tests.test_all_derived_envelopes_and_pinned_identity_reopen) ... ok
+test_cross_prediction_review_used_as_memory_parent (test_r1.R1Tests.test_cross_prediction_review_used_as_memory_parent) ... ok
+test_declared_custom_identity_bound_to_role (test_r1.R1Tests.test_declared_custom_identity_bound_to_role) ... ok
+test_foreign_memory_and_strategy_predecessor_rejected (test_r1.R1Tests.test_foreign_memory_and_strategy_predecessor_rejected) ... ok
+test_hash_and_reused_id_bind_versions_and_identity (test_r1.R1Tests.test_hash_and_reused_id_bind_versions_and_identity) ... ok
+test_missing_or_altered_parent_hash_and_same_prediction_preserved (test_r1.R1Tests.test_missing_or_altered_parent_hash_and_same_prediction_preserved) ... ok
+test_required_version_identity_fields (test_r1.R1Tests.test_required_version_identity_fields) ... ok
+test_review_foreign_evidence_and_indirect_memory_evidence (test_r1.R1Tests.test_review_foreign_evidence_and_indirect_memory_evidence) ... ok
+test_storage_boundary_rejects_incomplete_derived_record (test_r1.R1Tests.test_storage_boundary_rejects_incomplete_derived_record) ... ok
+test_invalid_remains_latched (test_r2.R2Tests.test_invalid_remains_latched) ... ok
+test_quarantine_latched_at_all_post_score_stages (test_r2.R2Tests.test_quarantine_latched_at_all_post_score_stages) ... ok
+test_revision_after_review_is_allowed (test_r2.R2Tests.test_revision_after_review_is_allowed) ... ok
+test_revision_batch_rolls_back_when_current_binding_is_wrong (test_r2.R2Tests.test_revision_batch_rolls_back_when_current_binding_is_wrong) ... ok
+test_revision_chain_after_memory_never_regresses (test_r2.R2Tests.test_revision_chain_after_memory_never_regresses) ... ok
+test_revision_status_failure_rolls_back_score (test_r2.R2Tests.test_revision_status_failure_rolls_back_score) ... ok
+test_unscored_latest_outcome_blocks_review_and_memory (test_r2.R2Tests.test_unscored_latest_outcome_blocks_review_and_memory) ... ok
+test_versions_explicit_refs_and_predecessors_must_match (test_r2.R2Tests.test_versions_explicit_refs_and_predecessors_must_match) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 1.196s
+
+OK
