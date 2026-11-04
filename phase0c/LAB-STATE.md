@@ -1,6 +1,6 @@
 # LAB-STATE — AI Autonomous Trading Learning Lab (authoritative handoff)
 
-**Updated:** 2026-11-03 (UTC+8), Founder-approved L0 v1.0 design merge and Gate reconciliation
+**Updated:** 2026-11-04 (UTC+8), Founder-approved L0 Core R2 PR #4 merge and gate reconciliation
 **Rule:** If chat history conflicts with this file, THIS FILE wins. Update it at every gate change.
 
 ## Current gate
@@ -8,7 +8,8 @@
 - **G2a (original): FAILED** (independent audit, 2026-11-03). Three independently reproduced defects: altered-content ID replay bypass, NEW_DAY clearing a latched daily halt, and non-atomic registry/fill/ledger persistence. This historical verdict is not rewritten by the R1 merge.
 - **G2a-R1: FOUNDER ACCEPTED WITH INDEPENDENT QA WAIVED / MERGED** (2026-11-03). The Founder explicitly accepted developer-reported 28/28 G2a tests, the historical G1 49/50 import result, disclosed residual risks, and waived additional independent QA. This is a Founder acceptance, **not** independent QA PASS. Correction merged in PR #2; no broker/API activation implied.
 - **Migration PR #1: MERGED** (2026-11-03). Founder explicitly accepted omitted historical failed-build archives; archive-presence regression remains a recorded failure.
-- **L0 Protocol v1.0: FOUNDER ADOPTED / MERGED** (2026-11-03). PR #3's four Markdown design documents were approved and merged to `main`; this is **design adoption only**. L0 implementation, scoring code, pilot execution, Bot runtime changes, outcome collection, and strategy activation remain **NOT AUTHORIZED**.
+- **L0 Protocol v1.0: FOUNDER ADOPTED / MERGED** (2026-11-03). PR #3's four Markdown design documents were approved and merged to `main`; this was design adoption only at that historical gate.
+- **L0 Core R2: FOUNDER ACCEPTED / MERGED** (2026-11-04). Founder explicitly authorized merge of PR #4 after reported independent offline QA 46/46 PASS (34 bundled tests plus 12 independently authored adversarial checks). Reviewed head `628542e2154e8189b57990d38e1c38173a6ede44`, merged to `main` as `634fa1dd9ec3bf8e1787421724f029a5f9953b44`. This is **offline engineering acceptance only**: no Forward Pilot, M1 scoring, external custody verification, outcome collection, Bot activation, broker/market/model API, trading orders or G2b authorization.
 - **G2b: NOT AUTHORIZED.** Also not authorized: PAPER_ON, broker connections, real/paper/synthetic simulation orders, recurring automation/schedules, paid APIs, new Bots.
 
 ## Gate history
@@ -24,7 +25,8 @@
 | G1-R4 | ACCEPTED 2026-11-03 (50/50 tests) |
 | G2a | FAIL; R1 CORRECTION AUTHORIZED 2026-11-03 |
 | G2a-R1 | 2026-11-03 Founder acceptance with independent QA WAIVED; PR #2 merged; developer-reported 28/28, not independently rerun |
-| L0-DESIGN | 2026-11-03 Founder adopted Protocol v1.0; PR #3 merged; implementation and pilot not authorized |
+| L0-DESIGN | 2026-11-03 Founder adopted Protocol v1.0; PR #3 merged; implementation and pilot were not authorized at that gate |
+| L0-IMPLEMENTATION R2 | 2026-11-04 independent offline QA reported 46/46 PASS; Founder explicitly authorized PR #4 merge; L0 Core merged, Pilot not authorized |
 
 ## Immutable evidence (never modify)
 - `predictions/PRED-M1-001.md` sha256 `2317319d9ec2b33d9ccd2b8316c6c39b2f78d2d25e7fa7ad45aeb0e9274f224e`
@@ -69,10 +71,18 @@ Forbidden: Alpaca/broker API, real or paper API orders, live execution, schedule
 - Adopted documentation files only: `l0/L0-PROTOCOL.md`, `l0/L0-ROLE-CONTRACT.md`, `l0/L0-EVALUATION-SPEC.md`, `l0/L0-READINESS-REPORT.md`.
 - Design conventions: separate lifecycle/eligibility statuses; derived argmax primary call; immutable hash-referenced prediction and freeze custody evidence; original M1 remains frozen and unscored.
 - Comparative thresholds of 30 blocks, 0.02 summed-Brier improvement and 95% paired CI are **PROPOSED / NOT ADOPTED**; they neither activate a cohort nor replace previously frozen formal strategy advancement requirements.
-- L0 implementation, scoring programs, new forward pilot, Bot runtime/identity bindings, automated collection, paid services, market/broker APIs, any orders or trading fixtures, G2b, and strategy activation are **NOT AUTHORIZED**. Adoption of this design does not waive future evidence requirements.
+- At the 2026-11-03 design-only gate, L0 implementation and later execution were **NOT AUTHORIZED**. A separate Founder decision subsequently authorized bounded offline L0 Core implementation, and PR #4 was merged on 2026-11-04. Forward Pilot, M1 scoring, Bot runtime/identity activation, automated outcome collection, paid services, market/broker APIs, any orders, G2b and strategy activation remain **NOT AUTHORIZED**.
+
+## L0 Core implementation and QA acceptance record (2026-11-04, UTC+8)
+- Founder-authorized bounded offline L0 core implementation was developed on `feat/l0-core` and delivered in PR #4.
+- R2 fixes specifically address quarantine rollback and stale Score/Review/Memory binding after outcome revisions.
+- Final reviewed head: `628542e2154e8189b57990d38e1c38173a6ede44`; PR #4 was marked Ready and **MERGED** using a merge commit: `634fa1dd9ec3bf8e1787421724f029a5f9953b44`.
+- Independent offline QA evidence supplied in conversation: 34/34 bundled tests, 12/12 additional adversarial tests; total **46/46 PASS**. SHA-256 integrity and frozen baseline preservation checked. QA files are conversation-delivered evidence, not falsely asserted to be incorporated into the repository.
+- Accepted scope is local offline Prediction Registry, deterministic Outcome/Scorer core, append-only Review/Memory records and bounded synthetic engineering tests. No claim of model learning effect or verified genuine-forward evidence.
+- Local role/identity labels are not authenticated identities; external custody, trusted market outcome provenance, cohort promotion and live integrations remain future gates.
 
 ## Next step
-Verify PR #3 merged status, the four adopted documents on `main` and preservation of G1/G2a/M1 frozen evidence. Any bounded offline L0 implementation or forward pilot requires a new explicit Founder decision. No automatic experiment start, G2b, broker connection or paid API activation.
+Preserve this merged offline L0 Core baseline. Any Forward Pilot, M1 outcome scoring, external data/model/broker integration, automated scheduling, order execution, G2b, or memory/strategy activation requires a **separate explicit Founder authorization**. No automatic experiment start or paid API activation.
 
 ## G2a deliverables
 - Report: `phase0c/G2a-IMPLEMENTATION-REPORT.md`
