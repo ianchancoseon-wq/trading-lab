@@ -1,0 +1,327 @@
+[
+  {
+    "actor_identity": "synthetic:scripted-example",
+    "created_at_utc": "2040-01-01T18:00:00Z",
+    "evidence_class": "RESEARCH_ONLY",
+    "id": "D0-MARKET-1",
+    "kind": "market",
+    "origin": "SYNTHETIC",
+    "parents": [],
+    "payload": {
+      "close": "100.00",
+      "price_basis": "invented; not an official market close",
+      "session": "2040-01-01"
+    },
+    "prediction_ref": null,
+    "schema": "d0_record_v1",
+    "series_id": "D0-MARKET-1",
+    "source": {
+      "acquired_at_utc": "2040-01-01T18:00:00Z",
+      "content": "{\"close\": \"100.00\", \"price_basis\": \"invented; not an official market close\", \"session\": \"2040-01-01\"}",
+      "name": "Invented engineering example",
+      "uri": "fixture:synthetic-d0",
+      "sha256": "fe3ab933c7f5a334beaa5f803afea6b03a0d4c12ef704dd8c5b2ba7b6116a469"
+    },
+    "supersedes": null,
+    "symbol": "SPY",
+    "target_at_utc": "2040-01-01T18:00:00Z",
+    "version": 1,
+    "missing_fields": [],
+    "data_status": "RECORDED_UNVERIFIED",
+    "timing_status": "NOT_ASSESSED",
+    "performance_eligible": false,
+    "content_sha256": "61ca55a50127316d221f7510ba7a7908b8611d645e9bd02bc7387888bbffdc19"
+  },
+  {
+    "actor_identity": "synthetic:scripted-example",
+    "created_at_utc": "2040-01-01T18:00:00Z",
+    "evidence_class": "RESEARCH_ONLY",
+    "id": "D0-NEWS-1",
+    "kind": "news",
+    "origin": "SYNTHETIC",
+    "parents": [],
+    "payload": {
+      "summary": "Invented mixed signals; no real publication."
+    },
+    "prediction_ref": null,
+    "schema": "d0_record_v1",
+    "series_id": "D0-NEWS-1",
+    "source": {
+      "acquired_at_utc": "2040-01-01T18:00:00Z",
+      "content": "{\"summary\": \"Invented mixed signals; no real publication.\"}",
+      "name": "Invented engineering example",
+      "uri": "fixture:synthetic-d0",
+      "sha256": "ad429949c47211d35a919543362b304d4a361e71acd2e1dbb3d07e7cf3be79b0"
+    },
+    "supersedes": null,
+    "symbol": "SPY",
+    "target_at_utc": "2040-01-02T21:00:00Z",
+    "version": 1,
+    "missing_fields": [],
+    "data_status": "RECORDED_UNVERIFIED",
+    "timing_status": "NOT_ASSESSED",
+    "performance_eligible": false,
+    "content_sha256": "2b35001a21d51178dacd3f9380d103f2247b4f7761de9368621bce1d53303d58"
+  },
+  {
+    "actor_identity": "synthetic:scripted-example",
+    "created_at_utc": "2040-01-01T18:00:00Z",
+    "evidence_class": "RESEARCH_ONLY",
+    "id": "D0-RESEARCH-1",
+    "kind": "research",
+    "origin": "SYNTHETIC",
+    "parents": [
+      {
+        "hash_kind": "canonical_json_sha256",
+        "id": "D0-MARKET-1",
+        "sha256": "61ca55a50127316d221f7510ba7a7908b8611d645e9bd02bc7387888bbffdc19"
+      },
+      {
+        "hash_kind": "canonical_json_sha256",
+        "id": "D0-NEWS-1",
+        "sha256": "2b35001a21d51178dacd3f9380d103f2247b4f7761de9368621bce1d53303d58"
+      }
+    ],
+    "payload": {
+      "knowledge_cutoff_utc": "2040-01-01T18:00:00Z",
+      "question": "What should be examined in this invented scenario?"
+    },
+    "prediction_ref": null,
+    "schema": "d0_record_v1",
+    "series_id": "D0-RESEARCH-1",
+    "source": {
+      "acquired_at_utc": "2040-01-01T18:00:00Z",
+      "content": "{\"knowledge_cutoff_utc\": \"2040-01-01T18:00:00Z\", \"question\": \"What should be examined in this invented scenario?\"}",
+      "name": "Invented engineering example",
+      "uri": "fixture:synthetic-d0",
+      "sha256": "453635c4359325bfcb2367b9ca697794eb79d69cbcb1cff0c415ac996aa4aa54"
+    },
+    "supersedes": null,
+    "symbol": "SPY",
+    "target_at_utc": "2040-01-02T21:00:00Z",
+    "version": 1,
+    "missing_fields": [],
+    "data_status": "RECORDED_UNVERIFIED",
+    "timing_status": "DECLARED_ONLY",
+    "performance_eligible": false,
+    "content_sha256": "ebb72aa3686587aee0b9a6dee5cc336af83f924218b6405f47629bfd650d64fd"
+  },
+  {
+    "actor_identity": "synthetic:scripted-example",
+    "created_at_utc": "2040-01-01T18:00:00Z",
+    "evidence_class": "RESEARCH_ONLY",
+    "id": "D0-PREDICTION-1",
+    "kind": "prediction",
+    "origin": "SYNTHETIC",
+    "parents": [
+      {
+        "hash_kind": "canonical_json_sha256",
+        "id": "D0-RESEARCH-1",
+        "sha256": "ebb72aa3686587aee0b9a6dee5cc336af83f924218b6405f47629bfd650d64fd"
+      }
+    ],
+    "payload": {
+      "knowledge_cutoff_utc": "2040-01-01T18:00:00Z",
+      "probs": {
+        "DOWN": 0.1,
+        "FLAT": 0.3,
+        "UP": 0.6
+      },
+      "rationale": "Scripted optimistic hypothesis, not a model call."
+    },
+    "prediction_ref": null,
+    "schema": "d0_record_v1",
+    "series_id": "D0-PREDICTION-1",
+    "source": {
+      "acquired_at_utc": "2040-01-01T18:00:00Z",
+      "content": "{\"knowledge_cutoff_utc\": \"2040-01-01T18:00:00Z\", \"probs\": {\"DOWN\": 0.1, \"FLAT\": 0.3, \"UP\": 0.6}, \"rationale\": \"Scripted optimistic hypothesis, not a model call.\"}",
+      "name": "Invented engineering example",
+      "uri": "fixture:synthetic-d0",
+      "sha256": "ba64d5a95173c1a2de249bcdb002409954afb00c484a2a5f7253a9024c8e0d2e"
+    },
+    "supersedes": null,
+    "symbol": "SPY",
+    "target_at_utc": "2040-01-02T21:00:00Z",
+    "version": 1,
+    "missing_fields": [],
+    "data_status": "RECORDED_UNVERIFIED",
+    "timing_status": "DECLARED_ONLY",
+    "performance_eligible": false,
+    "content_sha256": "d94e36c1db8df4cd9416cee2234aa45727ec45cd8106df7a542450de5ad721df"
+  },
+  {
+    "actor_identity": "synthetic:scripted-example",
+    "created_at_utc": "2040-01-02T22:00:00Z",
+    "evidence_class": "RESEARCH_ONLY",
+    "id": "D0-OUTCOME-1",
+    "kind": "outcome",
+    "origin": "SYNTHETIC",
+    "parents": [
+      {
+        "hash_kind": "canonical_json_sha256",
+        "id": "D0-PREDICTION-1",
+        "sha256": "d94e36c1db8df4cd9416cee2234aa45727ec45cd8106df7a542450de5ad721df"
+      }
+    ],
+    "payload": {
+      "close": "98.00",
+      "observation": "Invented terminal value 98.00; lower than baseline 100.00.",
+      "verification": "UNVERIFIED_SYNTHETIC"
+    },
+    "prediction_ref": {
+      "hash_kind": "canonical_json_sha256",
+      "id": "D0-PREDICTION-1",
+      "sha256": "d94e36c1db8df4cd9416cee2234aa45727ec45cd8106df7a542450de5ad721df"
+    },
+    "schema": "d0_record_v1",
+    "series_id": "D0-OUTCOME-1",
+    "source": {
+      "acquired_at_utc": "2040-01-02T22:00:00Z",
+      "content": "{\"close\": \"98.00\", \"observation\": \"Invented terminal value 98.00; lower than baseline 100.00.\", \"verification\": \"UNVERIFIED_SYNTHETIC\"}",
+      "name": "Invented engineering example",
+      "uri": "fixture:synthetic-d0",
+      "sha256": "36cf6d71de2bbac7a59c1bbb43a470c0fe6b764b7620a293c713823ecf96bec9"
+    },
+    "supersedes": null,
+    "symbol": "SPY",
+    "target_at_utc": "2040-01-02T21:00:00Z",
+    "version": 1,
+    "missing_fields": [],
+    "data_status": "RECORDED_UNVERIFIED",
+    "timing_status": "NOT_ASSESSED",
+    "performance_eligible": false,
+    "content_sha256": "b0512af1c77f9f6d78920d1b3bf67993553bd8f1025436853738704d121fcfa4"
+  },
+  {
+    "actor_identity": "synthetic:scripted-example",
+    "created_at_utc": "2040-01-02T22:00:00Z",
+    "evidence_class": "RESEARCH_ONLY",
+    "id": "D0-REVIEW-1",
+    "kind": "review",
+    "origin": "SYNTHETIC",
+    "parents": [
+      {
+        "hash_kind": "canonical_json_sha256",
+        "id": "D0-OUTCOME-1",
+        "sha256": "b0512af1c77f9f6d78920d1b3bf67993553bd8f1025436853738704d121fcfa4"
+      }
+    ],
+    "payload": {
+      "contrary_evidence": [
+        "Mixed scenario signals were underweighted in this scripted rationale."
+      ],
+      "findings": [
+        "UP was the highest declared probability; invented observation moved lower."
+      ],
+      "limitations": [
+        "One synthetic example cannot establish learning or forecast skill."
+      ]
+    },
+    "prediction_ref": {
+      "hash_kind": "canonical_json_sha256",
+      "id": "D0-PREDICTION-1",
+      "sha256": "d94e36c1db8df4cd9416cee2234aa45727ec45cd8106df7a542450de5ad721df"
+    },
+    "schema": "d0_record_v1",
+    "series_id": "D0-REVIEW-1",
+    "source": {
+      "acquired_at_utc": "2040-01-02T22:00:00Z",
+      "content": "{\"contrary_evidence\": [\"Mixed scenario signals were underweighted in this scripted rationale.\"], \"findings\": [\"UP was the highest declared probability; invented observation moved lower.\"], \"limitations\": [\"One synthetic example cannot establish learning or forecast skill.\"]}",
+      "name": "Invented engineering example",
+      "uri": "fixture:synthetic-d0",
+      "sha256": "46903f91976ea2834b010e560f32b1e5feb061c0d5bceee526186a75fbb6f9fe"
+    },
+    "supersedes": null,
+    "symbol": "SPY",
+    "target_at_utc": "2040-01-02T21:00:00Z",
+    "version": 1,
+    "missing_fields": [],
+    "data_status": "RECORDED_UNVERIFIED",
+    "timing_status": "NOT_ASSESSED",
+    "performance_eligible": false,
+    "content_sha256": "0ef33edced0c13c7653e121d9aaeed3e37716791a75ff1e2c24451891292818f"
+  },
+  {
+    "actor_identity": "synthetic:scripted-example",
+    "created_at_utc": "2040-01-02T22:00:00Z",
+    "evidence_class": "RESEARCH_ONLY",
+    "id": "D0-MEMORY-1",
+    "kind": "memory",
+    "origin": "SYNTHETIC",
+    "parents": [
+      {
+        "hash_kind": "canonical_json_sha256",
+        "id": "D0-REVIEW-1",
+        "sha256": "0ef33edced0c13c7653e121d9aaeed3e37716791a75ff1e2c24451891292818f"
+      }
+    ],
+    "payload": {
+      "falsification_condition": "Further examples may show no useful difference.",
+      "lesson": "Hypothesis: explicitly consider opposing signals next round.",
+      "scope": "this synthetic research exercise only",
+      "status": "PROPOSED_RESEARCH_NOTE"
+    },
+    "prediction_ref": {
+      "hash_kind": "canonical_json_sha256",
+      "id": "D0-PREDICTION-1",
+      "sha256": "d94e36c1db8df4cd9416cee2234aa45727ec45cd8106df7a542450de5ad721df"
+    },
+    "schema": "d0_record_v1",
+    "series_id": "D0-MEMORY-1",
+    "source": {
+      "acquired_at_utc": "2040-01-02T22:00:00Z",
+      "content": "{\"falsification_condition\": \"Further examples may show no useful difference.\", \"lesson\": \"Hypothesis: explicitly consider opposing signals next round.\", \"scope\": \"this synthetic research exercise only\", \"status\": \"PROPOSED_RESEARCH_NOTE\"}",
+      "name": "Invented engineering example",
+      "uri": "fixture:synthetic-d0",
+      "sha256": "69a34e2776736750ed227acb92da7ca6539c6c3776a83d9d77bd8cfcfd806b57"
+    },
+    "supersedes": null,
+    "symbol": "SPY",
+    "target_at_utc": "2040-01-02T21:00:00Z",
+    "version": 1,
+    "missing_fields": [],
+    "data_status": "RECORDED_UNVERIFIED",
+    "timing_status": "NOT_ASSESSED",
+    "performance_eligible": false,
+    "content_sha256": "eb78a91cbf1d09990d5790302f30ba71229e022d5d6e4f5b56b66b51795f1adf"
+  },
+  {
+    "actor_identity": "synthetic:scripted-example",
+    "created_at_utc": "2040-01-03T18:00:00Z",
+    "evidence_class": "RESEARCH_ONLY",
+    "id": "D0-RESEARCH-2",
+    "kind": "research",
+    "origin": "SYNTHETIC",
+    "parents": [
+      {
+        "hash_kind": "canonical_json_sha256",
+        "id": "D0-MEMORY-1",
+        "sha256": "eb78a91cbf1d09990d5790302f30ba71229e022d5d6e4f5b56b66b51795f1adf"
+      }
+    ],
+    "payload": {
+      "knowledge_cutoff_utc": "2040-01-03T18:00:00Z",
+      "memory_use": "Explicit research input; not strategy activation.",
+      "question": "Examine opposing signals using the prior proposed note."
+    },
+    "prediction_ref": null,
+    "schema": "d0_record_v1",
+    "series_id": "D0-RESEARCH-2",
+    "source": {
+      "acquired_at_utc": "2040-01-03T18:00:00Z",
+      "content": "{\"knowledge_cutoff_utc\": \"2040-01-03T18:00:00Z\", \"memory_use\": \"Explicit research input; not strategy activation.\", \"question\": \"Examine opposing signals using the prior proposed note.\"}",
+      "name": "Invented engineering example",
+      "uri": "fixture:synthetic-d0",
+      "sha256": "7124a7026e777ec1e2bfe84215472c4c352e25c096a3c25fb2fb7710fd29b265"
+    },
+    "supersedes": null,
+    "symbol": "SPY",
+    "target_at_utc": "2040-01-04T21:00:00Z",
+    "version": 1,
+    "missing_fields": [],
+    "data_status": "RECORDED_UNVERIFIED",
+    "timing_status": "DECLARED_ONLY",
+    "performance_eligible": false,
+    "content_sha256": "36dceab63aa7ce54da570a333b216648a7362527c334b312d1e31af17450993d"
+  }
+]

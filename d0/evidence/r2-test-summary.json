@@ -1,0 +1,44 @@
+{
+  "r2_base": "a9e022773d1c3c3a82541f7ab8d3ec0c644e879c",
+  "python": "3.12.14",
+  "sqlite": "3.53.1",
+  "results": [
+    {
+      "suite": "D0 original",
+      "log": "d0/evidence/d0-tests.txt",
+      "tests": 18,
+      "result": "PASS"
+    },
+    {
+      "suite": "L0 original",
+      "log": "d0/evidence/l0-regression-tests.txt",
+      "tests": 34,
+      "result": "PASS"
+    },
+    {
+      "suite": "Original QA script",
+      "log": "d0/evidence/r2-qa-adversarial.txt",
+      "tests": 11,
+      "result": "PASS"
+    },
+    {
+      "suite": "D0 R1",
+      "log": "d0/evidence/r2-r1-regression-tests.txt",
+      "tests": 4,
+      "result": "PASS"
+    },
+    {
+      "suite": "D0 R2 new",
+      "log": "d0/evidence/r2-regression-tests.txt",
+      "tests": 10,
+      "result": "PASS"
+    }
+  ],
+  "developer_tests_passed": 77,
+  "independent_original_supplemental_8": {
+    "status": "NOT_RUN_ORIGINAL_SCRIPT_UNAVAILABLE",
+    "searched": "PR #6 issue comments, review bodies, inline comments and current repository. QA comment 6624013890 describes results but contains no eight-test script or attachment.",
+    "note": "Ten new developer regressions are not presented as a rerun of the original eight."
+  },
+  "original_qa_script_sha256": "a2673ec68920fb48d2fe0f4f579d194a92bca842a3e34267eb77eba8481b8596"
+}

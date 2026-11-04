@@ -1,0 +1,16 @@
+test_cli_full_export_reimports_into_new_db_and_replays (__main__.AdversarialQA.test_cli_full_export_reimports_into_new_db_and_replays) ... ok
+test_cross_subject_review_parent_rejected (__main__.AdversarialQA.test_cross_subject_review_parent_rejected) ... ok
+test_d0_rejects_l0_db_and_m1_id (__main__.AdversarialQA.test_d0_rejects_l0_db_and_m1_id) ... ok
+test_documented_empty_string_marks_special_fields_missing (__main__.AdversarialQA.test_documented_empty_string_marks_special_fields_missing) ... ok
+test_future_parent_rejected_without_partial_import (__main__.AdversarialQA.test_future_parent_rejected_without_partial_import) ... ok
+test_l0_cannot_mix_its_tables_into_d0_database (__main__.AdversarialQA.test_l0_cannot_mix_its_tables_into_d0_database) ... ok
+test_outcome_revision_cannot_switch_prediction_subject (__main__.AdversarialQA.test_outcome_revision_cannot_switch_prediction_subject) ... ok
+test_post_target_knowledge_cutoff_is_not_declared_only (__main__.AdversarialQA.test_post_target_knowledge_cutoff_is_not_declared_only) ... ok
+test_revision_competing_branch_and_direct_update_rejected (__main__.AdversarialQA.test_revision_competing_branch_and_direct_update_rejected) ... ok
+test_schema_source_finite_and_timezone_rejections_are_atomic (__main__.AdversarialQA.test_schema_source_finite_and_timezone_rejections_are_atomic) ... ok
+test_sqlite_failure_rolls_back_existing_db_then_retry_succeeds (__main__.AdversarialQA.test_sqlite_failure_rolls_back_existing_db_then_retry_succeeds) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.481s
+
+OK
