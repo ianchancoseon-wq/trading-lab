@@ -1,0 +1,32 @@
+[
+  {
+    "id": "OTS",
+    "repository": "opentimestamps/opentimestamps-client",
+    "commit": "f3a9e92e4dcb89ed93396d71ec808b3290a438c4",
+    "path": "README.md",
+    "url": "https://github.com/opentimestamps/opentimestamps-client/blob/f3a9e92e4dcb89ed93396d71ec808b3290a438c4/README.md",
+    "sha256": "c1a65e8443d5bef6774274ae40ab4e3d16144be394c1508c47f29bf71538b116",
+    "review_date": "2026-11-04 Asia/Shanghai",
+    "scope": "public documentation only; not service invocation"
+  },
+  {
+    "id": "ALPACA-ARCHIVE",
+    "repository": "alpacahq/alpaca-docs",
+    "commit": "2080c5e0efbbd812c48eef9209a7a9962de67d2a",
+    "path": "content/market-data/_index.md",
+    "url": "https://github.com/alpacahq/alpaca-docs/blob/2080c5e0efbbd812c48eef9209a7a9962de67d2a/content/market-data/_index.md",
+    "sha256": "011948067d596bc4ad8b41faec6c454bc120f3d8054728160765d6682ccdedba",
+    "review_date": "2026-11-04 Asia/Shanghai",
+    "scope": "public documentation only; not service invocation"
+  },
+  {
+    "id": "SDK-FEEDS",
+    "repository": "alpacahq/alpaca-py",
+    "commit": "87cf99cfd86c844eeb8d83e0b735183ccdb6c3d0",
+    "path": "alpaca/data/enums.py",
+    "url": "https://github.com/alpacahq/alpaca-py/blob/87cf99cfd86c844eeb8d83e0b735183ccdb6c3d0/alpaca/data/enums.py",
+    "sha256": "b87ef8a9485ae94159b99a57a95cc6fe396295b625f386ece0682485867c340b",
+    "review_date": "2026-11-04 Asia/Shanghai",
+    "scope": "public documentation only; not service invocation"
+  }
+]
