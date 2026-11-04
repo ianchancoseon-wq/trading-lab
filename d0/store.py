@@ -10,10 +10,10 @@ class Store:
     def __init__(self, path):
         self.db = sqlite3.connect(path, timeout=15, isolation_level=None)
         try:
-            self.db.execute('PRAGMA synchronous=FULL')
             # Reject an existing non-D0 database instead of silently adding tables.
             tables = {v[0] for v in self.db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
             require(not tables or tables == {'d0_records'}, 'NOT_A_D0_DATABASE')
+            self.db.execute('PRAGMA synchronous=FULL')
             self.db.executescript('''
             CREATE TABLE IF NOT EXISTS d0_records(seq INTEGER PRIMARY KEY, id TEXT UNIQUE NOT NULL,
                 body TEXT NOT NULL, previous TEXT NOT NULL, chain TEXT NOT NULL);
@@ -47,6 +47,10 @@ class Store:
             require(r['version'] == 1 and r['supersedes'] is None, 'FIRST_VERSION')
         if r['kind'] in ('outcome', 'review', 'memory'):
             ref = r['prediction_ref']
+            if prior:
+                original = prior[0]
+                require(ref == original['prediction_ref'] and
+                        r['target_at_utc'] == original['target_at_utc'], 'REVISION_SUBJECT_MISMATCH')
             require(isinstance(ref, dict) and ref['id'] in rows and
                     reference(rows[ref['id']]) == ref and rows[ref['id']]['kind'] == 'prediction', 'PREDICTION_REF')
             require(r['target_at_utc'] == rows[ref['id']]['target_at_utc'], 'TARGET_MISMATCH')

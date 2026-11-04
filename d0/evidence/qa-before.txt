@@ -1,0 +1,94 @@
+test_cli_full_export_reimports_into_new_db_and_replays (__main__.AdversarialQA) ... ok
+test_cross_subject_review_parent_rejected (__main__.AdversarialQA) ... ok
+test_d0_rejects_l0_db_and_m1_id (__main__.AdversarialQA) ... ok
+test_documented_empty_string_marks_special_fields_missing (__main__.AdversarialQA) ... test_future_parent_rejected_without_partial_import (__main__.AdversarialQA) ... ok
+test_l0_cannot_mix_its_tables_into_d0_database (__main__.AdversarialQA) ... FAIL
+test_outcome_revision_cannot_switch_prediction_subject (__main__.AdversarialQA) ... FAIL
+test_post_target_knowledge_cutoff_is_not_declared_only (__main__.AdversarialQA) ... FAIL
+test_revision_competing_branch_and_direct_update_rejected (__main__.AdversarialQA) ... ok
+test_schema_source_finite_and_timezone_rejections_are_atomic (__main__.AdversarialQA) ... ok
+test_sqlite_failure_rolls_back_existing_db_then_retry_succeeds (__main__.AdversarialQA) ... ok
+
+======================================================================
+FAIL: test_documented_empty_string_marks_special_fields_missing (__main__.AdversarialQA) (key='close')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/trading-d0-r1.ShZHDmu1/d0/records.py", line 85, in prepare
+    price = Decimal(value)
+decimal.InvalidOperation: [<class 'decimal.ConversionSyntax'>]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/private/tmp/trading-d0-r1.ShZHDmu1/qa-adversarial.py", line 171, in test_documented_empty_string_marks_special_fields_missing
+    prepared = prepare(raw)
+ValueError: BAD_CLOSE
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/private/tmp/trading-d0-r1.ShZHDmu1/qa-adversarial.py", line 173, in test_documented_empty_string_marks_special_fields_missing
+    self.fail(f"Documented empty-string missing marker for {key} rejected: {exc}")
+AssertionError: Documented empty-string missing marker for close rejected: BAD_CLOSE
+
+======================================================================
+FAIL: test_documented_empty_string_marks_special_fields_missing (__main__.AdversarialQA) (key='probs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/trading-d0-r1.ShZHDmu1/qa-adversarial.py", line 171, in test_documented_empty_string_marks_special_fields_missing
+    prepared = prepare(raw)
+l0.core.records.Invalid: BAD_PROBS
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/private/tmp/trading-d0-r1.ShZHDmu1/qa-adversarial.py", line 173, in test_documented_empty_string_marks_special_fields_missing
+    self.fail(f"Documented empty-string missing marker for {key} rejected: {exc}")
+AssertionError: Documented empty-string missing marker for probs rejected: BAD_PROBS
+
+======================================================================
+FAIL: test_documented_empty_string_marks_special_fields_missing (__main__.AdversarialQA) (key='knowledge_cutoff_utc')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/trading-d0-r1.ShZHDmu1/qa-adversarial.py", line 171, in test_documented_empty_string_marks_special_fields_missing
+    prepared = prepare(raw)
+ValueError: Invalid isoformat string: ''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/private/tmp/trading-d0-r1.ShZHDmu1/qa-adversarial.py", line 173, in test_documented_empty_string_marks_special_fields_missing
+    self.fail(f"Documented empty-string missing marker for {key} rejected: {exc}")
+AssertionError: Documented empty-string missing marker for knowledge_cutoff_utc rejected: Invalid isoformat string: ''
+
+======================================================================
+FAIL: test_l0_cannot_mix_its_tables_into_d0_database (__main__.AdversarialQA)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/trading-d0-r1.ShZHDmu1/qa-adversarial.py", line 148, in test_l0_cannot_mix_its_tables_into_d0_database
+    self.fail(f"L0 opened the D0 file, left tables {names}, and D0 now rejects the file on reopen")
+AssertionError: L0 opened the D0 file, left tables ['d0_records', 'records'], and D0 now rejects the file on reopen
+
+======================================================================
+FAIL: test_outcome_revision_cannot_switch_prediction_subject (__main__.AdversarialQA)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/trading-d0-r1.ShZHDmu1/qa-adversarial.py", line 103, in test_outcome_revision_cannot_switch_prediction_subject
+    self.fail(f"{result}; {persisted['series_id']} v{persisted['version']} changed prediction "
+AssertionError: {'inserted': 1, 'replayed': 0}; D0-OUTCOME-1 v2 changed prediction from D0-PREDICTION-1 to PRED-B
+
+======================================================================
+FAIL: test_post_target_knowledge_cutoff_is_not_declared_only (__main__.AdversarialQA)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/trading-d0-r1.ShZHDmu1/qa-adversarial.py", line 187, in test_post_target_knowledge_cutoff_is_not_declared_only
+    self.assertEqual(actual['timing_status'], 'RETROSPECTIVE',
+AssertionError: 'DECLARED_ONLY' != 'RETROSPECTIVE'
+- DECLARED_ONLY
++ RETROSPECTIVE
+ : cutoff 2040-01-03T18:00:00Z is after target 2040-01-02T21:00:00Z
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.648s
+
+FAILED (failures=6)

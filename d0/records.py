@@ -69,17 +69,19 @@ def prepare(raw):
     sha = hashlib.sha256(s['content'].encode('utf-8')).hexdigest()
     require(s.get('sha256', sha) == sha, 'SOURCE_HASH_MISMATCH')
     s['sha256'] = sha
-    time(r['target_at_utc']); created = time(r['created_at_utc']); time(s['acquired_at_utc'])
+    target = time(r['target_at_utc'])
+    created = time(r['created_at_utc'])
+    acquired = time(s['acquired_at_utc'])
     missing = [key for key in REQUIRED[r['kind']] if r['payload'].get(key) in (None, '', [])]
     if not s['content']: missing.append('source.content')
     probs = r['payload'].get('probs')
-    if r['kind'] == 'prediction' and probs is not None:
+    if r['kind'] == 'prediction' and probs not in (None, ''):
         require(isinstance(probs, dict) and set(probs) == {'UP', 'FLAT', 'DOWN'}, 'BAD_PROBS')
         require(all(type(v) in (int, float) and 0 <= v <= 1 for v in probs.values()) and
                 abs(sum(probs.values()) - 1) <= 1e-9, 'BAD_PROBS')
-    if r['kind'] == 'market' and r['payload'].get('close') is not None:
+    value = r['payload'].get('close')
+    if r['kind'] == 'market' and value not in (None, ''):
         from decimal import Decimal, InvalidOperation
-        value = r['payload']['close']
         require(isinstance(value, str), 'BAD_CLOSE')
         try:
             price = Decimal(value)
@@ -88,9 +90,10 @@ def prepare(raw):
         require(price.is_finite() and price > 0, 'BAD_CLOSE')
     cutoff = r['payload'].get('knowledge_cutoff_utc')
     timing = 'NOT_ASSESSED'
-    if cutoff is not None:
+    if cutoff not in (None, ''):
         limit = time(cutoff)
-        timing = 'RETROSPECTIVE' if created >= time(r['target_at_utc']) or time(s['acquired_at_utc']) > limit else 'DECLARED_ONLY'
+        require(limit <= target and limit <= created, 'TIMING_CONFLICT')
+        timing = 'RETROSPECTIVE' if created >= target or acquired > limit else 'DECLARED_ONLY'
     derived_values = {'missing_fields': missing, 'data_status': 'MISSING' if missing else 'RECORDED_UNVERIFIED',
                       'timing_status': timing, 'performance_eligible': False}
     for key, value in derived_values.items():

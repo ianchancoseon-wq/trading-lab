@@ -11,6 +11,14 @@ class Storage:
         require(set(self.actor_bindings) == set(DEFAULT_IDENTITIES) and
                 all(isinstance(v, str) and v and v.strip() == v for v in self.actor_bindings.values()), 'ACTOR_BINDINGS')
         self.db = sqlite3.connect(path, timeout=15, isolation_level=None)
+        try:
+            d0_table = self.db.execute(
+                "SELECT 1 FROM sqlite_master WHERE type='table' AND name='d0_records' COLLATE NOCASE"
+            ).fetchone()
+            require(d0_table is None, 'NOT_AN_L0_DATABASE')
+        except BaseException:
+            self.db.close()
+            raise
         self.db.execute('PRAGMA synchronous=FULL')
         self.db.executescript('''
         CREATE TABLE IF NOT EXISTS records (

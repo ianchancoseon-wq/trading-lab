@@ -58,13 +58,16 @@ canonical JSON 儲存。原始預測的持久化值及來源文字一經保存�
 必要語義欄位：market(session, close)、news(summary)、research(question,
 knowledge_cutoff_utc)、prediction(probs, rationale, knowledge_cutoff_utc)、
 outcome(observation)、review(findings, contrary_evidence)、memory(lesson, scope,
-falsification_condition)。缺值用 null／空字串並標記 MISSING，不補假資料。
+falsification_condition)。缺值用 null／空字串並標記 MISSING。close、probs 和 cutoff 的缺值保留原樣，
+不補值。缺 cutoff 的時間狀態為 NOT_ASSESSED；非空而格式錯誤的值會被拒絕。
 來源名稱／URI、取得時間、目標時間、ID 等最小可稽核 metadata 缺失則拒絕匯入。
 機率若存在須為 UP/FLAT/DOWN、有限且加總為 1；market close 若存在需正有限
 十進位字串。不進行官方 close 認定、事件分類、Brier 或收益計算。
 
-歷史資料通常在目標時間後才取得；其研究／預測若含 cutoff，會標 RETROSPECTIVE。
-DECLARED_ONLY 只表示所填時序沒有上述矛盾，絕非 verified forward。原始來源的
+cutoff 晚於目標或記錄建立時間時，匯入會以 TIMING_CONFLICT 拒絕。比較採時區
+換算後的時間點，等於界線是合法值。建立時間已達目標，或來源在 cutoff 後才取得，
+標為 RETROSPECTIVE。其餘有 cutoff 的記錄標為 DECLARED_ONLY，表示自報時序。
+原始來源的
 publication time、Agent authored time 等可放 payload，不能拿 acquired_at 冒充。
 時間／可信度資訊不全的內容仍只作研究資料，不進正式績效分母。
 
@@ -76,7 +79,8 @@ publication time、Agent authored time 等可放 payload，不能拿 acquired_at
 研究用途；操作者應重用穩定 ID 來做 retry，不用新 ID 冒充新增樣本。
 
 Outcome 必須連到指定 prediction。Review 使用該 prediction 的最新 Outcome，
-Memory 使用最新 Review 且其 Outcome 仍當前有效。修訂需明確保留舊版本。
+Memory 使用最新 Review 且其 Outcome 仍當前有效。這三類的修訂保留首版的完整
+prediction_ref（ID、hash kind、hash）與 target，匯入與重開均驗證。
 新 research 可以引用此前 Memory 的完整 hash parent，不需要宣稱它已經是
 正式「approved memory」。D0 沒有策略 activation API，既有 L0 跨預測限制不變。
 
@@ -91,7 +95,9 @@ PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s d0/tests -v
 ```
 
 D0 使用獨立 SQLite、完整交易、hash chain 與 immutable triggers。既有非 D0 DB
-會被拒絕，不能混入 L0。沒有外部時間／簽章、模型推理、資料真偽驗證、CSV/PDF
+會在建表前被拒絕，L0 也會在初始化前拒絕既有 D0 資料庫。舊資料庫若含
+衝突 cutoff 或跨預測修訂，重開會報錯並保留原始記錄與 hash。
+沒有外部時間／簽章、模型推理、資料真偽驗證、CSV/PDF
 解析、GUI、自動採集、排程或正式統計。獨立 connection 供每個 worker 使用；
 不要在 threads 間共用 Store handle。失敗匯入以 exit/stderr 回報，未建立額外持久
 錯誤事件表。完整鏈驗證適合此小型 MVP，非大型資料倉庫。

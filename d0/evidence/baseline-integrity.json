@@ -1,5 +1,11 @@
 {
   "base": "2a681e8bd247a68446f09e661bde572752504727",
+  "base_tree": "e02baf7d568bb3e1bd74f377d0238eb2df924120",
+  "original_pr_head": "4ec8cf253712b7daebd49dbf954dc2350b99ffd6",
+  "original_pr_tree": "a4e3e4b296b2aa9435e3e80dd8a36ca7f2cdd362",
+  "baseline_file_count": 138,
+  "unchanged_file_count": 137,
+  "verification": "Verified all baseline bytes against the original SHA-256 map and reconstructed both Git trees. Compared each candidate baseline file to that verified copy.",
   "sha256": {
     ".gitignore": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793",
     "IMPORT-MANIFEST.sha256": "15c9caa9f039ceb2a0a69ba6d46d4bec1c07ca1d7fb5593e379748eaab651f40",
@@ -140,5 +146,573 @@
     "phase0c/g2a/verify_integrity.py": "4551be2060d0cb46ba48a19a9931029be4d6c8231bdc11a960873c8cf46c869c",
     "predictions/PRED-M1-001.md": "2317319d9ec2b33d9ccd2b8316c6c39b2f78d2d25e7fa7ad45aeb0e9274f224e"
   },
-  "unchanged_file_count": 138
+  "baseline_git_entries": {
+    ".gitignore": {
+      "mode": "100644",
+      "git_blob": "7a60b85e148f80966a550e5ab6a762a907c69ca6"
+    },
+    "IMPORT-MANIFEST.sha256": {
+      "mode": "100644",
+      "git_blob": "ce6d5d6c7870cac94c2b6f030262c41c008489c6"
+    },
+    "README.md": {
+      "mode": "100644",
+      "git_blob": "24fcd3f5218150e53b8f04dcba3e693fc6ee44b3"
+    },
+    "l0/L0-EVALUATION-SPEC.md": {
+      "mode": "100644",
+      "git_blob": "08d283075f10022bccce3f86892714432049fc1a"
+    },
+    "l0/L0-IMPLEMENTATION-REPORT.md": {
+      "mode": "100644",
+      "git_blob": "6d40a5cd94872c51168086fe6abe1b375eadc9b9"
+    },
+    "l0/L0-PROTOCOL.md": {
+      "mode": "100644",
+      "git_blob": "f48506eeb814b3e4ef0f1a89a8479a11c2812fc3"
+    },
+    "l0/L0-READINESS-REPORT.md": {
+      "mode": "100644",
+      "git_blob": "59cb084a385e06380c8f7f20d6419a7216293548"
+    },
+    "l0/L0-ROLE-CONTRACT.md": {
+      "mode": "100644",
+      "git_blob": "d751cf127ee02ca105dae07ac7f999341a141e9b"
+    },
+    "l0/core/__init__.py": {
+      "mode": "100644",
+      "git_blob": "633fa9476a1bd4b75048cdab1e6a71e393f2d6df"
+    },
+    "l0/core/records.py": {
+      "mode": "100644",
+      "git_blob": "125df0cb0571fe4a7a46ea2a5627c0d522f3648b"
+    },
+    "l0/core/registry.py": {
+      "mode": "100644",
+      "git_blob": "21d3035b3805579f22a4e49059e6af1a8e7ff46a"
+    },
+    "l0/core/review_memory.py": {
+      "mode": "100644",
+      "git_blob": "d85ed39cd040a59dc38b26a2d69a53d2149aa9c2"
+    },
+    "l0/core/scoring.py": {
+      "mode": "100644",
+      "git_blob": "8ed039124b89c5c5f26a6ced0c7699076afc6a01"
+    },
+    "l0/core/storage.py": {
+      "mode": "100644",
+      "git_blob": "9c29733fc9e2872f63136c10877950fbe477e412"
+    },
+    "l0/evidence/baseline-integrity.json": {
+      "mode": "100644",
+      "git_blob": "556a60810ee2afc312c2d6ae5c77f5b404fd1902"
+    },
+    "l0/evidence/changed-files.sha256": {
+      "mode": "100644",
+      "git_blob": "3cc623cd6dac6e92046b26a82d971bfba921e571"
+    },
+    "l0/evidence/r1-integrity.json": {
+      "mode": "100644",
+      "git_blob": "508b8286eb400ba4e9decb83448877037b1478f8"
+    },
+    "l0/evidence/r2-before-tests.txt": {
+      "mode": "100644",
+      "git_blob": "90b1af87be256a7c8797f578f4306ca6c44b77bd"
+    },
+    "l0/evidence/r2-integrity.json": {
+      "mode": "100644",
+      "git_blob": "7310a63cd56b7309d16773a3decf97b0c33d0672"
+    },
+    "l0/evidence/unit-tests.txt": {
+      "mode": "100644",
+      "git_blob": "592c97849bc3439573d6d305c48d27579c5a8bc1"
+    },
+    "l0/tests/fixtures.py": {
+      "mode": "100644",
+      "git_blob": "2f65509b7a030f51e605abc648ec940fd902a023"
+    },
+    "l0/tests/test_core.py": {
+      "mode": "100644",
+      "git_blob": "6606e1e497f0e3f4e59e95cc5794cf2c51a05dfc"
+    },
+    "l0/tests/test_r1.py": {
+      "mode": "100644",
+      "git_blob": "60cd116183b39d9ff5ebb25cc9ddb888a605bfe8"
+    },
+    "l0/tests/test_r2.py": {
+      "mode": "100644",
+      "git_blob": "0de4ef84734eeab2cf3a9641398deaedda589974"
+    },
+    "phase0c/G1-R4-HASHES.sha256": {
+      "mode": "100644",
+      "git_blob": "3a2dd5c0d89cc45655df57baedf9815cf40439d3"
+    },
+    "phase0c/G1-R4-IMPLEMENTATION-REPORT.md": {
+      "mode": "100644",
+      "git_blob": "ab79c0c5bf898a6f9f50ba46e01120825c8a36b7"
+    },
+    "phase0c/G2a-HASHES.sha256": {
+      "mode": "100644",
+      "git_blob": "9bc7c0d4050c234a70a368dce07833f7c470eeb0"
+    },
+    "phase0c/G2a-IMPLEMENTATION-REPORT.md": {
+      "mode": "100644",
+      "git_blob": "7e9603e7db699ead1bd444aa16b8c25fb36abf42"
+    },
+    "phase0c/G2a-R1-HASHES.sha256": {
+      "mode": "100644",
+      "git_blob": "cb1e2f4c036f98ec6f3e72f01390cefbe3c9c95f"
+    },
+    "phase0c/G2a-R1-PR.md": {
+      "mode": "100644",
+      "git_blob": "40f303f5f939b78cb2e45c7ba1e504f3f664cc99"
+    },
+    "phase0c/G2a-R1-REVIEW.md": {
+      "mode": "100644",
+      "git_blob": "21b970e95601bdd7eb7679748a028eee18461b58"
+    },
+    "phase0c/LAB-STATE.md": {
+      "mode": "100644",
+      "git_blob": "556cac7bf69cf98a04223ef0e771bbfd0e6b5874"
+    },
+    "phase0c/g1/MARKED_EQUITY_CONTRACT.md": {
+      "mode": "100644",
+      "git_blob": "f95fec0f90848fa109f0f5efd326e5d4348ed152"
+    },
+    "phase0c/g1/_hashutil.py": {
+      "mode": "100644",
+      "git_blob": "a79f93a9895ff37691d2e22567dbfb93b9870514"
+    },
+    "phase0c/g1/finite_numbers.py": {
+      "mode": "100644",
+      "git_blob": "47cc7e5d3cef363a2034f3222d86b71601b64b11"
+    },
+    "phase0c/g1/fixtures/decision_bad_hash.json": {
+      "mode": "100644",
+      "git_blob": "264390ffa5f061d7dfb4125d23b2f18bcc07e517"
+    },
+    "phase0c/g1/fixtures/decision_before_freeze.json": {
+      "mode": "100644",
+      "git_blob": "f7f364b15bfb053208dabffd790ab799233099af"
+    },
+    "phase0c/g1/fixtures/decision_buy_non_demo.json": {
+      "mode": "100644",
+      "git_blob": "cd634be7fa1447882bb98667cbd2450fbf628508"
+    },
+    "phase0c/g1/fixtures/decision_buy_ok.json": {
+      "mode": "100644",
+      "git_blob": "0e8a3c951597cb441f48f80d76952b4d45b3d2b9"
+    },
+    "phase0c/g1/fixtures/decision_buy_oversize.json": {
+      "mode": "100644",
+      "git_blob": "5f7ae17bd6c0703eba61e3448e7d701b2f2c8a04"
+    },
+    "phase0c/g1/fixtures/decision_buy_zero_share.json": {
+      "mode": "100644",
+      "git_blob": "50b7ed0449573ac7422ca3394ab2f643699ac831"
+    },
+    "phase0c/g1/fixtures/decision_no_trade.json": {
+      "mode": "100644",
+      "git_blob": "dcebaa586864e63f121fdb20f4f8d1c1977a045a"
+    },
+    "phase0c/g1/fixtures/decision_sell_naked.json": {
+      "mode": "100644",
+      "git_blob": "d779c6c2747df2a4851f085c5e05dd12cf38e5d4"
+    },
+    "phase0c/g1/fixtures/decision_spy_buy.json": {
+      "mode": "100644",
+      "git_blob": "677dda2ef5ccedc82db2d7f1526dc58310d0c9bb"
+    },
+    "phase0c/g1/fixtures/id_registry.jsonl": {
+      "mode": "100644",
+      "git_blob": "0c56b19a3c0308ee071cf6c6599ae172554d8f1e"
+    },
+    "phase0c/g1/fixtures/policy_fixture_eval.json": {
+      "mode": "100644",
+      "git_blob": "ffecf8b00577f326d4d7c6a228aa765fac81c707"
+    },
+    "phase0c/g1/fixtures/policy_forbidden_override.json": {
+      "mode": "100644",
+      "git_blob": "0338d45f4cb8df178945f06a215c4696b10365db"
+    },
+    "phase0c/g1/fixtures/policy_relaxed_cap.json": {
+      "mode": "100644",
+      "git_blob": "b1566ca412439730a75ec018eca3e419b6caae20"
+    },
+    "phase0c/g1/fixtures/policy_tampered_content.json": {
+      "mode": "100644",
+      "git_blob": "ba8e06abf328d6140609c536181671cd82e6d4f5"
+    },
+    "phase0c/g1/fixtures/portfolio_alias_conflict.json": {
+      "mode": "100644",
+      "git_blob": "12d17ba766e66c398720d5e7f6451520b9d11629"
+    },
+    "phase0c/g1/fixtures/portfolio_at_name_cap.json": {
+      "mode": "100644",
+      "git_blob": "fab2561c9eb181610c195934636ee85ff78d93fc"
+    },
+    "phase0c/g1/fixtures/portfolio_daily_loss.json": {
+      "mode": "100644",
+      "git_blob": "f14e8f9c22cd5b2934a769f3acfce836d4f6538c"
+    },
+    "phase0c/g1/fixtures/portfolio_drawdown.json": {
+      "mode": "100644",
+      "git_blob": "966f17ff55fe702e654cbcfd98b2df695a0aa1c1"
+    },
+    "phase0c/g1/fixtures/portfolio_equity_mismatch.json": {
+      "mode": "100644",
+      "git_blob": "204787de12ce0b0d3635ceab01851e15d002b593"
+    },
+    "phase0c/g1/fixtures/portfolio_inf_holding.json": {
+      "mode": "100644",
+      "git_blob": "da801217cdd4e7637e30b583811bc648f09c74d1"
+    },
+    "phase0c/g1/fixtures/portfolio_missing_equity.json": {
+      "mode": "100644",
+      "git_blob": "169bd833a1bb051b461921eabe4a253f39ada649"
+    },
+    "phase0c/g1/fixtures/portfolio_ok.json": {
+      "mode": "100644",
+      "git_blob": "cd14cd922d356588eb4dff6c703f606cf8e80705"
+    },
+    "phase0c/g1/fixtures/portfolio_pending.json": {
+      "mode": "100644",
+      "git_blob": "9f3706cd926b6a08748cd32f07b8263e6ccdf627"
+    },
+    "phase0c/g1/fixtures/portfolio_pending_fields_inconsistent.json": {
+      "mode": "100644",
+      "git_blob": "ff902cedf967f7923bb88972e12f0d0c72452499"
+    },
+    "phase0c/g1/fixtures/portfolio_pending_inconsistent_shares.json": {
+      "mode": "100644",
+      "git_blob": "9be36450f8d33cfafaf942195d7e199c68c7b900"
+    },
+    "phase0c/g1/fixtures/portfolio_pending_malformed.json": {
+      "mode": "100644",
+      "git_blob": "2405463d4f3901072f6d3edbb7fa3104d6dad5af"
+    },
+    "phase0c/g1/fixtures/portfolio_pending_other_symbol.json": {
+      "mode": "100644",
+      "git_blob": "6420f6a1b08cdad96b0f37698b50c8f5e65a8d02"
+    },
+    "phase0c/g1/fixtures/portfolio_pending_sell_not_filled.json": {
+      "mode": "100644",
+      "git_blob": "ea7b6348d0506eac943bbb6d0f7e87aa70350d86"
+    },
+    "phase0c/g1/fixtures/portfolio_pending_status_pending.json": {
+      "mode": "100644",
+      "git_blob": "c1d760068432097203b12d4151260d2db9097715"
+    },
+    "phase0c/g1/fixtures/portfolio_qqq_case_conflict.json": {
+      "mode": "100644",
+      "git_blob": "9c5744655a60fb9cea74929766e0fe33373bdb9d"
+    },
+    "phase0c/g1/fixtures/portfolio_spy_19_2_plus_pending_4_8.json": {
+      "mode": "100644",
+      "git_blob": "f49a0a192db053752f83d957f36882aa8ba97533"
+    },
+    "phase0c/g1/fixtures/portfolio_spy_30_existing.json": {
+      "mode": "100644",
+      "git_blob": "46592d9ee3ad851562b1fdc5052080d47317de37"
+    },
+    "phase0c/g1/fixtures/portfolio_spy_30_pending.json": {
+      "mode": "100644",
+      "git_blob": "d110b1e498d433c27ce791891539d002c76111aa"
+    },
+    "phase0c/g1/fixtures/portfolio_spy_two_pending_24.json": {
+      "mode": "100644",
+      "git_blob": "8e0310759428286ff3e31ba4f93faa966f393d70"
+    },
+    "phase0c/g1/fixtures/portfolio_tight_cash.json": {
+      "mode": "100644",
+      "git_blob": "ca9b6197a8b565f9bef37ac9b44fb14309f44a22"
+    },
+    "phase0c/g1/fixtures/portfolio_two_names.json": {
+      "mode": "100644",
+      "git_blob": "28f1a59073a1e4b6195500c8d76d4464ef01e0e1"
+    },
+    "phase0c/g1/fixtures/prediction_bad_probs.json": {
+      "mode": "100644",
+      "git_blob": "bb8fb344b53bae2bfe58830f3ccd702d90b4f113"
+    },
+    "phase0c/g1/fixtures/prediction_id_conflict.json": {
+      "mode": "100644",
+      "git_blob": "3ce975e5160185c9acedaf8a92034e9f838582ce"
+    },
+    "phase0c/g1/fixtures/prediction_naive_ts.json": {
+      "mode": "100644",
+      "git_blob": "553ab87d429817b9fc8fa2809f1c8fca2f5fb4f6"
+    },
+    "phase0c/g1/fixtures/prediction_nan_price.json": {
+      "mode": "100644",
+      "git_blob": "73ebfe4b8be75a74910eb99762fb087e51c1b2f5"
+    },
+    "phase0c/g1/fixtures/prediction_non_demo.json": {
+      "mode": "100644",
+      "git_blob": "1b69c62710b826656468b8cbc55c2fa1d2968a82"
+    },
+    "phase0c/g1/fixtures/prediction_ok.json": {
+      "mode": "100644",
+      "git_blob": "df5d60220e1bffa08227016f1b504af4272dbb5f"
+    },
+    "phase0c/g1/fixtures/prediction_spy.json": {
+      "mode": "100644",
+      "git_blob": "e4521b0f30534e568f7faa5cabecad1801a916ad"
+    },
+    "phase0c/g1/frozen_id_registry.jsonl": {
+      "mode": "100644",
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "phase0c/g1/frozen_limits.py": {
+      "mode": "100644",
+      "git_blob": "025e62c46fc686642d7c7657a9194c19ea7380ef"
+    },
+    "phase0c/g1/id_registry.py": {
+      "mode": "100644",
+      "git_blob": "4e749a2f7b2115372ea25a2360d88923dc31f2ee"
+    },
+    "phase0c/g1/json_strict.py": {
+      "mode": "100644",
+      "git_blob": "79dc70d637e5a9c64187f271b171864fa498322a"
+    },
+    "phase0c/g1/out/gate_results/GATE-G1-DEMO-BUY-OK.json": {
+      "mode": "100644",
+      "git_blob": "70c092e03058ba20cdd9d7df8b250f2d681a03b2"
+    },
+    "phase0c/g1/out/gate_results/GATE-G1-DEMO-FAIL-CLOSED.json": {
+      "mode": "100644",
+      "git_blob": "2319a04e84b672d52c6c2589472ec77e55d8514b"
+    },
+    "phase0c/g1/out/gate_results/GATE-G1-DEMO-NO-TRADE.json": {
+      "mode": "100644",
+      "git_blob": "1860a3a230bdddb98f3eebd6f20f145eb6ffc115"
+    },
+    "phase0c/g1/out/gate_results/GATE-G1-DEMO-OVERSIZE.json": {
+      "mode": "100644",
+      "git_blob": "444e6abd888d1aaee5cf9d5d598b5dafdfe2975a"
+    },
+    "phase0c/g1/out/gate_results/GATE-R1-BUY-OK.json": {
+      "mode": "100644",
+      "git_blob": "e84cc24d7e03a4be961d6afa0d3ef9b64af652e9"
+    },
+    "phase0c/g1/out/gate_results/GATE-R1-NO-TRADE.json": {
+      "mode": "100644",
+      "git_blob": "a3b82bbfdfa867d00aef197346324804113b9e67"
+    },
+    "phase0c/g1/out/gate_results/GATE-R1-PENDING-BAD.json": {
+      "mode": "100644",
+      "git_blob": "d3691b0fe194bd62e8fcc3b14c2493041dd3769d"
+    },
+    "phase0c/g1/out/gate_results/GATE-R1-POLICY-RELAX.json": {
+      "mode": "100644",
+      "git_blob": "802192186591563f7ff915ed1fb4a5aacaa0153f"
+    },
+    "phase0c/g1/out/gate_results/GATE-R1-ZERO-SHARE.json": {
+      "mode": "100644",
+      "git_blob": "540f309fc93aa7ffbc7ebb8e7cd8dc483718be02"
+    },
+    "phase0c/g1/out/gate_results/GATE-R2-ALIAS.json": {
+      "mode": "100644",
+      "git_blob": "37fab5af472e6578ca5058e896c4a3f63b7fe0a6"
+    },
+    "phase0c/g1/out/gate_results/GATE-R2-BUY-BLOCKED.json": {
+      "mode": "100644",
+      "git_blob": "03cb5b90607b071f9b9b86ce26461386c4849684"
+    },
+    "phase0c/g1/out/gate_results/GATE-R2-NO-TRADE.json": {
+      "mode": "100644",
+      "git_blob": "6e85a4019c977ebaee159313284ecba62f1d6950"
+    },
+    "phase0c/g1/out/gate_results/GATE-R2-PENDING-HIDE.json": {
+      "mode": "100644",
+      "git_blob": "5eb947541d04e2d787fd5a73b387ce3fc7f618d4"
+    },
+    "phase0c/g1/out/gate_results/GATE-R2-SELL-NOT-FILLED.json": {
+      "mode": "100644",
+      "git_blob": "7435629984565a168c60cada20181bddcdbadd15"
+    },
+    "phase0c/g1/out/gate_results/GATE-R2-ZERO.json": {
+      "mode": "100644",
+      "git_blob": "828465715245b43a708eb60d4eb2ce0a817a03a1"
+    },
+    "phase0c/g1/out/test_log.txt": {
+      "mode": "100644",
+      "git_blob": "dc125f0e69ae3558e36b642e613066bf9ba6b5c8"
+    },
+    "phase0c/g1/out/test_results.json": {
+      "mode": "100644",
+      "git_blob": "0d083f20fd06ce8b560bd79dcbd915d8363990a7"
+    },
+    "phase0c/g1/out/test_run_console.txt": {
+      "mode": "100644",
+      "git_blob": "3c453e22dc8760682a758affafaa1a67164ccc82"
+    },
+    "phase0c/g1/risk_gate.py": {
+      "mode": "100644",
+      "git_blob": "695c684ed0d87be8f4037c71f5e81d6bcfb8b03a"
+    },
+    "phase0c/g1/risk_policy.json": {
+      "mode": "100644",
+      "git_blob": "f9e245e16829adc59cd0b697dbd0d95a6faf8866"
+    },
+    "phase0c/g1/schemas/decision_v1.json": {
+      "mode": "100644",
+      "git_blob": "5cf67df07716978cd2d003d71ad8b7707fe72a80"
+    },
+    "phase0c/g1/schemas/gate_result_v1.json": {
+      "mode": "100644",
+      "git_blob": "3bb327702dce65b2e2145712a640bb6b90a9bc75"
+    },
+    "phase0c/g1/schemas/prediction_v1.json": {
+      "mode": "100644",
+      "git_blob": "6eda7ccfc2a572cacdf5f44d116c83b5ff36728e"
+    },
+    "phase0c/g1/submit_validator.py": {
+      "mode": "100644",
+      "git_blob": "c4257bf125fb9aa6461f3e696c15ac2e7a7a1230"
+    },
+    "phase0c/g1/tests/test_g1.py": {
+      "mode": "100644",
+      "git_blob": "b6c8471cda024b15cfe10b0bfe8aa08403d04047"
+    },
+    "phase0c/g1/tickers.py": {
+      "mode": "100644",
+      "git_blob": "6135d689e76169eb6c0f4044d84d7e3108e8fce7"
+    },
+    "phase0c/g2a/README.md": {
+      "mode": "100644",
+      "git_blob": "ba323a4f90c6b76012f06d954a04c549bbf78c51"
+    },
+    "phase0c/g2a/artifacts.py": {
+      "mode": "100644",
+      "git_blob": "ec0a00f50f968684feb8164b35200ab99faabc4a"
+    },
+    "phase0c/g2a/fill_engine.py": {
+      "mode": "100644",
+      "git_blob": "45ad71a930101b6d61df77288a46e5c0ca8d1b4f"
+    },
+    "phase0c/g2a/fixtures/prices_synth.json": {
+      "mode": "100644",
+      "git_blob": "3c1e91f4c91a65dc4a5a1659ba999bdb3c3446c5"
+    },
+    "phase0c/g2a/g2a_paths.py": {
+      "mode": "100644",
+      "git_blob": "bad0aa6dffceaec4ae699275b6651ed05c96b053"
+    },
+    "phase0c/g2a/g2a_registry.jsonl": {
+      "mode": "100644",
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "phase0c/g2a/ledger.py": {
+      "mode": "100644",
+      "git_blob": "1ad911e62031681e9aceacc4241cf872b26065a6"
+    },
+    "phase0c/g2a/out/g1_baseline_hashes.txt": {
+      "mode": "100644",
+      "git_blob": "9f19612eecc1d296b20f0ea45ff83bcae14a05f0"
+    },
+    "phase0c/g2a/out/g1_suite_from_temp_copy.json": {
+      "mode": "100644",
+      "git_blob": "38473025f84fce305c3477faa3b8b53e6681f3c0"
+    },
+    "phase0c/g2a/out/g1_unchanged.json": {
+      "mode": "100644",
+      "git_blob": "05a27921484edf7a623ccbf215c2ac532a235738"
+    },
+    "phase0c/g2a/out/reconciliation.json": {
+      "mode": "100644",
+      "git_blob": "14d5915c0df1cda43a6dd91f9d704b95f6d2ca44"
+    },
+    "phase0c/g2a/out/replay_evidence.json": {
+      "mode": "100644",
+      "git_blob": "a5fc1f909b9dd357ad805afff8110715d31cfabb"
+    },
+    "phase0c/g2a/out/scenario_ledger.jsonl": {
+      "mode": "100644",
+      "git_blob": "8b45eace250f374a8a7e2d54f89217509687839a"
+    },
+    "phase0c/g2a/out/test_results.json": {
+      "mode": "100644",
+      "git_blob": "04357cb62c32576ae4ede4b6958bffe59d0b10e9"
+    },
+    "phase0c/g2a/out/test_run_console.txt": {
+      "mode": "100644",
+      "git_blob": "b015f747f32be6cabff0680778280e71ad64f066"
+    },
+    "phase0c/g2a/prices.py": {
+      "mode": "100644",
+      "git_blob": "ff834fdc1527f89aad1d8b6913381264c9e09f1d"
+    },
+    "phase0c/g2a/r1_evidence/g1-tests.txt": {
+      "mode": "100644",
+      "git_blob": "b550a109f7a06146cba75303a8b0ea6af1ff0b61"
+    },
+    "phase0c/g2a/r1_evidence/g2a-tests.txt": {
+      "mode": "100644",
+      "git_blob": "4fa86689d255dbe0b5e7f7b75d9ede1f3703f290"
+    },
+    "phase0c/g2a/r1_evidence/import-manifest-check.txt": {
+      "mode": "100644",
+      "git_blob": "a03d4d826f7b8a9d18e1139d62ac6aba4694ba7e"
+    },
+    "phase0c/g2a/r1_evidence/original-atomicity-failures.json": {
+      "mode": "100644",
+      "git_blob": "f27a6e5560e72f0315c7858d05fa3afd7f9ec36d"
+    },
+    "phase0c/g2a/r1_evidence/original-replay-and-halt-failures.txt": {
+      "mode": "100644",
+      "git_blob": "94f1f704d714f751edf43ef3941cc11476838251"
+    },
+    "phase0c/g2a/replay.py": {
+      "mode": "100644",
+      "git_blob": "9b8a11cdb127b5f863d8648739b3ec4614f9976b"
+    },
+    "phase0c/g2a/schemas/fill_v1.json": {
+      "mode": "100644",
+      "git_blob": "97188de4eb01b91162e1e03f96a57e56e2c0fdb6"
+    },
+    "phase0c/g2a/schemas/ledger_event_v1.json": {
+      "mode": "100644",
+      "git_blob": "eadf89e2eae5ff06941988e7c2b6db8932de5cd4"
+    },
+    "phase0c/g2a/schemas/ledger_state_v1.json": {
+      "mode": "100644",
+      "git_blob": "0bf076d0cf75abb46614b5a4e672fe0515c1d0fa"
+    },
+    "phase0c/g2a/simulator.py": {
+      "mode": "100644",
+      "git_blob": "cefeeac46a4998fc669caa3913c3be1bba23c565"
+    },
+    "phase0c/g2a/tests/test_g2a.py": {
+      "mode": "100644",
+      "git_blob": "c6e78d4ac5cb1523047b4c0eddc8717355d7ddcd"
+    },
+    "phase0c/g2a/tests/test_g2a_r1.py": {
+      "mode": "100644",
+      "git_blob": "a8b5b271d69e3a99c3061f0d2a13cb8ff3016ed6"
+    },
+    "phase0c/g2a/verify_integrity.py": {
+      "mode": "100644",
+      "git_blob": "381e9637592401a618c22d3f88aa37a13f1be8b6"
+    },
+    "predictions/PRED-M1-001.md": {
+      "mode": "100644",
+      "git_blob": "df8316a2aacf81c7ec3143d02d2cdf885fd88b35"
+    }
+  },
+  "exceptions": {
+    "l0/core/storage.py": {
+      "reason": "Authorized L0 pre-initialization guard for existing D0 databases.",
+      "base": {
+        "sha256": "9305ad79f62ace1a611d48837f1635cfb3e6853ce78d0ccffa9f21fef4d61188",
+        "git_blob": "9c29733fc9e2872f63136c10877950fbe477e412",
+        "mode": "100644"
+      },
+      "r1": {
+        "sha256": "52db7719bbddedde68c4b34761b2dc3d7b5c5a92b5da7433903225811e00ff0f",
+        "git_blob": "deb5ea2f49cbbcd090afc54c8d49ff5ea661283b",
+        "mode": "100644"
+      }
+    }
+  }
 }

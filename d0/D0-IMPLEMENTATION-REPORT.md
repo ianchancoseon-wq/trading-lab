@@ -1,6 +1,6 @@
 # D0 Data Collection MVP — 實作交付報告
 
-狀態：**D0 MVP SUBMITTED FOR REVIEW / NOT ACCEPTED**。
+狀態：**D0 R1 DRAFT，待獨立 QA 和 Founder 批准**。
 日期：2026-11-04（Asia/Shanghai）。
 基線：`2a681e8bd247a68446f09e661bde572752504727`。
 獨立分支：`feat/d0-research-data`。最終 head SHA 隨提交回覆／PR 提供，避免自參照 hash。
@@ -8,6 +8,17 @@
 Founder D0 決議授權本次離線工程、人工資料輸入能力及 synthetic tests，並將研究
 資料收集與正式績效資格分離。本 MVP 不受限於 PR #5 尚未採用的正式 Pilot
 準備條件，也沒有採用／修改那份方案或現有 L0/G1/G2a 規則。
+
+## R1 修正
+
+- Outcome／Review／Memory 以首版完整 prediction ref 和 target 固定修訂系列。
+  匯入及快照驗證共用規則，拒絕跨預測修訂並回滾失敗批次。
+- cutoff 晚於 target 或 created 時以 TIMING_CONFLICT 拒絕。採帶時區的時間點比較，
+  容許等於邊界，保留合法歷史資料的 RETROSPECTIVE 標記。
+- close、probs、cutoff 的 null／空字串保留原值並標 MISSING；缺 cutoff 標
+  NOT_ASSESSED。舊庫如含衝突時序或跨預測修訂，重開時拒絕，保留原始封存值。
+- L0 Storage 初始化前查詢 SQLite schema，發現 D0 表即拒絕並關閉連線。雙向
+  回歸檢查失敗開啟前後的資料庫 bytes、schema、記錄及原本入口重開。
 
 ## 已實作
 
@@ -35,11 +46,15 @@ score、績效彙總、策略 activation 或真實模型學習過程。
 ```sh
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s d0/tests -v
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s l0/tests -v
+PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1 python3 d0/evidence/qa-adversarial.py
 ```
 
-- **D0：18 tests passed**，0 failures/errors/skips。
-- **L0 回歸：34 tests passed**，0 failures/errors/skips。
-- 合計 **52 developer tests passed**，不是獨立 QA 或 Founder acceptance。
+- 既有 D0 **18/18**、既有 L0 **34/34**、新增 R1 **4/4**。D0 discovery 合計 **22/22**。
+- 原獨立 QA 腳本共 **11 項**。原 HEAD 重現四類缺陷（六個斷言失敗，包含缺值的
+  三個欄位子案例），R1 原樣重跑 **11/11**。這是開發者重跑，獨立 QA 待驗。
+- 日誌：[既有 D0](evidence/d0-tests.txt)、[既有 L0](evidence/l0-regression-tests.txt)、
+  [新增 R1](evidence/r1-regression-tests.txt)、[原 HEAD QA](evidence/qa-before.txt)、
+  [R1 QA](evidence/qa-after.txt)。
 - G1/G2a 的 Risk Gate／交易 fixtures／模擬器均未執行；M1 未評分。
 
 D0 測試包括完整研究循環、重試無重複、stale/rehashed ID conflict、原預測保留與
@@ -68,11 +83,14 @@ Memory 改變下一輪研究輸入，並不證明預測改善，更不證明 AI 
 
 ## 完整性與範圍
 
-本次只新增 `d0/`；所有既有 **138 個 main 基線檔案**逐 byte 與指定 base 比對，
-保持不變。涵蓋全部 L0、G1/G2a、M1、歷史 manifests、adopted L0 文件和 LAB-STATE。
-M1 原 SHA-256：`2317319d9ec2b33d9ccd2b8316c6c39b2f78d2d25e7fa7ad45aeb0e9274f224e`。
-檔案清單／原物 hash 見 `evidence/baseline-integrity.json`、新增交付 SHA 見
-`evidence/FILES.sha256`（不含自身 hash）。原有兩個未追蹤 ZIP 保留、不收入提交。
+對基線的 **138** 個檔案核對 SHA-256、Git blob 和 mode，其中 **137** 個保持一致。
+唯一例外是已接受的 `l0/core/storage.py`，只新增初始化前的 D0 schema 防護。
+G1／G2a、M1、已採用的 L0 協議、其餘 L0 檔案、LAB-STATE 和歷史 manifests
+均維持原 hash。M1 SHA-256 為 `2317319d9ec2b33d9ccd2b8316c6c39b2f78d2d25e7fa7ad45aeb0e9274f224e`。
+[基線證據](evidence/baseline-integrity.json)記錄完整基線及例外的新舊 hash。
+[現行交付清單](evidence/FILES.sha256)涵蓋 D0 檔案與修正後的 L0 Storage。
+L0 原交付清單仍記載歷史版本的 Storage hash。G2a／匯入歷史清單中先前已被後續
+基線取代的項目，詳見[歷史清單核對](evidence/frozen-manifests.txt)。
 未新增 credentials、token、真實券商識別碼；來源採 `fixture:`，沒有 live network dependency。
 
 ## 限制／待驗收事項
@@ -86,10 +104,7 @@ SQLite 需要可靠 local filesystem／fsync；未測實際斷電／磁碟控制
 hash chain 不是簽章，高權限整庫重寫或尾部截斷無外部錨點不能證明沒有發生。
 全量重建／驗證優先可稽核，批量操作可能 O(n²)，未做大量資料效能設計。
 
-無策略升級、無 formal metrics，亦無宣稱學習改善。既有 L0 custody 和資格判斷
-完全未修改；D0 的研究 Memory 流轉不代表正式 memory activation。
+無策略升級、無 formal metrics，亦無宣稱學習改善。既有 L0 custody 和資格判斷沿用原協議。D0 的研究 Memory 流轉僅供研究。
 本次未執行真實資料匯入、券商／行情／模型 API、訂單、正式 Pilot、定時服務、
-部署、G2b 或任何付費服務。下一步是 Founder 審查本 MVP 與合成 trace，並另行
-決定是否／如何手動提供真實研究資料。只交付 Draft PR，不合併。
-
-建議：**D0 MVP READY FOR REVIEW**，等待驗收。
+部署、G2b 或任何付費服務。PR #6 維持 Draft，待獨立 QA 重新驗證此修訂，
+再由 Founder 決定是否批准合併。

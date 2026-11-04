@@ -1,0 +1,33 @@
+Frozen SHA-256 manifest comparison against base and R1.
+Manifest files are historical artifacts. The active delivery manifest is d0/evidence/FILES.sha256.
+All manifest files retain their baseline bytes. Baseline mismatches below predate R1.
+
+IMPORT-MANIFEST.sha256: base 98/105, R1 98/105
+  Prior baseline difference: README.md (manifest 8f2091a5b65ede54ce0381a014d1e7ab0fe4e7a85886c43309eb716965df19cd, base 9a08e687f3380d87b2b4a14057bd737dc4d5380578a1c039864a6b8c2666ee1c)
+  Prior baseline difference: phase0c/LAB-STATE.md (manifest 0b7084a3776679c8a5fff96706f540e6ed3c61b581f19d556d7850cef410156c, base a6fe68e0302261a746a0b58201de1ab1a9680d409f5cb9e1995686d430aa413f)
+  Prior baseline difference: phase0c/g2a/README.md (manifest f255ad557eea5007fbcb5aae95b747564cef37bc57b427730aa9f84702f50907, base 2b674487195eb4d0f6af4ca1422fcaaea537906402b0075606b7eb54eabfe64c)
+  Prior baseline difference: phase0c/g2a/ledger.py (manifest d45ce87ada15efd0d4bf0d3078a180586d1dc334c2dba395bb20663cf59d419b, base 20d29a4fc5a81be9bb84af573e4d19aeba684de02663f1b731b9e879808915cf)
+  Prior baseline difference: phase0c/g2a/replay.py (manifest fba8d4342fda8fa21a67a6ce51203e4ba6d99ecf7cb1691ebcfb52ce4affca38, base 96fd79846c19a18bd865dce6aa3f4c244249cc9f9b24ed307d2bcd72fecc8d1f)
+  Prior baseline difference: phase0c/g2a/simulator.py (manifest f530abbe415a60be4bed38a003ffe9e125aaad9561582f686aea7ccf3a147d36, base d484028c5e195d49ab94a49da21e100e797734defa05b56e4ae99a284700ee88)
+  Prior baseline difference: phase0c/g2a/tests/test_g2a.py (manifest 78317c90c3dda904ad20303464343ca86847a870b85675c36c8d2edff2e58b04, base 8134057212fef4222c7279e5a2d5b4e653599059db459beff83491618dfe87f9)
+
+phase0c/G1-R4-HASHES.sha256: base 77/77, R1 77/77
+
+phase0c/G2a-HASHES.sha256: base 18/23, R1 18/23
+  Prior baseline difference: phase0c/g2a/README.md (manifest f255ad557eea5007fbcb5aae95b747564cef37bc57b427730aa9f84702f50907, base 2b674487195eb4d0f6af4ca1422fcaaea537906402b0075606b7eb54eabfe64c)
+  Prior baseline difference: phase0c/g2a/ledger.py (manifest d45ce87ada15efd0d4bf0d3078a180586d1dc334c2dba395bb20663cf59d419b, base 20d29a4fc5a81be9bb84af573e4d19aeba684de02663f1b731b9e879808915cf)
+  Prior baseline difference: phase0c/g2a/replay.py (manifest fba8d4342fda8fa21a67a6ce51203e4ba6d99ecf7cb1691ebcfb52ce4affca38, base 96fd79846c19a18bd865dce6aa3f4c244249cc9f9b24ed307d2bcd72fecc8d1f)
+  Prior baseline difference: phase0c/g2a/simulator.py (manifest f530abbe415a60be4bed38a003ffe9e125aaad9561582f686aea7ccf3a147d36, base d484028c5e195d49ab94a49da21e100e797734defa05b56e4ae99a284700ee88)
+  Prior baseline difference: phase0c/g2a/tests/test_g2a.py (manifest 78317c90c3dda904ad20303464343ca86847a870b85675c36c8d2edff2e58b04, base 8134057212fef4222c7279e5a2d5b4e653599059db459beff83491618dfe87f9)
+
+phase0c/G2a-R1-HASHES.sha256: base 14/16, R1 14/16
+  Prior baseline difference: phase0c/LAB-STATE.md (manifest ef6e8bf3a1fd09d373507e7737c45e788001d896d58daeeca651d24b0e2c9f16, base a6fe68e0302261a746a0b58201de1ab1a9680d409f5cb9e1995686d430aa413f)
+  Prior baseline difference: phase0c/g2a/verify_integrity.py (manifest 5d1bb3190caa5faf833a9e290cb5a33c0dd82ab4bdfa844c8e42c2ddaf18fd10, base 4551be2060d0cb46ba48a19a9931029be4d6c8231bdc11a960873c8cf46c869c)
+
+l0/evidence/changed-files.sha256: base 16/16, R1 15/16
+  R1 exception: l0/core/storage.py (base 9305ad79f62ace1a611d48837f1635cfb3e6853ce78d0ccffa9f21fef4d61188, R1 52db7719bbddedde68c4b34761b2dc3d7b5c5a92b5da7433903225811e00ff0f)
+
+All 138 baseline SHA-256 and Git blob IDs verified. 137 unchanged in R1.
+M1: 2317319d9ec2b33d9ccd2b8316c6c39b2f78d2d25e7fa7ad45aeb0e9274f224e
+L0 adopted protocol: 0b5ebbe5d002defaee9b5ea4a0f46b33d9a9b72f49a872fac008a06cd59a9058
+LAB-STATE: a6fe68e0302261a746a0b58201de1ab1a9680d409f5cb9e1995686d430aa413f
